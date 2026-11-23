@@ -1,4 +1,4 @@
-# python -m pip install --no-cache-dir "PyMuPDF==1.24.24"
+# python -m pip install --no-cache-dir "PyMuPDF==1.24.14"
 # python -c "import fitz; print('Installation successful!')"
 # python validate_data.py
 
