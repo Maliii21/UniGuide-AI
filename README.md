@@ -1,54 +1,112 @@
-# UniGuide-AI
-AIU Student Assistant powered by RAG
+## Data Collection and Processing
 
-UniGuide AI uses official Alamein International University policy documents as its source corpus. This branch contains the source inventory and the document-processing pipeline. The [Student 1 report](docs/student1_completion_report.md) describes the audit and the 12 source-review flags.
+The UniGuide-AI data processing pipeline prepares official Alamein International University (AIU) policy documents for a Retrieval-Augmented Generation (RAG) system supporting Arabic and English queries.
 
-## Set up and rebuild on Windows
+### Dataset Overview
 
-Run these commands from the repository root. They use Python 3.12.
+| Metric | Value |
+|---|---:|
+| Official PDF documents | 26 |
+| Extracted pages | 121 |
+| Extracted words | 33,599 |
+| Pages enhanced with visual summaries | 9 |
+| Generated chunks | 202 |
+| Maximum chunk size | 400 tokens |
+| Minimum chunk size | 34 tokens |
+| Average chunk size | 264.77 tokens |
+| Target chunk overlap | 60 tokens |
+| Passed tests | 27/27 |
 
-```powershell
-py -3.12 -m venv .venv
-& .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-& .\.venv\Scripts\python.exe -m scripts.acquire_sources
-& .\.venv\Scripts\python.exe -m src.rebuild_chunks
+### Data Processing Pipeline
+
+1. **Data Collection:** Collect official university policy documents from the AIU website.
+2. **Data Validation:** Check PDF readability, duplicate files, and text availability.
+3. **Source Inventory:** Record document metadata, source URLs, page counts, verification statuses, and review notes.
+4. **Text Extraction:** Extract page-level text using PyMuPDF.
+5. **Text Cleaning:** Normalize whitespace while preserving the original content and paragraph structure.
+6. **Image Content Processing:** Supplement native text extraction with reviewed visual summaries where necessary.
+7. **Document Chunking:** Split extracted text into overlapping, token-based chunks.
+8. **Metadata Preservation:** Retain document identifiers, page numbers, source URLs, and review information.
+9. **Quality Assurance:** Validate the processing pipeline through automated tests.
+
+### OCR Experiments
+
+Basic and enhanced OCR approaches were investigated using PyMuPDF and Tesseract OCR.
+
+The experiments included:
+
+- Arabic and English text recognition.
+- High-resolution image rendering.
+- Grayscale conversion.
+- Contrast enhancement and sharpening.
+- OCR configuration adjustments.
+
+Recognition errors were observed in complex forms, tables, and Arabic image-based content. Therefore, raw OCR output was not approved for ingestion.
+
+A hybrid approach was adopted, combining native PDF text extraction with visual form summaries marked as verified in the correction inventory.
+
+Nine pages across five documents were enhanced using this approach.
+
+### Chunking Strategy
+
+The system implements page-aware, boundary-aware token chunking with overlapping content.
+
+| Parameter | Configuration |
+|---|---|
+| Tokenizer | intfloat/multilingual-e5-base |
+| Model maximum sequence length | 512 tokens |
+| Maximum chunk size | 400 tokens |
+| Target overlap | 60 tokens |
+| Overlap percentage | 15% |
+| Page boundary preservation | Enabled |
+| Metadata preservation | Enabled |
+
+The tokenizer is used to calculate token lengths accurately for both Arabic and English content. Natural sentence boundaries are preferred where possible, while character offsets preserve the original extracted text.
+
+The selected chunk size leaves sufficient space for the embedding model's input prefix and special tokens.
+
+### Generated Data Files
+
+| File | Description |
+|---|---|
+| `data/sources.csv` | Source inventory and document metadata |
+| `data/ocr_corrections.json` | Page-level visual summaries and review statuses |
+| `data/processed/documents.json` | Extracted page-level text and metadata |
+| `data/processed/chunks.json` | Processed chunks ready for embedding |
+
+### Reproducing the Data Processing Pipeline
+
+Run the following commands from the project root:
+
+```bash
+python Validate_data.py
+python src/document_loader.py
+python src/chunking.py
+python src/update_source_inventory.py
 ```
 
-On Linux, use `python3.12 -m venv .venv` and `.venv/bin/python` for the remaining commands. Acquisition reads official HTTPS URLs from [data/sources.csv](data/sources.csv) and verifies each PDF's SHA-256 before saving it. It stops on a checksum mismatch and preserves existing copies. The first chunk build needs the CPU MiniLM model; later runs can use its local cache with `HF_HUB_OFFLINE=1`.
+### Testing and Validation
 
-The loader is in `src/document_loader.py`, text cleanup is in `src/clean_text.py`, and chunking is in `src/chunking.py`.
+Run the data processing tests using:
 
-Original PDFs and verbatim derived text stay local while redistribution permission is unverified. The canonical output is `data/processed/document_chunks.json`. It is ignored by Git and can be reproduced from the source manifest. Chunk IDs retain the original filename, PDF page range, and recognizable section headings. The default is 500 words with 75 words of overlap before the MiniLM token cap. Use `--chunk-size` and `--overlap` when intentionally changing the index.
-
-Student 2's retrieval branch builds on this branch and contains the embedding and search commands.
-
-## Inspect extracted text locally
-
-From the repository root, run the optional export after acquiring the source documents.
-
-```powershell
-& .\.venv\Scripts\python.exe -m scripts.export_documents
-(Get-Content -Raw -Encoding UTF8 data/processed/documents.json | ConvertFrom-Json) | Select-Object -First 1
+```bash
+python -m pytest tests/test_document_loader.py tests/test_chunking.py -v
 ```
 
-`data/processed/documents.json` contains the original filename, project-relative source path, page number, and extracted text before cleaning or chunking. Records are sorted by source path and numeric page, with `null` for DOCX pages. The export is local and ignored by Git. The normal rebuild still writes `document_chunks.json` for Student 2.
+Test results:
 
-## Run Student 1 tests
+| Test Suite | Passed |
+|---|---:|
+| Document Loader | 11/11 |
+| Chunking | 16/16 |
+| Total | 27/27 |
 
-From the repository root, install the test requirements and run the complete suite.
+The tests cover text cleaning, metadata preservation, unique identifiers, page boundaries, overlapping content, Arabic text preservation, text coverage, JSON serialization, and embedding input length.
 
-```powershell
-& .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
-& .\.venv\Scripts\python.exe -m pytest tests/ -v
-```
+### Limitations
 
-Run a single file by replacing `tests/` with its path.
-
-| File | Coverage |
-| --- | --- |
-| `tests/test_document_loader.py` | Format validation, repaired PDFs, merged DOCX cells, duplicate text, and an empty source folder |
-| `tests/test_clean_text.py` | Unicode normalization, whitespace, lists, and idempotence |
-| `tests/test_chunking.py` | Overlap, token limits, source coverage, IDs, and page provenance |
-| `tests/test_document_processing.py` | Extraction-to-chunk metadata, mixed input, the rebuild CLI, and the optional text export |
-
-The tests also support `python -m unittest discover -s tests -v`.
+- OCR accuracy is affected by complex layouts, tables, and scanned Arabic forms.
+- Some university policies contain outdated editions or conflicting information requiring institutional confirmation.
+- Page-aware chunking may produce shorter chunks for pages with limited content.
+- Retrieval effectiveness must be evaluated after embedding and indexing.
+- Public accessibility of source documents does not automatically establish redistribution permission.

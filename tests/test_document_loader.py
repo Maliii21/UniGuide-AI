@@ -1,90 +1,240 @@
-from pathlib import Path
-from tempfile import TemporaryDirectory
-import unittest
+# python -m pytest tests/test_document_loader.py -v
+import csv
+import json
 
-from docx import Document
-import pymupdf
+import fitz
+import pytest
 
-from src.document_loader import extract_docx, read_documents
+from src.document_loader import (
+    load_sources,
+    clean_text,
+    load_documents,
+    save_documents,
+)
 
 
-class DocumentLoaderTests(unittest.TestCase):
-    def setUp(self):
-        temporary = TemporaryDirectory()
-        self.addCleanup(temporary.cleanup)
-        self.raw = Path(temporary.name)
+@pytest.fixture
+def sample_data(tmp_path):
+    raw_dir = tmp_path / "raw"
+    raw_dir.mkdir()
 
-    def make_pdf(self, filename, *pages):
-        path = self.raw / filename
-        with pymupdf.open() as document:
-            for text in pages:
-                page = document.new_page()
-                if text:
-                    page.insert_text((72, 72), text)
-            document.save(path)
-        return path
+    pdf_path = raw_dir / "sample.pdf"
 
-    def test_pdf_rejects_recognized_non_pdf_formats(self):
-        fixtures = {
-            "page.pdf": "<html><body><p>HTML text.</p></body></html>",
-            "drawing.pdf": (
-                '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100">'
-                '<text x="10" y="30">SVG text.</text></svg>'
-            ),
+    with fitz.open() as pdf:
+        page = pdf.new_page()
+        page.insert_text((72, 72), "AIU Attendance Policy")
+
+        page = pdf.new_page()
+        page.insert_text(
+            (72, 72),
+            "Students must attend lectures."
+        )
+
+        pdf.save(pdf_path)
+
+    sources_file = tmp_path / "sources.csv"
+
+    metadata = {
+        "document_id": "AIU-TEST",
+        "document_title": "Attendance Policy",
+        "original_filename": "sample.pdf",
+        "official_source_url": "https://aiu.edu.eg",
+        "document_category": "Academic Policies",
+        "language": "English",
+        "document_date_as_printed": "2026",
+        "document_date_type": "Creation",
+        "page_count": "2",
+        "review_status": "accepted",
+        "review_notes": "",
+        "version_notes": ""
+    }
+
+    with open(
+        sources_file, "w",
+        encoding="utf-8", newline=""
+    ) as file:
+        writer = csv.DictWriter(
+            file, fieldnames=metadata.keys()
+        )
+        writer.writeheader()
+        writer.writerow(metadata)
+
+    return raw_dir, sources_file
+
+
+# Test 1: Source inventory loading
+def test_load_sources(sample_data):
+    _, sources_file = sample_data
+
+    sources = load_sources(sources_file)
+
+    assert len(sources) == 1
+    assert "sample.pdf" in sources
+    assert sources["sample.pdf"]["document_id"] == "AIU-TEST"
+
+
+# Test 2: Text cleaning
+def test_clean_text():
+    text = "  AIU    Policy\n\n\n\nAttendance  "
+
+    assert clean_text(text) == "AIU Policy\n\nAttendance"
+
+
+# Test 3: PDF text extraction
+def test_load_documents(sample_data):
+    raw_dir, sources_file = sample_data
+
+    documents = load_documents(raw_dir, sources_file)
+
+    assert len(documents) == 2
+    assert "AIU Attendance Policy" in documents[0]["text"]
+    assert "Students must attend lectures." in documents[1]["text"]
+
+
+# Test 4: Metadata preservation
+def test_metadata_preservation(sample_data):
+    raw_dir, sources_file = sample_data
+
+    documents = load_documents(raw_dir, sources_file)
+
+    assert documents[0]["document_id"] == "AIU-TEST"
+    assert documents[0]["document_title"] == "Attendance Policy"
+    assert documents[0]["source"] == "sample.pdf"
+    assert documents[0]["source_url"] == "https://aiu.edu.eg"
+
+
+# Test 5: Page numbering and IDs
+def test_page_numbering(sample_data):
+    raw_dir, sources_file = sample_data
+
+    documents = load_documents(raw_dir, sources_file)
+
+    assert documents[0]["page"] == 1
+    assert documents[1]["page"] == 2
+
+    assert documents[0]["page_id"] == "AIU-TEST-P001"
+    assert documents[1]["page_id"] == "AIU-TEST-P002"
+
+
+# Test 6: JSON output
+def test_save_documents(sample_data, tmp_path):
+    raw_dir, sources_file = sample_data
+
+    documents = load_documents(raw_dir, sources_file)
+
+    output_file = tmp_path / "processed" / "documents.json"
+
+    save_documents(documents, output_file)
+
+    assert output_file.exists()
+
+    with open(output_file, "r", encoding="utf-8") as file:
+        saved_documents = json.load(file)
+
+    assert saved_documents == documents
+
+
+# Test 7: Empty PDF folder
+def test_empty_folder(sample_data, tmp_path):
+    _, sources_file = sample_data
+
+    empty_dir = tmp_path / "empty"
+    empty_dir.mkdir()
+
+    with pytest.raises(FileNotFoundError):
+        load_documents(empty_dir, sources_file)
+
+
+# Test 8: Unregistered PDF
+def test_unregistered_pdf(sample_data):
+    raw_dir, sources_file = sample_data
+
+    with fitz.open() as pdf:
+        pdf.new_page()
+        pdf.save(raw_dir / "unregistered.pdf")
+
+    with pytest.raises(ValueError):
+        load_documents(raw_dir, sources_file)
+
+
+# Test 9: Verified visual correction
+def test_verified_correction(sample_data, tmp_path):
+    raw_dir, sources_file = sample_data
+
+    corrections_file = tmp_path / "corrections.json"
+
+    corrections = [
+        {
+            "document_id": "AIU-TEST",
+            "page": 1,
+            "extraction_method": "visual_form_summary",
+            "review_status": "verified",
+            "text": "Reviewed image content."
         }
-        valid = self.make_pdf("valid.pdf", "Valid policy text.")
-        for name, markup in fixtures.items():
-            path = self.raw / name
-            path.write_text(markup, encoding="utf-8")
-            with pymupdf.open(path) as document:
-                self.assertFalse(document.is_pdf)
-                self.assertIn("text.", document[0].get_text().lower())
+    ]
 
-        documents, skipped = read_documents(self.raw)
-        self.assertEqual([path for path, _ in documents], [valid])
-        self.assertEqual({path.name: reason for path, reason in skipped},
-                         dict.fromkeys(fixtures, "File content is not a PDF."))
+    corrections_file.write_text(
+        json.dumps(corrections),
+        encoding="utf-8"
+    )
 
-    def test_pdf_rejects_a_file_that_requires_structural_repair(self):
-        path = self.make_pdf("truncated.pdf", "Recoverable policy text.")
-        contents = path.read_bytes()
-        path.write_bytes(contents[:contents.rindex(b"\nxref")])
+    documents = load_documents(
+        raw_dir,
+        sources_file,
+        corrections_file
+    )
 
-        with pymupdf.open(path) as document:
-            self.assertTrue(document.is_pdf)
-            self.assertTrue(document.is_repaired)
-            self.assertIn("Recoverable policy text.", document[0].get_text())
+    assert len(documents) == 2
+    assert "AIU Attendance Policy" in documents[0]["text"]
+    assert "Reviewed image content." in documents[0]["text"]
 
-        documents, skipped = read_documents(self.raw)
-        self.assertEqual(documents, [])
-        self.assertEqual(skipped, [(path, "PDF required structural repair. Obtain an intact copy.")])
+    assert (
+        documents[0]["extraction_method"]
+        == "native_text_plus_visual_summary"
+    )
 
-    def test_docx_extracts_each_merged_cell_once_and_keeps_distinct_cells(self):
-        path = self.raw / "merged.docx"
-        document = Document()
-        table = document.add_table(rows=2, cols=3)
-        table.cell(0, 0).merge(table.cell(1, 0)).text = "Vertical merge."
-        table.cell(0, 1).merge(table.cell(0, 2)).text = "Horizontal merge."
-        table.cell(1, 1).text = "Same text."
-        table.cell(1, 2).text = "Same text."
-        document.add_paragraph("After the table.")
-        document.save(path)
+    assert documents[0]["image_review_status"] == "verified"
 
-        part, = extract_docx(path)
-        self.assertEqual(part.text.split("\n\n"), [
-            "Vertical merge.", "Horizontal merge.", "Same text.", "Same text.", "After the table.",
-        ])
 
-    def test_duplicate_text_is_reported_after_normalization(self):
-        for name, text in [("a.docx", "Café rules."), ("b.docx", "Cafe\u0301  rules."),
-                           ("c.docx", "Other rules.")]:
-            document = Document()
-            document.add_paragraph(text)
-            document.save(self.raw / name)
+# Test 10: Unverified correction
+def test_unverified_correction(sample_data, tmp_path):
+    raw_dir, sources_file = sample_data
 
-        documents, skipped = read_documents(self.raw)
-        self.assertEqual([path.name for path, _ in documents], ["a.docx", "c.docx"])
-        self.assertEqual(skipped, [(self.raw / "b.docx", "Duplicate extracted text of a.docx.")])
+    corrections_file = tmp_path / "corrections.json"
 
-    def test_empty_source_folder_returns_no_documents(self):
-        self.assertEqual(read_documents(self.raw), ([], []))
+    corrections = [
+        {
+            "document_id": "AIU-TEST",
+            "page": 1,
+            "extraction_method": "visual_form_summary",
+            "review_status": "pending_human_review",
+            "text": "Unverified information."
+        }
+    ]
+
+    corrections_file.write_text(
+        json.dumps(corrections),
+        encoding="utf-8"
+    )
+
+    documents = load_documents(
+        raw_dir,
+        sources_file,
+        corrections_file
+    )
+
+    assert "Unverified information." not in documents[0]["text"]
+
+    assert documents[0]["extraction_method"] == "native_text"
+
+
+# Test 11: Native extraction method
+def test_native_extraction_method(sample_data):
+    raw_dir, sources_file = sample_data
+
+    documents = load_documents(raw_dir, sources_file)
+
+    assert all(
+        doc["extraction_method"] == "native_text"
+        for doc in documents
+    )

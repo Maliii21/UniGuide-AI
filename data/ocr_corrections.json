@@ -3,63 +3,63 @@
     "document_id": "AIU-008",
     "page": 3,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "Sample transcript and transcript key. The sample lists course code, title, attempted and earned credits, GPA and letter grade, semester and cumulative totals, semester and cumulative GPA. English is the main language of instruction. Other grades: S Satisfactory, U Unsatisfactory, W Withdraw, IP In Progress, I Incomplete, FW Force Withdraw, T Transfer. GPA is earned points divided by credit hours for courses with grades included in GPA; transferred, audit and zero-credit courses are excluded. Sample student details are omitted. Grading and repeat-course details in the sample should be checked against the applicable grading policy."
   },
   {
     "document_id": "AIU-010",
     "page": 2,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "طلب انسحاب: يتضمن طلب سحب ملف الطالب واسترداد المصروفات الدراسية بعد خصم المصروفات الإدارية حسب اللوائح المعمول بها بالجامعة. البيانات: اسم الطالب، الرقم الجامعي، الرقم القومي، المجال أو البرنامج، فصل الالتحاق، فصل الانسحاب، اسم ولي الأمر ورقمه القومي، أسباب الانسحاب وسحب الملف، توقيع الطالب وولي الأمر والتاريخ. جزء خاص بمكتب القبول وتوقيع الموظف والتاريخ."
   },
   {
     "document_id": "AIU-010",
     "page": 3,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "إخلاء طرف طالب: يتضمن بيانات الطالب والرقم الجامعي والرقم القومي والمجال أو البرنامج، وجدول إخلاء الطرف من الإدارات مع التوقيعات، واعتماد إدارة القبول والتسجيل. إقرار استلام ملف: اسم الطالب، المجال أو البرنامج، اسم ولي الأمر، وإقرار باستلام كافة المستندات الخاصة بالطالب من جامعة العلمين الدولية بناء على الرغبة دون أدنى مسؤولية على الجامعة وعدم الرجوع عن القرار، وتوقيع ولي الأمر والتاريخ."
   },
   {
     "document_id": "AIU-018",
     "page": 2,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "طلب غياب بعذر: يطلب الطالب الموافقة على تغيبه عن المحاضرات خلال الفترة الموضحة بسبب العذر. البيانات: اسم الطالب، الرقم الجامعي والقومي، رقم التليفون، البريد الجامعي، المجال أو البرنامج، فصل الالتحاق والفصل الدراسي الحالي، سبب الغياب، تاريخ بداية الغياب وتاريخ معاودة الانتظام، وجود امتحانات خلال فترة الغياب والمقررات المعنية، توقيع الطالب وتاريخ تقديم الطلب. الجزء الإداري يتضمن ملاحظات القبول والتسجيل ورأي المرشد الأكاديمي ورئيس البرنامج واعتماد عميد الكلية."
   },
   {
     "document_id": "AIU-018",
     "page": 3,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "Students' absence recording sheet: Instructor Name, Instructor Email, Program Director Name, Program Director email, Course Code, Course Title, Absent Student's ID, Absent Student name, Warning no."
   },
   {
     "document_id": "AIU-020",
     "page": 4,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "Course Registration Form: The form states registration during the first week, add and drop until the end of the second week, and withdrawal starting from the third week. Fields: student full name, ID, mobile number, enrollment semester, current semester, university email, faculty/school, program, course code, course title, credit hours, course classification (Core, Elective, AU), cumulative credit hours, student signature and registration date. Administrative approvals: Academic Advisor, Program Director, Registrar office, with signatures, dates and notes. Conflict: policy body on page 2 permits adding in the first week of main semesters; confirm applicable deadline with AIU."
   },
   {
     "document_id": "AIU-020",
     "page": 5,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "Course Add and Drop Form: The form states add/drop until the end of the second week and withdrawal starting from the third week. Fields: student full name, ID, mobile number, enrollment and current semesters, university email, faculty/school, program, separate add and drop course tables with code, title, credit hours and classification (Core, Elective, AU), cumulative credit hours after add/drop, signature and date. Administrative approvals: Academic Advisor, Program Director, Registrar office. Conflict: policy body on page 2 permits adding in the first week of main semesters; confirm applicable deadline with AIU."
   },
   {
     "document_id": "AIU-020",
     "page": 6,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "طلب سحب مقرر: يقر الطالب بعدم استرداد مصروفات المقرر المنسحب منه وظهور علامة W (منسحب) في كشف الدرجات وعدم احتسابها في التقدير التراكمي، وإعادة تسجيل المقرر الإلزامي أو دراسة مقرر بديل إذا كان اختيارياً مع سداد المصروفات. البيانات: اسم الطالب، الرقم الجامعي، فصل الالتحاق والفصل الحالي، الهاتف والبريد الجامعي، الكلية والبرنامج، المقرر المراد الانسحاب منه وعدد ساعاته والساعات المتبقية بالفصل، التوقيع والتاريخ. الجزء الإداري: تحقق القبول والتسجيل من متطلبات الساعات، رأي المرشد الأكاديمي ورئيس البرنامج واعتماد عميد الكلية. ملاحظة: هذا نص النموذج؛ سياسة الصفحتين 2 و3 تميز بين طلاب المنح وغيرهم في الرسوم."
   },
   {
     "document_id": "AIU-021",
     "page": 2,
     "extraction_method": "visual_form_summary",
-    "review_status": "pending_human_review",
+    "review_status": "verified",
     "text": "طلب مقرر غير مكتمل: طلب الموافقة على عدم حضور الامتحان النهائي وإعادة الامتحان. يتضمن بيانات الطالب والرقم الجامعي والقومي وفصل الالتحاق والفصل الحالي والمجال أو البرنامج والمقرر وتاريخ الامتحان وأسباب عدم حضور الامتحان وتوقيع الطالب والتاريخ. الجزء الإداري يتضمن القبول والتسجيل والملاحظات ورأي أستاذ المقرر ورئيس البرنامج واعتماد عميد الكلية ونائب رئيس الجامعة للشؤون الأكاديمية والطلاب."
   }
 ]
