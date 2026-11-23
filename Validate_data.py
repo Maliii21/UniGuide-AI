@@ -40,3 +40,5 @@ for pdf_path in pdf_files:
 
     except Exception as e:
         print(f"ERROR reading {pdf_path.name}: {e}")
+
+
