@@ -1,0 +1,114 @@
+UniGuide AI retrieval comparison
+================================
+
+Method
+------
+The same six questions, model, and verified index were used for both runs.
+The index contains 26 PDFs, 290 chunks, and 290 normalized 384-dimensional
+vectors. The model ran on CPU from the local cache. Each run returned three
+primary passages. The revised run could attach at most one continuation
+outside those three. All reported scores are unadjusted cosine similarities.
+The repository copy records rankings and evidence summaries. Consult the
+original PDFs through data/sources.csv for passage text.
+
+Expected policy in top three: 6/6 before, 6/6 after.
+Expected policy at rank one: 5/6 before, 6/6 after.
+This comparison measures document retrieval and manually checked evidence on
+six questions. It supplies no corpus-wide accuracy estimate.
+
+Filenames used in rankings
+--------------------------
+Admission Transfer = 1-Admission-Transfer-Undergrad-Policy.pdf
+Appeals = 8-Appeals-Complaints-and-Grevances-Policy.pdf
+Attendance = 4-Attendance-Policy.pdf
+Course Audit = 9-Course-Audit-Policy.pdf
+Disability = 4-Disability-policy.pdf
+Enrollment = 10-Enrollment-Policy.pdf
+Medical = 6-Medical-service-policy.pdf
+Registration = 5-Course-Registration-Policy.pdf
+Tuition = 14-Tuition-and-Fees-Policy.pdf
+
+1. What are the rules for registering for courses at AIU?
+---------------------------------------------------------
+Before: Enrollment #3 (0.7391), Registration #1 (0.7074),
+        Enrollment #2 (0.6929).
+After:  Registration #1 (0.7074), Enrollment #3 (0.7391),
+        Registration #7 (0.6302).
+        Continuation for #1: Registration #2 (0.6357).
+
+Before, the direct policy supplied the study-plan and adviser rules and the
+usual load. Enrollment cross-referenced the limits and occupied two slots.
+After, #2 adds the credit limits and summer exception. #7 adds the calendar,
+forms, review, payment, and financial-hold requirements.
+
+Remaining gap: Concrete calendar dates require the academic calendar.
+Detailed late-registration, add/drop, and withdrawal rules remain outside this
+result set.
+
+2. What medical services are available to students at AIU?
+---------------------------------------------------------
+Before: Medical #5 (0.6537), Medical #6 (0.5977), Disability #16 (0.5881).
+After:  Medical #5 (0.6537), Medical #2 (0.5849), Disability #16 (0.5881).
+        Continuation for #2: Medical #3 (0.4438).
+
+Before, the medical passages focused on ambulance transport, staff dependents,
+and employees' pre-placement examinations. After, #2 adds primary care,
+on-campus emergency response, walk-in access, and the start of the medication
+rules. #3 supplies the rest of the prescription exclusions and refill rules.
+
+Remaining gap: The top hit still contains staff-dependent material, and the
+third hit concerns disability. This evidence gives a clinic overview; clinic
+hours and a detailed list of services for students are absent from these hits.
+
+3. How can a student submit an appeal or complaint at AIU?
+--------------------------------------------------------
+Before: Appeals #2 (0.7559), Appeals #1 (0.6869), Disability #30 (0.6806).
+After:  Appeals #2 (0.7559), Appeals #5 (0.6727), Disability #30 (0.6806).
+
+Before, #2 gave the format and content of a written submission, while #1
+repeated the general scope and protections. After, #5 provides the recipient,
+referral, recommendation, and approval or decline process. Together #2 and #5
+support the general submission procedure.
+
+Remaining gap: The final-grade appeal deadline, charges, and response timeline
+are on page 2 in other indexed passages. Those details were outside both top
+threes.
+
+4. What is the minimum attendance percentage required at AIU?
+-------------------------------------------------------------
+Before: Attendance #1 (0.5798), Enrollment #3 (0.5767), Enrollment #2 (0.5709).
+After:  Attendance #1 (0.5798), Enrollment #3 (0.5767), Enrollment #12 (0.5449).
+
+Rank one supplies the requested minimum in both runs. The two other hits
+come from Enrollment and add little for this narrow question.
+
+5. How many credit hours can a student register for in a main semester at AIU?
+----------------------------------------------------------------------------
+Before: Registration #2 (0.8319), Registration #3 (0.6972), Course Audit #2 (0.6843).
+After:  Registration #2 (0.8319), Course Audit #3 (0.6835),
+        Admission Transfer #2 (0.6829).
+        Continuation for #2: Registration #3 (0.6972).
+
+Both runs cover the usual load and the adviser-approved limits. The revised
+run keeps the graduation exception as context after demoting the overlapping
+chunk. The two secondary primary hits are tangential.
+
+6. What are the tuition and fee payment requirements for students at AIU?
+------------------------------------------------------------------------
+Before: Tuition #1 (0.7545), Tuition #2 (0.7076), Admission Transfer #2 (0.6760).
+After:  Tuition #1 (0.7545), Tuition #4 (0.6532), Tuition #2 (0.7076).
+
+Before, #2 covered due dates, currency, and semester versus credit-hour
+billing. After, #4 adds charge categories, good financial standing, and
+consequences of nonpayment, while #2 is still present.
+
+Remaining gap: The deferred-payment terms on page 2 are outside both result
+sets. The student can apply for two installments under the conditions in the
+policy. The retrieved passages also omit current tuition amounts.
+
+Checks beyond the six questions
+------------------------------
+The correct policy stayed at rank one in both modes for three additional
+document checks: requesting an official transcript (0.7557), losing a student
+identification card (0.6683), and requesting an incomplete grade (0.5924).
+These spot checks covered document ranking.
