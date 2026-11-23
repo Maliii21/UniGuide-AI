@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 from hashlib import sha256
+import json
+import os
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 from zipfile import BadZipFile
 
 import pymupdf
@@ -17,6 +20,7 @@ else:
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RAW_FOLDER = PROJECT_ROOT / "data" / "raw"
 PROCESSED_FOLDER = PROJECT_ROOT / "data" / "processed"
+DOCUMENTS_PATH = PROCESSED_FOLDER / "documents.json"
 SUPPORTED_EXTENSIONS = {".pdf", ".docx"}
 
 
@@ -29,8 +33,9 @@ class TextPart:
 
 def discover_documents(folder=RAW_FOLDER):
     return sorted(
-        path for path in folder.iterdir()
-        if path.is_file() and path.suffix.lower() in SUPPORTED_EXTENSIONS
+        (path for path in folder.iterdir()
+         if path.is_file() and path.suffix.lower() in SUPPORTED_EXTENSIONS),
+        key=lambda path: path.name,
     )
 
 
@@ -95,16 +100,36 @@ def read_documents(folder=RAW_FOLDER):
     return documents, skipped
 
 
+def document_records(documents):
+    return [
+        {"source": path.name, "page": part.page, "text": clean_text(part.text)}
+        for path, parts in documents
+        for part in parts
+    ]
+
+
+def write_json(path, records):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with NamedTemporaryFile(mode="w", encoding="utf-8", newline="\n",
+                            dir=path.parent, delete=False) as staged:
+        staged_path = Path(staged.name)
+        try:
+            json.dump(records, staged, ensure_ascii=False, indent=2)
+            staged.write("\n")
+            staged.close()
+            os.replace(staged_path, path)
+        finally:
+            staged.close()
+            staged_path.unlink(missing_ok=True)
+
+
 def main():
     documents, skipped = read_documents()
-    PROCESSED_FOLDER.mkdir(parents=True, exist_ok=True)
-    for path, parts in documents:
-        output = PROCESSED_FOLDER / f"{path.name}.txt"
-        output.write_text("\n\n".join(part.text for part in parts), encoding="utf-8")
-        print(f"{path.name} -> {output.name}")
     for path, reason in skipped:
         print(f"Skipped {path.name}: {reason}")
-    print(f"Extracted {len(documents)} document(s), skipped {len(skipped)}.")
+    records = document_records(documents)
+    write_json(DOCUMENTS_PATH, records)
+    print(f"Exported {len(records)} page record(s) from {len(documents)} document(s).")
 
 
 if __name__ == "__main__":

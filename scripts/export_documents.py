@@ -1,9 +1,8 @@
 """Export page text for local inspection before cleaning and chunking."""
 
-from src.document_loader import PROCESSED_FOLDER, PROJECT_ROOT, read_documents
-from src.rebuild_chunks import atomic_write, chunk_json
+from src.document_loader import PROCESSED_FOLDER, PROJECT_ROOT, read_documents, write_json
 
-DOCUMENTS_PATH = PROCESSED_FOLDER / "documents.json"
+DOCUMENTS_PATH = PROCESSED_FOLDER / "documents_raw.json"
 
 
 def main():
@@ -21,7 +20,7 @@ def main():
         for path, parts in sorted(documents, key=lambda document: document[0].as_posix())
         for part in sorted(parts, key=lambda part: part.page or 0)
     ]
-    atomic_write(DOCUMENTS_PATH, chunk_json(records))
+    write_json(DOCUMENTS_PATH, records)
     print(f"Exported {len(records)} record(s) from {len(documents)} document(s) to {DOCUMENTS_PATH}.")
 
 

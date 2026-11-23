@@ -1,90 +1,51 @@
-from pathlib import Path
-from tempfile import TemporaryDirectory
-import unittest
+import json
 
-from docx import Document
 import pymupdf
 
-from src.document_loader import extract_docx, read_documents
+from src import document_loader
 
 
-class DocumentLoaderTests(unittest.TestCase):
-    def setUp(self):
-        temporary = TemporaryDirectory()
-        self.addCleanup(temporary.cleanup)
-        self.raw = Path(temporary.name)
+def make_pdf(path, *pages):
+    with pymupdf.open() as pdf:
+        for text in pages:
+            page = pdf.new_page()
+            if text:
+                page.insert_text((72, 72), text)
+        pdf.save(path)
 
-    def make_pdf(self, filename, *pages):
-        path = self.raw / filename
-        with pymupdf.open() as document:
-            for text in pages:
-                page = document.new_page()
-                if text:
-                    page.insert_text((72, 72), text)
-            document.save(path)
-        return path
 
-    def test_pdf_rejects_recognized_non_pdf_formats(self):
-        fixtures = {
-            "page.pdf": "<html><body><p>HTML text.</p></body></html>",
-            "drawing.pdf": (
-                '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100">'
-                '<text x="10" y="30">SVG text.</text></svg>'
-            ),
-        }
-        valid = self.make_pdf("valid.pdf", "Valid policy text.")
-        for name, markup in fixtures.items():
-            path = self.raw / name
-            path.write_text(markup, encoding="utf-8")
-            with pymupdf.open(path) as document:
-                self.assertFalse(document.is_pdf)
-                self.assertIn("text.", document[0].get_text().lower())
+def test_pdf_export_cleans_text_and_keeps_source_and_page_numbers(tmp_path, monkeypatch):
+    name = "Attendance.PDF"
+    make_pdf(tmp_path / name, "  First    policy.  ", "Second policy.")
+    output = tmp_path / "processed" / "documents.json"
+    monkeypatch.setattr(document_loader, "DOCUMENTS_PATH", output)
+    load = document_loader.read_documents
+    monkeypatch.setattr(document_loader, "read_documents", lambda: load(tmp_path))
 
-        documents, skipped = read_documents(self.raw)
-        self.assertEqual([path for path, _ in documents], [valid])
-        self.assertEqual({path.name: reason for path, reason in skipped},
-                         dict.fromkeys(fixtures, "File content is not a PDF."))
+    document_loader.main()
 
-    def test_pdf_rejects_a_file_that_requires_structural_repair(self):
-        path = self.make_pdf("truncated.pdf", "Recoverable policy text.")
-        contents = path.read_bytes()
-        path.write_bytes(contents[:contents.rindex(b"\nxref")])
+    assert json.loads(output.read_text(encoding="utf-8")) == [
+        {"source": name, "page": 1, "text": "First policy."},
+        {"source": name, "page": 2, "text": "Second policy."},
+    ]
 
-        with pymupdf.open(path) as document:
-            self.assertTrue(document.is_pdf)
-            self.assertTrue(document.is_repaired)
-            self.assertIn("Recoverable policy text.", document[0].get_text())
 
-        documents, skipped = read_documents(self.raw)
-        self.assertEqual(documents, [])
-        self.assertEqual(skipped, [(path, "PDF required structural repair. Obtain an intact copy.")])
+def test_empty_folder(tmp_path):
+    assert document_loader.read_documents(tmp_path) == ([], [])
+    assert document_loader.document_records([]) == []
 
-    def test_docx_extracts_each_merged_cell_once_and_keeps_distinct_cells(self):
-        path = self.raw / "merged.docx"
-        document = Document()
-        table = document.add_table(rows=2, cols=3)
-        table.cell(0, 0).merge(table.cell(1, 0)).text = "Vertical merge."
-        table.cell(0, 1).merge(table.cell(0, 2)).text = "Horizontal merge."
-        table.cell(1, 1).text = "Same text."
-        table.cell(1, 2).text = "Same text."
-        document.add_paragraph("After the table.")
-        document.save(path)
 
-        part, = extract_docx(path)
-        self.assertEqual(part.text.split("\n\n"), [
-            "Vertical merge.", "Horizontal merge.", "Same text.", "Same text.", "After the table.",
-        ])
+def test_blank_page_keeps_its_number_and_textless_pdf_is_skipped(tmp_path):
+    mixed = tmp_path / "mixed.pdf"
+    blank = tmp_path / "blank.pdf"
+    make_pdf(mixed, "First page.", "", "Third page.")
+    make_pdf(blank, "")
 
-    def test_duplicate_text_is_reported_after_normalization(self):
-        for name, text in [("a.docx", "Café rules."), ("b.docx", "Cafe\u0301  rules."),
-                           ("c.docx", "Other rules.")]:
-            document = Document()
-            document.add_paragraph(text)
-            document.save(self.raw / name)
+    documents, skipped = document_loader.read_documents(tmp_path)
 
-        documents, skipped = read_documents(self.raw)
-        self.assertEqual([path.name for path, _ in documents], ["a.docx", "c.docx"])
-        self.assertEqual(skipped, [(self.raw / "b.docx", "Duplicate extracted text of a.docx.")])
-
-    def test_empty_source_folder_returns_no_documents(self):
-        self.assertEqual(read_documents(self.raw), ([], []))
+    assert skipped == [(blank, "No extractable text.")]
+    assert document_loader.document_records(documents) == [
+        {"source": mixed.name, "page": 1, "text": "First page."},
+        {"source": mixed.name, "page": 2, "text": ""},
+        {"source": mixed.name, "page": 3, "text": "Third page."},
+    ]
