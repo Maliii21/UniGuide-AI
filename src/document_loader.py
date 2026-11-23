@@ -36,8 +36,12 @@ def discover_documents(folder=RAW_FOLDER):
 
 def extract_pdf(path):
     with pymupdf.open(path) as document:
+        if not document.is_pdf:
+            raise ValueError("File content is not a PDF.")
         if document.needs_pass:
             raise ValueError("PDF requires a password.")
+        if document.is_repaired:
+            raise ValueError("PDF required structural repair. Obtain an intact copy.")
         return [TextPart(page.get_text("text"), page.number + 1) for page in document]
 
 
@@ -47,8 +51,14 @@ def docx_paragraphs(container):
         if isinstance(item, Paragraph):
             yield item
         else:
+            seen_cells = set()
             for row in item.rows:
                 for cell in row.cells:
+                    # Merged grid positions share the same underlying cell, even across rows.
+                    cell_xml = cell._tc
+                    if cell_xml in seen_cells:
+                        continue
+                    seen_cells.add(cell_xml)
                     yield from docx_paragraphs(cell)
 
 

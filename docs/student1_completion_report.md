@@ -99,6 +99,14 @@ OCR is unnecessary for the core English policy-text handoff because the substant
 - Two full read/extract/chunk passes matched the stored JSON byte for byte. The cached CPU MiniLM model regenerated the `(290, 384)` embedding array exactly in memory. The saved index and all original PDFs retained their SHA-256 checksums.
 - **23 tests passed, 0 failed, 0 skipped** via `python -m unittest discover -s tests -v`. The full suite covers PDF/DOCX extraction, empty and invalid documents, Unicode, duplicates, configurable chunking, page and section metadata, index integrity and retrieval.
 
+## Loader reliability follow-up
+
+The approved local follow-up validates the actual PDF format through PyMuPDF and skips files that required structural repair with a diagnostic asking for an intact copy. Password-protected and image-only PDFs are still reported as skipped. The DOCX loader walks each merged cell once in table order and preserves text from separate ordinary cells even when their wording is identical.
+
+Word-generated numbering and bullet labels are outside the extracted paragraph text. The loader retains the list item wording and literal markers. Verify the original DOCX when a policy answer depends on an automatically rendered label or number.
+
+The follow-up incorporates the audit test draft and adds regressions for mislabeled HTML and SVG, repaired PDFs, and horizontal and vertical DOCX merges. In the local follow-up, 14 Student 1 tests and all 27 combined tests passed. All 26 PDFs rebuilt with zero skips. The 290 chunks, embedding file and index manifest matched the validated outputs byte for byte, and all six retrieval comparisons matched. See the [independent audit](student1_independent_completeness_audit.md) for historical observations and the follow-up verification.
+
 ## Handoff to Student 2 and the next students
 
 The `data/processed/document_chunks.json` remains the source of passage text and metadata. Keep its row order aligned with the locally generated vectors and index manifest. Join `source_path` to `local_file_path` in [sources.csv](../data/sources.csv) to find the official URL, and use `page_start` and `page_end` for citations. The real CPU model returned `4-Attendance-Policy.pdf`, page 1, as rank one for the minimum-attendance question in both ranking modes. Its score was `0.5798`, and the passage contained the 75% requirement.
