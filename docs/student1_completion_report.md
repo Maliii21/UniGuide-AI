@@ -93,8 +93,8 @@ OCR is unnecessary for the core English policy-text handoff because the substant
 ## Processing results and corrections
 
 - Added canonical Unicode NFC normalization to `src/clean_text.py`. The regression test checks a decomposed accent along with line breaks, bullets and ordinary policy punctuation.
-- Added duplicate extracted-text detection in `src/extract_pdf.py`. It compares case-preserving text after NFC and whitespace normalization, keeps the first file in sorted order and reports subsequent matches by filename. Documents that differ only in images still need review of those images.
-- Exposed `--chunk-size` and `--overlap` through `src/rebuild_chunks.py` and passed them through `src/chunk_documents.py`. A regression test verifies that both options change the generated passages. Default settings are unchanged.
+- Added duplicate extracted-text detection in `src/document_loader.py`. It compares case-preserving text after NFC and whitespace normalization, keeps the first file in sorted order and reports subsequent matches by filename. Documents that differ only in images still need review of those images.
+- Exposed `--chunk-size` and `--overlap` through `src/rebuild_chunks.py` and passed them through `src/chunking.py`. A regression test verifies that both options change the generated passages. Default settings are unchanged.
 - All 290 chunks traced to contiguous source words, with no gaps across documents' extracted text. All 264 adjacent within-document pairs overlapped by 75 words. MiniLM inputs ranged from 127 to 256 tokens including special tokens. Sparse captions on form pages still have valid one-based page references.
 - Two full read/extract/chunk passes matched the stored JSON byte for byte. The cached CPU MiniLM model regenerated the `(290, 384)` embedding array exactly in memory. The saved index and all original PDFs retained their SHA-256 checksums.
 - **23 tests passed, 0 failed, 0 skipped** via `python -m unittest discover -s tests -v`. The full suite covers PDF/DOCX extraction, empty and invalid documents, Unicode, duplicates, configurable chunking, page and section metadata, index integrity and retrieval.

@@ -5,11 +5,11 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 if __package__:
-    from .chunk_documents import CHUNK_OVERLAP, CHUNK_SIZE, chunk_document
-    from .extract_pdf import PROJECT_ROOT, read_documents
+    from .chunking import CHUNK_OVERLAP, CHUNK_SIZE, chunk_document
+    from .document_loader import PROJECT_ROOT, read_documents
 else:
-    from chunk_documents import CHUNK_OVERLAP, CHUNK_SIZE, chunk_document
-    from extract_pdf import PROJECT_ROOT, read_documents
+    from chunking import CHUNK_OVERLAP, CHUNK_SIZE, chunk_document
+    from document_loader import PROJECT_ROOT, read_documents
 
 CHUNKS_PATH = PROJECT_ROOT / "data" / "processed" / "document_chunks.json"
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"

@@ -1,9 +1,9 @@
 if __package__:
-    from .chunk_documents import CHUNK_OVERLAP, CHUNK_SIZE
+    from .chunking import CHUNK_OVERLAP, CHUNK_SIZE
     from .generate_embeddings import generate_embeddings, save_knowledge_base
     from .rebuild_chunks import CHUNKS_PATH, atomic_write, build_chunks, chunk_json, chunk_settings, load_model
 else:
-    from chunk_documents import CHUNK_OVERLAP, CHUNK_SIZE
+    from chunking import CHUNK_OVERLAP, CHUNK_SIZE
     from generate_embeddings import generate_embeddings, save_knowledge_base
     from rebuild_chunks import CHUNKS_PATH, atomic_write, build_chunks, chunk_json, chunk_settings, load_model
 
