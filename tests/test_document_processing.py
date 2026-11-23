@@ -8,9 +8,9 @@ from docx import Document
 import pymupdf
 
 from src import rebuild_chunks
-from src.chunk_documents import chunk_document, chunk_parts, chunk_text
+from src.chunking import chunk_document, chunk_parts, chunk_text
 from src.clean_text import clean_text
-from src.extract_pdf import TextPart, extract_docx, extract_pdf, read_documents
+from src.document_loader import TextPart, extract_docx, extract_pdf, read_documents
 
 
 class DocumentProcessingTests(unittest.TestCase):

@@ -17,6 +17,8 @@ py -3.12 -m venv .venv
 
 On Linux, use `python3.12 -m venv .venv` and `.venv/bin/python` for the remaining commands. Acquisition reads official HTTPS URLs from [data/sources.csv](data/sources.csv) and verifies each PDF's SHA-256 before saving it. It stops on a checksum mismatch and preserves existing copies. The first chunk build needs the CPU MiniLM model; later runs can use its local cache with `HF_HUB_OFFLINE=1`.
 
+The loader is in `src/document_loader.py`, text cleanup is in `src/clean_text.py`, and chunking is in `src/chunking.py`.
+
 Original PDFs and verbatim derived text stay local while redistribution permission is unverified. The generated index files are ignored by Git and can be reproduced from the source manifest. Chunk IDs retain the original filename, PDF page range, and recognizable section headings. The default is 500 words with 75 words of overlap before the MiniLM token cap. Use `--chunk-size` and `--overlap` when intentionally changing the index.
 
 Student 2's retrieval branch builds on this branch and contains the embedding and search commands.
