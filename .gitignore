@@ -229,7 +229,14 @@ __marimo__/
 !/data/processed/.gitkeep
 !/data/processed/chunks.json
 !/data/processed/documents.json
-/data/embeddings/
+/data/embeddings/*
+!/data/embeddings/.gitkeep
+!/data/embeddings/config.json
+!/data/embeddings/embeddings.npy
+!/data/embeddings/index.faiss
+!/data/embeddings/index_manifest.json
+!/data/embeddings/metadata.json
+
 
 # Local secrets, editor settings and temporary files
 .env.*
