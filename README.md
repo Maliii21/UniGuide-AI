@@ -1,38 +1,95 @@
-# UniGuide-AI
-AIU Student Assistant powered by RAG
+## Embeddings and Retrieval
 
-UniGuide AI uses official Alamein International University policy documents as its source corpus. This branch contains the source inventory and the document-processing, embedding, and retrieval pipelines. The [Student 1 report](docs/student1_completion_report.md) describes the audit and the 12 source-review flags.
+This stage turns the 202 chunks from `data/processed/chunks.json` into vectors and finds the chunks most similar to a student's question (Arabic or English).
 
-## Set up and rebuild on Windows
+### Model selection
 
-Run these commands from the repository root. They use Python 3.12.
+| Setting | Value |
+|---|---|
+| Model | `intfloat/multilingual-e5-base` |
+| Embedding dimension | 768 |
+| Maximum input | 512 tokens |
+| Languages | Arabic and English |
 
-```powershell
-py -3.12 -m venv .venv
-& .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-& .\.venv\Scripts\python.exe -m scripts.acquire_sources
-& .\.venv\Scripts\python.exe -m src.rebuild_knowledge_base
-& .\.venv\Scripts\python.exe -m unittest discover -s tests -v
+The model supports both languages, and it uses the same tokenizer as the chunking stage, so the 400-token chunks leave room for the document title, the `passage: ` prefix and the special tokens. Other candidates from the project guide (`multilingual-e5-small`, `multilingual-e5-large`, BGE-M3) were **not** benchmarked.
+
+### Vector storage
+
+The index is stored as a NumPy matrix plus a JSON metadata file, not in ChromaDB or FAISS.
+
+- The assignment requires the similarity calculation to be implemented in NumPy.
+- 202 chunks x 768 values (155,136 numbers, about 0.6 MB) fit easily in memory, so an exact search over every chunk is fast.
+- The same files can be loaded into a vector database later if the corpus grows.
+
+### How it works
+
+1. Each chunk is embedded as `passage: <document title>` + new line + `<chunk text>`. Many chunks never name their policy, and adding the title improved ranking (see Evaluation).
+2. Each question is embedded as `query: <question>`.
+3. All vectors are L2-normalized (unit length) and validated: correct shape, no NaN or infinite values.
+4. Cosine similarity is computed with NumPy: `cos(q, d) = (q . d) / (||q|| * ||d||)`.
+5. The Top-K chunks (default `K = 5`) are returned with their score, rank and source metadata.
+
+### Files
+
+| File | Purpose |
+|---|---|
+| `src/embeddings.py` | Validate chunks, create embeddings in batches, save and load the index |
+| `src/retrieval.py` | Cosine similarity, Top-K search, `Retriever` class, prompt context formatting |
+| `data/embeddings/embeddings.npy` | Float32 matrix, shape `(202, 768)` |
+| `data/embeddings/chunks_metadata.json` | The chunks in the same row order as the matrix |
+| `data/embeddings/embedding_config.json` | Model name, dimension, prefixes, chunk count |
+
+`data/embeddings/` is generated locally and ignored by Git.
+
+### Running
+
+Run from the project root, after the data processing steps:
+
+```bash
+python src/embeddings.py
+python -X utf8 src/retrieval.py "What is the minimum attendance percentage?" --top-k 5
 ```
 
-On Linux, use `python3.12 -m venv .venv` and `.venv/bin/python` for the remaining commands. Acquisition reads official HTTPS URLs from [data/sources.csv](data/sources.csv) and verifies each PDF's SHA-256 before saving it. It stops on a checksum mismatch and preserves existing copies. The first chunk build needs the CPU MiniLM model; later runs can use its local cache with `HF_HUB_OFFLINE=1`.
+The first run downloads the model (about 1 GB).
 
-The loader is in `src/document_loader.py`, text cleanup is in `src/clean_text.py`, and chunking is in `src/chunking.py`.
+### Using the retriever (for the LLM stage)
 
-Original PDFs and verbatim derived text stay local while redistribution permission is unverified. The generated index files are ignored by Git and can be reproduced from the source manifest. Chunk IDs retain the original filename, PDF page range, and recognizable section headings. The default is 500 words with 75 words of overlap before the MiniLM token cap. Use `--chunk-size` and `--overlap` when intentionally changing the index.
+```python
+from src.retrieval import Retriever, format_context
 
-The full rebuild creates the processed JSON, vectors, and integrity manifest together. It uses the same processing functions as `src.rebuild_chunks`. Use the full rebuild whenever inputs or chunking settings change.
-
-## Retrieval
-
-```powershell
-& .\.venv\Scripts\python.exe -X utf8 -m src.semantic_search --top-k 3 --question "What is the minimum attendance percentage required at AIU?"
+retriever = Retriever()                      # loads the model and the index once
+results = retriever.search("What is the minimum attendance percentage?", top_k=5)
+context = format_context(results)            # source blocks for the LLM prompt
 ```
 
-Student 3 can import `load_model` from `src.generate_embeddings` and `load_knowledge_base` and `semantic_search` from `src.semantic_search`. Load the model and index once. Each row carries passage text, a cosine score, source path, PDF page range, available section headings and optional continuation passages. Match `source_path` with `local_file_path` in the source manifest for official URLs. Use `diversify=False` or `--cosine-only` for the original rank order.
+Each result contains the chunk metadata (`chunk_id`, `document_id`, `document_title`, `page`, `source_url`, `text`), plus `score` and `rank`.
 
-The [six-question retrieval evaluation](evaluation/retrieval_comparison.txt) records rankings, scores and observed evidence gaps. The single-corpus benchmark uses 26 PDFs, 290 passages and 290 normalized 384-dimensional vectors.
+### Tests
 
-## Team integration
+```bash
+python -m pytest tests/test_embeddings.py tests/test_retrieval.py -v -rs
+```
 
-Review the data-processing branch first, then the retrieval branch, which includes the processing commit in its ancestry. Preserve the existing UI and evaluation branch files when integrating. Once the LLM and Streamlit entry point are implemented, the owner can choose the reviewed integration branch and `app.py` in Streamlit Community Cloud and set Python 3.12. Add the UI's dependencies to `requirements.txt` when that code is integrated. A Git checkout starts without the index. The deployment needs a reproducible build or provisioned index using data authorized for that environment. Keep API credentials in deployment secrets.
+| Suite | Tests |
+|---|---:|
+| `tests/test_embeddings.py` | 17 |
+| `tests/test_retrieval.py` | 13 |
+
+Twenty-five of these tests use a small fake model and run offline. Five load the real model (model loading, Arabic and English embeddings, and two search tests including an Arabic question that finds English text). If the model cannot be loaded, those five are skipped and `-rs` shows why. Together with the data processing tests, the full suite is 58 tests, all passing.
+
+### Evaluation
+
+Twelve English and Arabic questions were checked against the document we expected to answer each one. This measures whether the **right document** appears, not whether the exact answer passage does.
+
+| Embedding input | Correct document first | In top 3 | In top 5 |
+|---|---:|---:|---:|
+| Chunk text only | 6/12 | 11/12 | 11/12 |
+| Document title + chunk text (used) | 7/12 | 11/12 | 12/12 |
+
+This is why the default is `top_k = 5`. The sample is small and the questions and expected documents were chosen by us, so treat it as a sanity check, not a benchmark.
+
+### Limitations
+
+- **Arabic questions and English chunks.** For the Arabic question "What is the minimum attendance percentage?", the top results were Arabic form text. The chunk that states the 75% rule (`AIU-018-P001-C001`) was not in the top 5, although the English version of the question finds it in the top 2.
+- **Scores are close together.** Relevant and irrelevant chunks scored between 0.73 and 0.79 for the same question, so a score threshold (`min_score`) is not a reliable way to detect "no answer".
+- **Possible improvement.** Search with both the Arabic question and its English translation and keep each chunk's higher score.
