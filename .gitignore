@@ -227,6 +227,8 @@ __marimo__/
 !/data/raw/.gitkeep
 /data/processed/*
 !/data/processed/.gitkeep
+!/data/processed/chunks.json
+!/data/processed/documents.json
 /data/embeddings/
 
 # Local secrets, editor settings and temporary files
