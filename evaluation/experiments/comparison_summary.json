@@ -1,0 +1,92 @@
+[
+  {
+    "model": "intfloat/multilingual-e5-base",
+    "alias": "multilingual_e5",
+    "device": "cpu",
+    "document_prefix": "passage: ",
+    "query_prefix": "query: ",
+    "dataset_sha256": "eeec7a6aa2b333d5ceb5f4284f5f8872deb334e9ed1a26c9c675faae0435b09c",
+    "embedding_file": "multilingual_e5.npy",
+    "embedding_shape": [
+      202,
+      768
+    ],
+    "dtype": "float32",
+    "batch_size": 16,
+    "window_overlap": 64,
+    "aggregation": "mean_then_l2",
+    "normalized": true,
+    "windowed_chunks": 0,
+    "windowed_chunk_ids": [],
+    "total_encoding_inputs": 202,
+    "maximum_input_tokens": 404,
+    "model_loading_seconds": 3.4674,
+    "preparation_seconds": 0.325,
+    "encoding_seconds": 116.2676,
+    "aggregation_seconds": 0.0006,
+    "chunks_per_second": 1.7374,
+    "file_size_kib": 606.12
+  },
+  {
+    "model": "intfloat/e5-base-v2",
+    "alias": "english_e5",
+    "device": "cpu",
+    "document_prefix": "passage: ",
+    "query_prefix": "query: ",
+    "dataset_sha256": "eeec7a6aa2b333d5ceb5f4284f5f8872deb334e9ed1a26c9c675faae0435b09c",
+    "embedding_file": "english_e5.npy",
+    "embedding_shape": [
+      202,
+      768
+    ],
+    "dtype": "float32",
+    "batch_size": 16,
+    "window_overlap": 64,
+    "aggregation": "mean_then_l2",
+    "normalized": true,
+    "windowed_chunks": 2,
+    "windowed_chunk_ids": [
+      "AIU-020-P006-C001",
+      "AIU-021-P002-C001"
+    ],
+    "total_encoding_inputs": 204,
+    "maximum_input_tokens": 512,
+    "model_loading_seconds": 0.7905,
+    "preparation_seconds": 0.2641,
+    "encoding_seconds": 114.3716,
+    "aggregation_seconds": 0.001,
+    "chunks_per_second": 1.7662,
+    "file_size_kib": 606.12
+  },
+  {
+    "model": "BAAI/bge-base-en-v1.5",
+    "alias": "bge_base",
+    "device": "cpu",
+    "document_prefix": "",
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "dataset_sha256": "eeec7a6aa2b333d5ceb5f4284f5f8872deb334e9ed1a26c9c675faae0435b09c",
+    "embedding_file": "bge_base.npy",
+    "embedding_shape": [
+      202,
+      768
+    ],
+    "dtype": "float32",
+    "batch_size": 16,
+    "window_overlap": 64,
+    "aggregation": "mean_then_l2",
+    "normalized": true,
+    "windowed_chunks": 2,
+    "windowed_chunk_ids": [
+      "AIU-020-P006-C001",
+      "AIU-021-P002-C001"
+    ],
+    "total_encoding_inputs": 204,
+    "maximum_input_tokens": 512,
+    "model_loading_seconds": 0.7363,
+    "preparation_seconds": 0.2892,
+    "encoding_seconds": 160.9937,
+    "aggregation_seconds": 0.0011,
+    "chunks_per_second": 1.2547,
+    "file_size_kib": 606.12
+  }
+]
