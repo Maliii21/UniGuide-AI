@@ -1,214 +1,237 @@
-import unittest
+# python -m pytest tests/test_retrieval.py -v -rs
+#
+# Most tests use a fake query model and hand-built vectors, so they run
+# offline. Tests that need the real multilingual-e5-base model are skipped
+# automatically when it cannot be loaded (-rs shows the reason).
 from unittest.mock import Mock
 
 import numpy as np
+import pytest
 
-from src.embeddings import embed_query, embed_texts, normalize_rows
-from src.generate_embeddings import EMBEDDING_DIMENSION
-from src.retrieval import cosine_similarity, format_context, retrieve, top_k_indices
-from src.semantic_search import semantic_search
-
-
-def passage(source, number, text, *, section="Scope"):
-    path = f"data/raw/{source}"
-    return {
-        "source": source,
-        "source_path": path,
-        "chunk_id": f"{path}#{number}",
-        "page_start": number,
-        "page_end": number + 1,
-        "section_heading": section,
-        "section_headings": [section],
-        "text": text,
-    }
+from src.embeddings import (
+    EMBEDDING_DIMENSION,
+    QUERY_PREFIX,
+    embed_passages,
+    load_model,
+    save_index,
+)
+from src.retrieval import (
+    Retriever,
+    cosine_similarity,
+    format_context,
+    retrieve,
+    top_k_indices,
+)
 
 
-class RetrievalTests(unittest.TestCase):
-    def setUp(self):
-        self.model = Mock()
-        query = np.zeros(EMBEDDING_DIMENSION, dtype=np.float32)
-        query[0] = 1
-        self.model.encode.return_value = query
-
-    def search(self, question, chunks, scores, top_k, **options):
-        vectors = np.zeros((len(chunks), EMBEDDING_DIMENSION), dtype=np.float32)
-        for row, score in enumerate(scores):
-            vectors[row, 0] = score
-            vectors[row, row + 1] = np.sqrt(1 - score ** 2)
-        return semantic_search(question, self.model, chunks, vectors, top_k, **options)
-
-    def test_matching_document_can_outrank_a_higher_scoring_cross_reference(self):
-        cross_reference = passage("Campus-Handbook.pdf", 1, "See the library loan policy for details.")
-        policy = passage("Library-Loan-Policy.pdf", 1, "Loans may be renewed at the library desk.")
-        question = "How do I renew library loans?"
-        chunks = [cross_reference, policy]
-        self.assertEqual(self.search(question, chunks, [0.81, 0.78], 1, diversify=False)[0]["source"],
-                         cross_reference["source"])
-        result, = self.search(question, chunks, [0.81, 0.78], 1)
-        self.assertEqual(result["source"], policy["source"])
-        self.assertAlmostEqual(result["score"], 0.78)
-
-    def test_broader_pool_returns_distinct_sections_of_the_same_policy(self):
-        title = "Equipment-Checkout.pdf"
-        repeated = "The first desk opens on Monday at noon for all borrowers."
-        chunks = [passage(title, index, repeated) for index in range(1, 4)]
-        rules = passage(title, 4, "Bring a campus card and complete the checkout form.", section="Procedure")
-        chunks.append(rules)
-        results = self.search("How does equipment checkout work?", chunks, [0.90, 0.89, 0.88, 0.83], 2)
-        self.assertEqual([item["chunk_id"] for item in results],
-                         [chunks[0]["chunk_id"], rules["chunk_id"]])
-        self.assertEqual({key: results[1][key] for key in rules}, rules)
-
-    def test_adds_verified_continuation_with_its_own_metadata_and_full_text(self):
-        overlap = "staff will confirm in the system whether the equipment"
-        anchor = passage("Checkout.pdf", 1, "At the front desk, " + overlap)
-        neighbor = passage("Checkout.pdf", 2, overlap + " can be borrowed. Print a receipt from the self-service terminal before you leave the checkout desk.", section="Pickup")
-        result, = self.search("What is the checkout process?", [anchor, neighbor], [0.85, 0.75], 1)
-        context, = result["context"]
-        self.assertEqual({key: context[key] for key in neighbor}, neighbor)
-        self.assertAlmostEqual(context["score"], 0.75)
-        self.assertNotIn("context", anchor)
-        self.model.encode.assert_called_once()
-
-    def test_skips_unverified_weak_or_duplicate_neighbors(self):
-        shared = "one two three four five six seven eight nine ten eleven twelve"
-        new_text = " followed by many more words explaining an important part of the policy in detail."
-        anchor = passage("Checkout.pdf", 1, shared)
-        different_source = passage("Another.pdf", 2, shared + new_text)
-        different_source["chunk_id"] = "data/raw/Checkout.pdf#2"
-        neighbor = passage("Checkout.pdf", 2, shared + new_text)
-        no_overlap = passage("Checkout.pdf", 2, "Different first words" + new_text)
-        duplicate = passage("Checkout.pdf", 2, shared)
-        cases = [(different_source, 0.79), (neighbor, 0.60), (no_overlap, 0.79), (duplicate, 0.79)]
-        for candidate, score in cases:
-            with self.subTest(candidate=candidate["text"], source=candidate["source"], score=score):
-                result, = self.search("checkout", [anchor, candidate], [0.85, score], 1)
-                self.assertNotIn("context", result)
-        results = self.search("checkout", [anchor, neighbor], [0.85, 0.79], 2)
-        self.assertTrue(all("context" not in result for result in results))
-
-    def test_recovers_suppressed_adjacent_top_hit_with_new_evidence(self):
-        overlap = ("Visitors need to show their campus badge at reception before picking up "
-                   "any equipment from the desk.")
-        anchor = passage("Checkout.pdf", 1, overlap)
-        neighbor = passage("Checkout.pdf", 2, overlap + " For exceptions to this rule the supervisor must sign a separate receipt at the desk.")
-        other = passage("Facilities.pdf", 1, "Equipment can also be picked up at the annex.")
-        results = self.search("Where can I get equipment?", [anchor, neighbor, other], [0.90, 0.87, 0.83], 2)
-        self.assertEqual([item["chunk_id"] for item in results], [anchor["chunk_id"], other["chunk_id"]])
-        self.assertEqual(results[0]["context"][0]["chunk_id"], neighbor["chunk_id"])
+def basis_vector(*values):
+    vector = np.zeros(EMBEDDING_DIMENSION, dtype=np.float32)
+    vector[:len(values)] = values
+    return vector
 
 
-# ---- Tests for src/embeddings.py and src/retrieval.py ----
-
-
-def vector(*values):
-    result = np.zeros(EMBEDDING_DIMENSION, dtype=np.float32)
-    result[:len(values)] = values
-    return result
-
-
-def make_chunks(count):
-    return [{"chunk_id": f"data/raw/Doc{i}.pdf#1", "source": f"Doc{i}.pdf", "source_path": f"data/raw/Doc{i}.pdf",
-             "text": f"Passage number {i} about a different topic.", "page_start": i + 1, "page_end": i + 1}
-            for i in range(count)]
+def make_chunks(texts):
+    return [
+        {
+            "document_id": f"AIU-{number:03d}",
+            "page_id": f"AIU-{number:03d}-P001",
+            "chunk_id": f"AIU-{number:03d}-P001-C001",
+            "document_title": f"Policy {number}",
+            "source": f"policy-{number}.pdf",
+            "source_url": f"https://aiu.edu.eg/policy-{number}.pdf",
+            "language": "English",
+            "page": number,
+            "token_count": 10,
+            "text": text,
+        }
+        for number, text in enumerate(texts, start=1)
+    ]
 
 
 def make_index(scores):
-    matrix = np.zeros((len(scores), EMBEDDING_DIMENSION), dtype=np.float32)
+    """Unit vectors whose cosine similarity with basis_vector(1) is `scores`."""
+    vectors = np.zeros((len(scores), EMBEDDING_DIMENSION), dtype=np.float32)
+
     for row, score in enumerate(scores):
-        matrix[row, 0] = score
-        matrix[row, row + 1] = np.sqrt(1 - score ** 2)
-    return matrix
+        vectors[row, 0] = score
+        vectors[row, row + 1] = np.sqrt(1 - score ** 2)
+
+    return vectors
 
 
-class CosineTests(unittest.TestCase):
-    def test_matches_manual_formula_on_unnormalized_vectors(self):
-        query = np.array([3.0, 4.0])
-        matrix = np.array([[3.0, 4.0], [4.0, -3.0], [-6.0, -8.0], [0.0, 0.0]])
-        np.testing.assert_allclose(cosine_similarity(query, matrix), [1.0, 0.0, -1.0, 0.0], atol=1e-12)
-
-    def test_rejects_shape_mismatch(self):
-        with self.assertRaisesRegex(ValueError, "Shape mismatch"):
-            cosine_similarity(np.ones(3), np.ones((2, 4)))
-
-    def test_top_k_is_ordered_stable_and_clamped(self):
-        scores = np.array([0.2, 0.9, 0.9, 0.1])
-        self.assertEqual(top_k_indices(scores, 3).tolist(), [1, 2, 0])
-        self.assertEqual(top_k_indices(scores, 10).tolist(), [1, 2, 0, 3])
-        self.assertEqual(top_k_indices(scores, 0).tolist(), [])
+@pytest.fixture
+def query_model():
+    model = Mock()
+    model.encode.return_value = basis_vector(1)
+    return model
 
 
-class EmbeddingHelperTests(unittest.TestCase):
-    def test_normalize_rows_and_zero_vector(self):
-        np.testing.assert_allclose(np.linalg.norm(normalize_rows(np.array([[3, 4], [0, 2]])), axis=1), 1)
-        with self.assertRaisesRegex(ValueError, "zero vector"):
-            normalize_rows(np.zeros((1, 4)))
-
-    def test_embed_query_normalizes_and_validates(self):
-        model = Mock()
-        model.encode.return_value = vector(5)  # not unit length
-        result = embed_query("  attendance  ", model)
-        np.testing.assert_allclose(np.linalg.norm(result), 1)
-        self.assertEqual(model.encode.call_args.args[0], "attendance")
-        for bad in ("", "   ", None):
-            with self.assertRaises(ValueError):
-                embed_query(bad, model)
-        model.encode.return_value = np.ones(7, dtype=np.float32)
-        with self.assertRaisesRegex(ValueError, "384"):
-            embed_query("x", model)
-
-    def test_embed_texts_shape_and_input_checks(self):
-        model = Mock()
-        model.encode.return_value = np.stack([vector(1), vector(0, 1)])
-        self.assertEqual(embed_texts(["a", "b"], model).shape, (2, EMBEDDING_DIMENSION))
-        for bad in ("single string", [], ["ok", " "]):
-            with self.assertRaises(ValueError):
-                embed_texts(bad, model)
+@pytest.fixture(scope="module")
+def real_model():
+    try:
+        return load_model()
+    except Exception as error:
+        pytest.skip(f"multilingual-e5-base could not be loaded ({type(error).__name__}): {error}")
 
 
-class RetrieveTests(unittest.TestCase):
-    def setUp(self):
-        self.model = Mock()
-        self.model.encode.return_value = vector(1)
-        self.chunks = make_chunks(4)
-        self.index = make_index([0.5, 0.9, 0.7, 0.1])
+# Test 1: Cosine similarity formula
+def test_cosine_similarity_matches_manual_formula():
+    query = np.array([3.0, 4.0])
+    matrix = np.array([[3.0, 4.0], [4.0, -3.0], [-6.0, -8.0], [0.0, 0.0]])
 
-    def test_plain_ranking_scores_and_rank_field(self):
-        results = retrieve("attendance", self.model, self.chunks, self.index, top_k=3, diversify=False)
-        self.assertEqual([r["chunk_id"] for r in results],
-                         [self.chunks[1]["chunk_id"], self.chunks[2]["chunk_id"], self.chunks[0]["chunk_id"]])
-        np.testing.assert_allclose([r["score"] for r in results], [0.9, 0.7, 0.5], atol=1e-6)
-        self.assertEqual([r["rank"] for r in results], [1, 2, 3])
-        self.assertNotIn("rank", self.chunks[1])  # input chunks are not mutated
+    scores = cosine_similarity(query, matrix)
 
-    def test_agrees_with_semantic_search_in_both_modes(self):
-        for diversify in (False, True):
-            expected = semantic_search("attendance", self.model, self.chunks, self.index, 3, diversify=diversify)
-            actual = retrieve("attendance", self.model, self.chunks, self.index, 3, diversify=diversify)
-            self.assertEqual([r["chunk_id"] for r in actual], [r["chunk_id"] for r in expected])
-            np.testing.assert_allclose([r["score"] for r in actual], [r["score"] for r in expected], atol=1e-6)
-
-    def test_min_score_filters_weak_matches_and_renumbers(self):
-        results = retrieve("attendance", self.model, self.chunks, self.index, 4, min_score=0.6, diversify=False)
-        self.assertEqual([r["rank"] for r in results], [1, 2])
-        self.assertEqual(retrieve("attendance", self.model, self.chunks, self.index, 4, min_score=0.99), [])
-
-    def test_empty_question_and_bad_top_k_skip_encoding(self):
-        self.assertEqual(retrieve("  ", None, self.chunks, self.index), [])
-        self.assertEqual(retrieve("attendance", None, self.chunks, self.index, top_k=0), [])
-
-    def test_rejects_mismatched_index(self):
-        with self.assertRaisesRegex(ValueError, "do not match"):
-            retrieve("attendance", self.model, self.chunks[:2], self.index)
-
-    def test_format_context_includes_source_pages_and_continuation(self):
-        results = [{**self.chunks[0], "rank": 1, "score": 0.9, "page_end": 3,
-                    "context": [{**self.chunks[1], "page_start": 3, "page_end": 3}]}]
-        text = format_context(results)
-        self.assertIn("[Source 1: Doc0.pdf, pages 1-3]\nPassage number 0", text)
-        self.assertIn("[Source 1: Doc1.pdf, page 3 (continuation)]\nPassage number 1", text)
-        self.assertEqual(format_context([]), "")
+    assert np.allclose(scores, [1.0, 0.0, -1.0, 0.0], atol=1e-12)
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_cosine_similarity_rejects_shape_mismatch():
+    with pytest.raises(ValueError, match="Shape mismatch"):
+        cosine_similarity(np.ones(3), np.ones((2, 4)))
+
+
+# Test 2: Top-K selection
+def test_top_k_is_ordered_stable_and_clamped():
+    scores = np.array([0.2, 0.9, 0.9, 0.1])
+
+    assert top_k_indices(scores, 3).tolist() == [1, 2, 0]
+    assert top_k_indices(scores, 10).tolist() == [1, 2, 0, 3]
+    assert top_k_indices(scores, 0).tolist() == []
+
+
+# Test 3: Basic semantic search (controlled similarities)
+def test_similarity_search_ranks_by_cosine(query_model):
+    chunks = make_chunks([
+        "University email account policy.",
+        "Course registration requirements.",
+        "Students must attend at least 75% of lectures.",
+        "Attendance warnings are issued to students.",
+    ])
+    vectors = make_index([0.15, 0.42, 0.92, 0.81])
+
+    results = retrieve("minimum attendance?", query_model, chunks, vectors, top_k=4)
+
+    assert [result["text"] for result in results] == [
+        "Students must attend at least 75% of lectures.",
+        "Attendance warnings are issued to students.",
+        "Course registration requirements.",
+        "University email account policy.",
+    ]
+    assert np.allclose([result["score"] for result in results], [0.92, 0.81, 0.42, 0.15], atol=1e-6)
+    assert [result["rank"] for result in results] == [1, 2, 3, 4]
+
+
+# Test 4: Metadata is returned and inputs are not changed
+def test_results_keep_metadata_without_vectors(query_model):
+    chunks = make_chunks(["First.", "Second."])
+    vectors = make_index([0.5, 0.9])
+
+    result = retrieve("question", query_model, chunks, vectors, top_k=1)[0]
+
+    assert result["chunk_id"] == "AIU-002-P001-C001"
+    assert result["source_url"] == "https://aiu.edu.eg/policy-2.pdf"
+    assert result["page"] == 2
+    assert "vector" not in result
+    assert "score" not in chunks[1] and "rank" not in chunks[1]
+
+
+# Test 5: The query uses the E5 "query: " prefix
+def test_query_prefix_is_applied(query_model):
+    chunks = make_chunks(["First."])
+
+    retrieve("  Where is the library?  ", query_model, chunks, make_index([0.5]))
+
+    assert query_model.encode.call_args.args[0] == QUERY_PREFIX + "Where is the library?"
+
+
+# Test 6: Minimum score
+def test_min_score_filters_weak_matches_and_renumbers(query_model):
+    chunks = make_chunks(["A", "B", "C", "D"])
+    vectors = make_index([0.5, 0.9, 0.7, 0.1])
+
+    results = retrieve("q", query_model, chunks, vectors, top_k=4, min_score=0.6)
+
+    assert [result["text"] for result in results] == ["B", "C"]
+    assert [result["rank"] for result in results] == [1, 2]
+    assert retrieve("q", query_model, chunks, vectors, top_k=4, min_score=0.99) == []
+
+
+# Test 7: Empty question, bad top_k, mismatched index
+def test_empty_question_and_bad_top_k_skip_encoding():
+    chunks = make_chunks(["A"])
+    vectors = make_index([0.5])
+
+    assert retrieve("   ", None, chunks, vectors) == []
+    assert retrieve("question", None, chunks, vectors, top_k=0) == []
+
+
+def test_rejects_embeddings_that_do_not_match_chunks(query_model):
+    with pytest.raises(ValueError, match="do not match"):
+        retrieve("q", query_model, make_chunks(["A", "B"]), make_index([0.5]))
+
+
+# Test 8: Prompt context
+def test_format_context_includes_title_page_and_text():
+    results = [
+        {**make_chunks(["Students must attend 75%."])[0], "rank": 1, "score": 0.9},
+        {**make_chunks(["x", "Warnings are issued."])[1], "rank": 2, "score": 0.8},
+    ]
+
+    context = format_context(results)
+
+    assert "[Source 1: Policy 1, page 1]\nStudents must attend 75%." in context
+    assert "[Source 2: Policy 2, page 2]\nWarnings are issued." in context
+    assert format_context([]) == ""
+
+
+# Test 9: Retriever loads a saved index
+def test_retriever_searches_a_saved_index(tmp_path, query_model):
+    chunks = make_chunks(["A", "B", "C"])
+    vectors = make_index([0.3, 0.95, 0.6])
+    save_index(chunks, vectors, tmp_path)
+
+    retriever = Retriever(tmp_path, model=query_model)
+    results = retriever.search("question", top_k=2)
+
+    assert [result["text"] for result in results] == ["B", "C"]
+    assert retriever.config["chunk_count"] == 3
+
+    with pytest.raises(FileNotFoundError):
+        Retriever(tmp_path / "missing", model=query_model)
+
+
+# Test 10: English semantic search with the real model
+def test_real_model_english_query_finds_attendance_rule(real_model):
+    passages = [
+        "Students must attend at least 75% of lectures.",
+        "Attendance warnings are issued to students.",
+        "Course registration requirements.",
+        "University email account policy.",
+    ]
+    chunks = make_chunks(passages)
+    vectors = embed_passages(passages, real_model)
+
+    results = retrieve(
+        "What is the minimum attendance percentage?",
+        real_model, chunks, vectors, top_k=4,
+    )
+
+    assert results[0]["text"] == passages[0]
+    assert results[-1]["text"] in (passages[2], passages[3])
+
+
+# Test 11: Arabic question retrieves English text (cross-lingual)
+def test_real_model_arabic_query_finds_english_text(real_model):
+    passages = [
+        "Students must attend at least 75% of lectures.",
+        "Course registration requirements.",
+        "University email account policy.",
+    ]
+    chunks = make_chunks(passages)
+    vectors = embed_passages(passages, real_model)
+
+    results = retrieve(
+        "ما هو الحد الأدنى لنسبة الحضور؟",
+        real_model, chunks, vectors, top_k=1,
+    )
+
+    assert results[0]["text"] == passages[0]
