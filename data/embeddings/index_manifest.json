@@ -1,0 +1,10 @@
+{
+  "index_type": "IndexFlatIP",
+  "similarity_metric": "cosine",
+  "embedding_dimension": 768,
+  "number_of_vectors": 202,
+  "embeddings_hash": "13b4066c2c1be35b50d84af65c55f81bcf577afdb4338545bfba06e454cf2d3b",
+  "metadata_hash": "eeec7a6aa2b333d5ceb5f4284f5f8872deb334e9ed1a26c9c675faae0435b09c",
+  "config_hash": "244b5e638ac6daa52a86afbdaacfba73b491d474c00757ce362b71afd38b9d00",
+  "index_hash": "3c8c2649002387865d400443bc9b08592843943c41170a4d38bebf9f2f000c2d"
+}
