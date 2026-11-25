@@ -1,0 +1,150 @@
+
+[
+  {
+    "question_id": "DEV-01",
+    "question": "Is registration in the summer semester mandatory?",
+    "question_type": "direct_factual",
+    "difficulty": "easy",
+    "answerable": true,
+    "expected_answer": "No. Registration in the summer semester is optional.",
+    "relevant_chunk_ids": ["AIU-003-P002-C002"],
+    "context_chunk_ids": ["AIU-003-P002-C002"],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-02",
+    "question": "Who must approve and sign a transcript sealed by the Ministry of Higher Education?",
+    "question_type": "direct_factual",
+    "difficulty": "easy",
+    "answerable": true,
+    "expected_answer": "The Provost and the President must approve and sign the transcript.",
+    "relevant_chunk_ids": ["AIU-008-P003-C001"],
+    "context_chunk_ids": ["AIU-008-P003-C001"],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-03",
+    "question": "How long after the final results are announced can a student appeal a final grade?",
+    "question_type": "direct_factual",
+    "difficulty": "easy",
+    "answerable": true,
+    "expected_answer": "The appeal must be submitted within one week after the final results are announced. Late appeals will not be reviewed.",
+    "relevant_chunk_ids": ["AIU-024-P002-C001"],
+    "context_chunk_ids": ["AIU-024-P002-C001"],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-04",
+    "question": "Can I keep accessing my university student mailbox after my email services are terminated?",
+    "question_type": "paraphrased",
+    "difficulty": "medium",
+    "answerable": true,
+    "expected_answer": "No. Students may no longer access the contents of their mailboxes once their electronic services are terminated.",
+    "relevant_chunk_ids": ["AIU-015-P002-C001"],
+    "context_chunk_ids": ["AIU-015-P002-C001"],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-05",
+    "question": "Am I allowed to use another student's account to access the university network?",
+    "question_type": "paraphrased",
+    "difficulty": "medium",
+    "answerable": true,
+    "expected_answer": "No. Users must not allow others to use their passwords. Attempting to access the Internet using another user's account results in cancellation of user privileges.",
+    "relevant_chunk_ids": ["AIU-016-P003-C002"],
+    "context_chunk_ids": ["AIU-016-P003-C002"],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-06",
+    "question": "What steps should a student follow to submit an incomplete course request?",
+    "question_type": "procedural",
+    "difficulty": "medium",
+    "answerable": true,
+    "expected_answer": "The student submits an incomplete form with a reasonable excuse to the Registrar no later than two days after the final exam. The Registrar verifies at least 75% attendance. The Vice President for Academic Affairs approves or declines the request. If approved, the concerned faculty or program arranges another exam and informs the student of its exact date, which must not be after the end of the second week of the following main semester.",
+    "relevant_chunk_ids": ["AIU-021-P002-C001"],
+    "context_chunk_ids": [
+      "AIU-021-P001-C001",
+      "AIU-021-P002-C001"
+    ],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-07",
+    "question": "How can a student submit an official grievance, and who approves the final decision?",
+    "question_type": "procedural",
+    "difficulty": "medium",
+    "answerable": true,
+    "expected_answer": "The student submits a written grievance containing a clear explanation of the complaint and its source, together with supporting documentation, to the Admission and Registration Department. Oral grievances are not considered official. The request is reported to the Office of the Vice President for Academic Affairs and redirected to the concerned committee, department or faculty. The responsible unit provides its recommendation, and the Vice President for Academic Affairs approves or declines the recommended decision.",
+    "relevant_chunk_ids": ["AIU-024-P002-C001"],
+    "context_chunk_ids": [
+      "AIU-024-P002-C001",
+      "AIU-024-P002-C002"
+    ],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-08",
+    "question": "A student attended 80% of course sessions, submitted an excuse one day after missing the final exam, and received approval from the Vice President for Academic Affairs. The student then missed the next available exam. What grades should the student receive at each stage?",
+    "question_type": "complex_reasoning",
+    "difficulty": "hard",
+    "answerable": true,
+    "expected_answer": "The student initially receives an I grade because the attendance requirement of at least 75%, the two-day submission deadline and the approval condition are satisfied. The I grade does not count toward the cumulative GPA. Missing the next available examination results in an F grade.",
+    "relevant_chunk_ids": ["AIU-021-P001-C001"],
+    "context_chunk_ids": [
+      "AIU-021-P001-C001",
+      "AIU-021-P001-C002"
+    ],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-09",
+    "question": "A student has a CGPA below 2.0 for six consecutive main semesters but has completed 85% of graduation credits. Can the student receive an additional chance before dismissal?",
+    "question_type": "complex_reasoning",
+    "difficulty": "hard",
+    "answerable": true,
+    "expected_answer": "Yes, conditionally. The student satisfies the minimum requirement of completing at least 80% of graduation credits. An additional and final opportunity of two consecutive main semesters and a summer semester is available if there is a possibility of raising the CGPA to at least 2.0 and fulfilling graduation requirements. Completing 85% alone does not guarantee eligibility.",
+    "relevant_chunk_ids": ["AIU-003-P003-C001"],
+    "context_chunk_ids": [
+      "AIU-003-P003-C001",
+      "AIU-003-P002-C002"
+    ],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-10",
+    "question": "What is the exact fee for issuing an official academic transcript?",
+    "question_type": "unanswerable",
+    "difficulty": "medium",
+    "answerable": false,
+    "expected_answer": "The provided context states that the corresponding fees must be paid but does not specify the exact amount. The exact fee cannot be determined from the provided context.",
+    "relevant_chunk_ids": [],
+    "context_chunk_ids": ["AIU-008-P003-C001"],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-11",
+    "question": "What is the maximum attachment size allowed in the university email system?",
+    "question_type": "unanswerable",
+    "difficulty": "medium",
+    "answerable": false,
+    "expected_answer": "The provided context does not specify the maximum email attachment size. This information cannot be determined from the provided context.",
+    "relevant_chunk_ids": [],
+    "context_chunk_ids": [
+      "AIU-015-P001-C001",
+      "AIU-015-P003-C001"
+    ],
+    "expected_language": "en"
+  },
+  {
+    "question_id": "DEV-12",
+    "question": "هل يتم احتساب تقدير المقرر غير المكتمل في المعدل التراكمي، ومتى يجب إعادة الامتحان؟",
+    "question_type": "arabic",
+    "difficulty": "medium",
+    "answerable": true,
+    "expected_answer": "لا يُحتسب تقدير المقرر غير المكتمل (I) في المعدل التراكمي، ويجب عقد امتحان الإعادة قبل نهاية الأسبوع الثاني من الفصل الدراسي الرئيسي التالي.",
+    "relevant_chunk_ids": ["AIU-021-P001-C001"],
+    "context_chunk_ids": ["AIU-021-P001-C001"],
+    "expected_language": "ar"
+  }
+]

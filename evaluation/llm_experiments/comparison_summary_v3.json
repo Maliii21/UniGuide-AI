@@ -1,0 +1,65 @@
+{
+  "review_method": "AI-assisted rubric review, non-blind, single reviewer; pending team confirmation",
+  "definitions": {
+    "fully_correct_rate": "correctness=2 / all successful answers; completeness separate",
+    "abstention_accuracy": "correct abstentions / 2 unanswerable questions",
+    "false_abstention_rate": "abstentions / 10 answerable questions",
+    "hallucination_rate": "answers with material unsupported or contradicted claims, including false claims about context / 12",
+    "citation_validity_rate": "individual extracted IDs present in supplied context / all extracted IDs; not formatting or entailment",
+    "api_attempt_success_rate": "successful top-level attempts / recorded top-level attempts; not transport-level requests",
+    "automatic_retries": "within-run retry_count; manual recovery separate",
+    "total_elapsed_seconds": "sum of saved generation elapsed times including failures; excludes between-question and between-run delays"
+  },
+  "source_sha256": {
+    "comparison_results_v3.json": "f3393cad442e9282e2c5d6be4a5e5248e819ba5dcb0912d378960ed634723220",
+    "comparison_results_v2.json": "43a5200f44ee8c103772974cb395e6078f4856dfe047018692540e8a2bc07518",
+    "development_questions.json": "4869af38ab526ade990e1fe122133bc3a6edc716709ea934510a4dc862a96272",
+    "evaluation_contexts(1).json": "20f3472643e90ed1f58d18e92beabc608ce6ca35e0af2804cfce04d4c620b757",
+    "evaluation_prompt.txt": "7ed5c905754d91b838be05f99d5b8b57ad951a0945c740e44b661f5a0147f876",
+    "quality_scoring_rubric.md": "f1dc7c7af6b7b035f6e9fab227aa47c1c70baf12c4a0b844ac038549f286066d"
+  },
+  "models": {
+    "gemini-3.5-flash-lite": {
+      "evaluated_responses": 12,
+      "mean_weighted_score": 83.54166666666667,
+      "fully_correct_rate": 0.9166666666666666,
+      "abstention_accuracy": 1.0,
+      "false_abstention_rate": 0.1,
+      "hallucination_rate": 0.08333333333333333,
+      "citation_validity_rate": 1.0,
+      "citation_ids_count": 22,
+      "mean_latency_seconds": 3.2958083333333335,
+      "median_latency_seconds": 3.0484999999999998,
+      "total_tokens": 8760,
+      "mean_tokens": 730,
+      "completion_rate": 1.0,
+      "api_attempts": 12,
+      "api_attempt_success_rate": 1.0,
+      "automatic_retries": 0,
+      "failed_records": 0,
+      "total_elapsed_seconds": 39.553
+    },
+    "gemini-3.1-flash-lite": {
+      "evaluated_responses": 12,
+      "mean_weighted_score": 95.83333333333333,
+      "fully_correct_rate": 1.0,
+      "abstention_accuracy": 1.0,
+      "false_abstention_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "citation_validity_rate": 1.0,
+      "citation_ids_count": 30,
+      "mean_latency_seconds": 14.168658333333333,
+      "median_latency_seconds": 9.609200000000001,
+      "total_tokens": 9098,
+      "mean_tokens": 758.1666666666666,
+      "completion_rate": 1.0,
+      "api_attempts": 13,
+      "api_attempt_success_rate": 0.9230769230769231,
+      "automatic_retries": 0,
+      "failed_records": 1,
+      "total_elapsed_seconds": 289.7977
+    }
+  },
+  "provisional_selection": "gemini-3.1-flash-lite",
+  "manual_recovery_count": 1
+}

@@ -1,0 +1,869 @@
+{
+  "experiment_name": "UniGuide-AI LLM Comparison",
+  "evaluation_type": "fixed_context_development",
+  "created_at": "2026-11-25T08:12:58.263889+00:00",
+  "fingerprint": {
+    "questions_hash": "4869af38ab526ade990e1fe122133bc3a6edc716709ea934510a4dc862a96272",
+    "prompt_hash": "7ed5c905754d91b838be05f99d5b8b57ad951a0945c740e44b661f5a0147f876",
+    "chunks_hash": "eeec7a6aa2b333d5ceb5f4284f5f8872deb334e9ed1a26c9c675faae0435b09c",
+    "contexts_hash": "20f3472643e90ed1f58d18e92beabc608ce6ca35e0af2804cfce04d4c620b757",
+    "script_hash": "902f7d6622a8d53f4d46853bc98aa80215d1d742666f77581704bee3093532a8"
+  },
+  "models": [
+    "gemini-3.5-flash-lite",
+    "gemini-4-hydrogen",
+    "gemma-4-31b-it"
+  ],
+  "results": [
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-01",
+      "question": "Is registration in the summer semester mandatory?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "No. Registration in the summer semester is optional.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "prompt_characters": 1978,
+      "prompt_sha256": "b9621e67f3f11ad18bf820b0a4dcdbf9e0d4dcdb658a431f19b5d26104b5d909",
+      "timestamp": "2026-11-25T08:13:01.660521+00:00",
+      "status": "success",
+      "answer": "No, registration in the summer semester is optional [AIU-003-P002-C002].",
+      "latency_seconds": 1.3982,
+      "total_elapsed_seconds": 1.3994,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 1.3982
+        }
+      ],
+      "input_tokens": 445,
+      "output_tokens": 27,
+      "thinking_tokens": null,
+      "total_tokens": 472,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-02",
+      "question": "Who must approve and sign a transcript sealed by the Ministry of Higher Education?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "The Provost and the President must approve and sign the transcript.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-008-P003-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-008-P003-C001"
+      ],
+      "prompt_characters": 2509,
+      "prompt_sha256": "6833b5806d8f110764882ae8ee7ccda682af94a6abb71fd8518f947f9d9d6a16",
+      "timestamp": "2026-11-25T08:13:13.867020+00:00",
+      "status": "success",
+      "answer": "A transcript sealed by the MoHE (Ministry of Higher Education) must be approved and signed by the Provost and the President [AIU-008-P003-C001].",
+      "latency_seconds": 7.1978,
+      "total_elapsed_seconds": 7.198,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 7.1978
+        }
+      ],
+      "input_tokens": 532,
+      "output_tokens": 42,
+      "thinking_tokens": null,
+      "total_tokens": 574,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-03",
+      "question": "How long after the final results are announced can a student appeal a final grade?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "The appeal must be submitted within one week after the final results are announced. Late appeals will not be reviewed.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-024-P002-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-024-P002-C001"
+      ],
+      "prompt_characters": 3095,
+      "prompt_sha256": "e744e6edd79e1595f4496f65537d82257ca8ce585cf5a2dbf47004c27d6e3dac",
+      "timestamp": "2026-11-25T08:13:20.295627+00:00",
+      "status": "success",
+      "answer": "A student must submit a final grade appeal within one week after the final results are announced [AIU-024-P002-C001].",
+      "latency_seconds": 1.4245,
+      "total_elapsed_seconds": 1.4247,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 1.4245
+        }
+      ],
+      "input_tokens": 670,
+      "output_tokens": 35,
+      "thinking_tokens": null,
+      "total_tokens": 705,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-04",
+      "question": "Can I keep accessing my university student mailbox after my email services are terminated?",
+      "question_type": "paraphrased",
+      "difficulty": "medium",
+      "answerable": true,
+      "expected_answer": "No. Students may no longer access the contents of their mailboxes once their electronic services are terminated.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-015-P002-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-015-P002-C001"
+      ],
+      "prompt_characters": 2046,
+      "prompt_sha256": "05041844d6634b683535f43e88b8f38dc1868fa8904cb3e48156ac6781e8287b",
+      "timestamp": "2026-11-25T08:13:29.664018+00:00",
+      "status": "success",
+      "answer": "No, once a student's electronic services are terminated, students may no longer access the contents of their mailboxes [AIU-015-P002-C001].",
+      "latency_seconds": 4.3647,
+      "total_elapsed_seconds": 4.3649,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 4.3647
+        }
+      ],
+      "input_tokens": 434,
+      "output_tokens": 41,
+      "thinking_tokens": null,
+      "total_tokens": 475,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-05",
+      "question": "Am I allowed to use another student's account to access the university network?",
+      "question_type": "paraphrased",
+      "difficulty": "medium",
+      "answerable": true,
+      "expected_answer": "No. Users must not allow others to use their passwords. Attempting to access the Internet using another user's account results in cancellation of user privileges.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-016-P003-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-016-P003-C002"
+      ],
+      "prompt_characters": 1847,
+      "prompt_sha256": "b823586950a7aec5b259f6ab4b56fec27c4d3c7e014b84b18ad22c445f35230b",
+      "timestamp": "2026-11-25T08:13:39.330724+00:00",
+      "status": "success",
+      "answer": "No, you are not allowed to use another person's account. According to the university policy, a user must never allow others to use their password, and attempts to log on to the Internet with an account other than your own will result in the cancellation of your user privileges [AIU-016-P003-C002].",
+      "latency_seconds": 4.663,
+      "total_elapsed_seconds": 4.6632,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 4.663
+        }
+      ],
+      "input_tokens": 411,
+      "output_tokens": 73,
+      "thinking_tokens": null,
+      "total_tokens": 484,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-06",
+      "question": "What steps should a student follow to submit an incomplete course request?",
+      "question_type": "procedural",
+      "difficulty": "medium",
+      "answerable": true,
+      "expected_answer": "The student submits an incomplete form with a reasonable excuse to the Registrar no later than two days after the final exam. The Registrar verifies at least 75% attendance. The Vice President for Academic Affairs approves or declines the request. If approved, the concerned faculty or program arranges another exam and informs the student of its exact date, which must not be after the end of the second week of the following main semester.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-021-P002-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-021-P001-C001",
+        "AIU-021-P002-C001"
+      ],
+      "prompt_characters": 3508,
+      "prompt_sha256": "107eaa3ed6e2b99201512ad7160485f54ed583749dff945e9efbd70d9451625e",
+      "timestamp": "2026-11-25T08:13:46.066785+00:00",
+      "status": "success",
+      "answer": "To submit an incomplete course request, a student should follow these steps:\n\n1. Request an incomplete at the Office of the Registrar [AIU-021-P002-C001].\n2. Submit the incomplete form with a reasonable excuse no later than two days after the final exam [AIU-021-P001-C001, AIU-021-P002-C001]. \n\nAdditionally, the student must have attended at least 75% of the course sessions, and the absence from the final exam must be due to circumstances beyond their control with an excuse accepted by the Vice President for Academic Affairs [AIU-021-P001-C001].",
+      "latency_seconds": 1.7323,
+      "total_elapsed_seconds": 1.7324,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 1.7323
+        }
+      ],
+      "input_tokens": 822,
+      "output_tokens": 163,
+      "thinking_tokens": null,
+      "total_tokens": 985,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-07",
+      "question": "How can a student submit an official grievance, and who approves the final decision?",
+      "question_type": "procedural",
+      "difficulty": "medium",
+      "answerable": true,
+      "expected_answer": "The student submits a written grievance containing a clear explanation of the complaint and its source, together with supporting documentation, to the Admission and Registration Department. Oral grievances are not considered official. The request is reported to the Office of the Vice President for Academic Affairs and redirected to the concerned committee, department or faculty. The responsible unit provides its recommendation, and the Vice President for Academic Affairs approves or declines the recommended decision.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-024-P002-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-024-P002-C001",
+        "AIU-024-P002-C002"
+      ],
+      "prompt_characters": 3632,
+      "prompt_sha256": "54c97806250faf6cfd342f723d5343ba138c69eee1a44d62d4b504e585d164ce",
+      "timestamp": "2026-11-25T08:13:52.305385+00:00",
+      "status": "success",
+      "answer": "To submit an official grievance, a student must submit a clear written appeal or grievance request (oral appeals/grievances are not considered official) to the Admission and Registration Department [AIU-024-P002-C001, AIU-024-P002-C002]. The written appeal or grievance must include a clear explanation of the complaint or problem and its source, along with supporting documentation [AIU-024-P002-C001]. \n\nThe final decision (or the recommended decision) is approved or declined by the Vice President for Academic Affairs [AIU-024-P002-C001, AIU-024-P002-C002].",
+      "latency_seconds": 1.228,
+      "total_elapsed_seconds": 1.2282,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 1.228
+        }
+      ],
+      "input_tokens": 795,
+      "output_tokens": 168,
+      "thinking_tokens": null,
+      "total_tokens": 963,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-08",
+      "question": "A student attended 80% of course sessions, submitted an excuse one day after missing the final exam, and received approval from the Vice President for Academic Affairs. The student then missed the next available exam. What grades should the student receive at each stage?",
+      "question_type": "complex_reasoning",
+      "difficulty": "hard",
+      "answerable": true,
+      "expected_answer": "The student initially receives an I grade because the attendance requirement of at least 75%, the two-day submission deadline and the approval condition are satisfied. The I grade does not count toward the cumulative GPA. Missing the next available examination results in an F grade.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-021-P001-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-021-P001-C001",
+        "AIU-021-P001-C002"
+      ],
+      "prompt_characters": 3335,
+      "prompt_sha256": "eaefaf4e77d45f63b9fe5fd1c2f7ed2840f6c5956e9ba902da1dcdb537af11f0",
+      "timestamp": "2026-11-25T08:14:02.042965+00:00",
+      "status": "success",
+      "answer": "Based on the provided policy, the student should receive the following grades at each stage:\n\n1. **After receiving approval for the missed final exam:** The student will receive a grade of **(I)** (Incomplete) in the course until the exam is carried out [AIU-021-P001-C001]. This grade (I) will not count in the student’s cumulative GPA [AIU-021-P001-C001, AIU-021-P001-C002].\n2. **After failing to attend the next available examination date (the retake exam):** The student will receive a grade of **(F)** in that course [AIU-021-P001-C001].",
+      "latency_seconds": 4.7322,
+      "total_elapsed_seconds": 4.7323,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 4.7322
+        }
+      ],
+      "input_tokens": 789,
+      "output_tokens": 174,
+      "thinking_tokens": null,
+      "total_tokens": 963,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-09",
+      "question": "A student has a CGPA below 2.0 for six consecutive main semesters but has completed 85% of graduation credits. Can the student receive an additional chance before dismissal?",
+      "question_type": "complex_reasoning",
+      "difficulty": "hard",
+      "answerable": true,
+      "expected_answer": "Yes, conditionally. The student satisfies the minimum requirement of completing at least 80% of graduation credits. An additional and final opportunity of two consecutive main semesters and a summer semester is available if there is a possibility of raising the CGPA to at least 2.0 and fulfilling graduation requirements. Completing 85% alone does not guarantee eligibility.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-003-P003-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-003-P003-C001",
+        "AIU-003-P002-C002"
+      ],
+      "prompt_characters": 3284,
+      "prompt_sha256": "559f6501fa8382bf32c662e74939f0a6b44d5edb30de63055058bc8306f21975",
+      "timestamp": "2026-11-25T08:14:11.974391+00:00",
+      "status": "success",
+      "answer": "Based on the provided context, the information cannot be determined as it does not explicitly address whether a student who has had a cumulative GPA below 2.0 for six consecutive main semesters can receive the additional and final chance if they have completed at least 80% of graduation credits [AIU-003-P003-C001].",
+      "latency_seconds": 4.9257,
+      "total_elapsed_seconds": 4.9258,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 4.9257
+        }
+      ],
+      "input_tokens": 753,
+      "output_tokens": 74,
+      "thinking_tokens": null,
+      "total_tokens": 827,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-10",
+      "question": "What is the exact fee for issuing an official academic transcript?",
+      "question_type": "unanswerable",
+      "difficulty": "medium",
+      "answerable": false,
+      "expected_answer": "The provided context states that the corresponding fees must be paid but does not specify the exact amount. The exact fee cannot be determined from the provided context.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [],
+      "context_chunk_ids": [
+        "AIU-008-P003-C001"
+      ],
+      "prompt_characters": 2493,
+      "prompt_sha256": "4d10d24ff5067e4eb4ebcac9cfc47ffa625e7ea40c72edbfa24535f429f82219",
+      "timestamp": "2026-11-25T08:14:18.519413+00:00",
+      "status": "success",
+      "answer": "The information regarding the exact fee for issuing an official academic transcript cannot be determined from the provided context [AIU-008-P003-C001].",
+      "latency_seconds": 1.5394,
+      "total_elapsed_seconds": 1.5395,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 1.5394
+        }
+      ],
+      "input_tokens": 529,
+      "output_tokens": 37,
+      "thinking_tokens": null,
+      "total_tokens": 566,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-11",
+      "question": "What is the maximum attachment size allowed in the university email system?",
+      "question_type": "unanswerable",
+      "difficulty": "medium",
+      "answerable": false,
+      "expected_answer": "The provided context does not specify the maximum email attachment size. This information cannot be determined from the provided context.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [],
+      "context_chunk_ids": [
+        "AIU-015-P001-C001",
+        "AIU-015-P003-C001"
+      ],
+      "prompt_characters": 5031,
+      "prompt_sha256": "fbc391a9119564e1a7b6e8b7d1de7057d5d33a6da4944dc477a9ed2336728a36",
+      "timestamp": "2026-11-25T08:14:28.768559+00:00",
+      "status": "success",
+      "answer": "The information cannot be determined from the provided context.",
+      "latency_seconds": 5.2442,
+      "total_elapsed_seconds": 5.2446,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 5.2442
+        }
+      ],
+      "input_tokens": 1031,
+      "output_tokens": 10,
+      "thinking_tokens": null,
+      "total_tokens": 1041,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-12",
+      "question": "هل يتم احتساب تقدير المقرر غير المكتمل في المعدل التراكمي، ومتى يجب إعادة الامتحان؟",
+      "question_type": "arabic",
+      "difficulty": "medium",
+      "answerable": true,
+      "expected_answer": "لا يُحتسب تقدير المقرر غير المكتمل (I) في المعدل التراكمي، ويجب عقد امتحان الإعادة قبل نهاية الأسبوع الثاني من الفصل الدراسي الرئيسي التالي.",
+      "expected_language": "ar",
+      "relevant_chunk_ids": [
+        "AIU-021-P001-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-021-P001-C001"
+      ],
+      "prompt_characters": 2553,
+      "prompt_sha256": "5905f9da253f31c97622b5c3ff5772a518b647fb9a3fca56750945b65ff4ff32",
+      "timestamp": "2026-11-25T08:14:34.914020+00:00",
+      "status": "success",
+      "answer": "استناداً إلى السياسة المقدمة:\n\n* **تقدير المقرر غير المكتمل (I):** لا يتم احتساب تقدير (I) في المعدل التراكمي للطالب [AIU-021-P001-C001].\n* **موعد إعادة الامتحان:** يجب أن يُعقد امتحان الإعادة قبل نهاية الأسبوع الثاني من الفصل الدراسي الرئيسي التالي [AIU-021-P001-C001].",
+      "latency_seconds": 1.0997,
+      "total_elapsed_seconds": 1.1,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 1.0997
+        }
+      ],
+      "input_tokens": 602,
+      "output_tokens": 103,
+      "thinking_tokens": null,
+      "total_tokens": 705,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "question_id": "DEV-01",
+      "question": "Is registration in the summer semester mandatory?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "No. Registration in the summer semester is optional.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "prompt_characters": 1978,
+      "prompt_sha256": "b9621e67f3f11ad18bf820b0a4dcdbf9e0d4dcdb658a431f19b5d26104b5d909",
+      "timestamp": "2026-11-25T08:20:06.475303+00:00",
+      "status": "success",
+      "answer": "No, registration in the summer semester is optional [AIU-003-P002-C002].",
+      "latency_seconds": 5.243,
+      "total_elapsed_seconds": 5.2432,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 5.243
+        }
+      ],
+      "input_tokens": 475,
+      "output_tokens": 31,
+      "thinking_tokens": 289,
+      "total_tokens": 795,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "question_id": "DEV-02",
+      "question": "Who must approve and sign a transcript sealed by the Ministry of Higher Education?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "The Provost and the President must approve and sign the transcript.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-008-P003-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-008-P003-C001"
+      ],
+      "prompt_characters": 2509,
+      "prompt_sha256": "6833b5806d8f110764882ae8ee7ccda682af94a6abb71fd8518f947f9d9d6a16",
+      "timestamp": "2026-11-25T08:33:24.087251+00:00",
+      "status": "success",
+      "answer": "According to the provided context, a transcript sealed by the MoHE must be approved and signed by the **Provost** and the **President** [AIU-008-P003-C001]. \n\n*(Note: The provided policy excerpt uses the abbreviation \"MoHE\" without explicitly spelling out \"Ministry of Higher Education.\")*",
+      "latency_seconds": 7.6508,
+      "total_elapsed_seconds": 50.8431,
+      "attempt_count": 3,
+      "retry_count": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 7.1753
+        },
+        {
+          "attempt": 2,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 6.0113
+        },
+        {
+          "attempt": 3,
+          "status": "success",
+          "latency_seconds": 7.6508
+        }
+      ],
+      "input_tokens": 559,
+      "output_tokens": 78,
+      "thinking_tokens": 1071,
+      "total_tokens": 1708,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "question_id": "DEV-03",
+      "question": "How long after the final results are announced can a student appeal a final grade?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "The appeal must be submitted within one week after the final results are announced. Late appeals will not be reviewed.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-024-P002-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-024-P002-C001"
+      ],
+      "prompt_characters": 3095,
+      "prompt_sha256": "e744e6edd79e1595f4496f65537d82257ca8ce585cf5a2dbf47004c27d6e3dac",
+      "timestamp": "2026-11-25T08:33:53.023677+00:00",
+      "status": "success",
+      "answer": "A student can submit an appeal on a final grade within **one week** after the final results are announced; no appeal will be reviewed after this time limit [AIU-024-P002-C001]. \n\nAdditionally, the appeal must be submitted in writing (no oral appeals are considered official) to the Admission and Registration Department, and the student must pay the charges stated in the tuition fees and charges policy [AIU-024-P002-C001].",
+      "latency_seconds": 13.9295,
+      "total_elapsed_seconds": 13.9296,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 13.9295
+        }
+      ],
+      "input_tokens": 693,
+      "output_tokens": 112,
+      "thinking_tokens": 506,
+      "total_tokens": 1311,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "question_id": "DEV-04",
+      "question": "Can I keep accessing my university student mailbox after my email services are terminated?",
+      "question_type": "paraphrased",
+      "difficulty": "medium",
+      "answerable": true,
+      "expected_answer": "No. Students may no longer access the contents of their mailboxes once their electronic services are terminated.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-015-P002-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-015-P002-C001"
+      ],
+      "prompt_characters": 2046,
+      "prompt_sha256": "05041844d6634b683535f43e88b8f38dc1868fa8904cb3e48156ac6781e8287b",
+      "timestamp": "2026-11-25T08:34:24.030731+00:00",
+      "status": "success",
+      "answer": "No. According to the policy, university email services are provided only while you are enrolled in the University, and once your electronic services are terminated, you may no longer access the contents of your mailbox [AIU-015-P002-C001].",
+      "latency_seconds": 3.9554,
+      "total_elapsed_seconds": 16.0017,
+      "attempt_count": 2,
+      "retry_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 2.0451
+        },
+        {
+          "attempt": 2,
+          "status": "success",
+          "latency_seconds": 3.9554
+        }
+      ],
+      "input_tokens": 462,
+      "output_tokens": 61,
+      "thinking_tokens": 474,
+      "total_tokens": 997,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "question_id": "DEV-05",
+      "question": "Am I allowed to use another student's account to access the university network?",
+      "question_type": "paraphrased",
+      "difficulty": "medium",
+      "answerable": true,
+      "expected_answer": "No. Users must not allow others to use their passwords. Attempting to access the Internet using another user's account results in cancellation of user privileges.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-016-P003-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-016-P003-C002"
+      ],
+      "prompt_characters": 1847,
+      "prompt_sha256": "b823586950a7aec5b259f6ab4b56fec27c4d3c7e014b84b18ad22c445f35230b",
+      "timestamp": "2026-11-25T08:35:14.417047+00:00",
+      "status": "error",
+      "answer": null,
+      "latency_seconds": null,
+      "total_elapsed_seconds": 35.3818,
+      "attempt_count": 3,
+      "retry_count": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 1.3994
+        },
+        {
+          "attempt": 2,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 2.5804
+        },
+        {
+          "attempt": 3,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 1.3991
+        }
+      ],
+      "input_tokens": null,
+      "output_tokens": null,
+      "thinking_tokens": null,
+      "total_tokens": null,
+      "error_code": 503,
+      "error_type": "ServerError",
+      "quality_scores": null
+    },
+    {
+      "model": "gemma-4-31b-it",
+      "question_id": "DEV-01",
+      "question": "Is registration in the summer semester mandatory?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "No. Registration in the summer semester is optional.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "prompt_characters": 1978,
+      "prompt_sha256": "b9621e67f3f11ad18bf820b0a4dcdbf9e0d4dcdb658a431f19b5d26104b5d909",
+      "timestamp": "2026-11-25T08:39:42.320246+00:00",
+      "status": "error",
+      "answer": null,
+      "latency_seconds": null,
+      "total_elapsed_seconds": 33.2499,
+      "attempt_count": 3,
+      "retry_count": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 1.3149
+        },
+        {
+          "attempt": 2,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 0.8508
+        },
+        {
+          "attempt": 3,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 1.0794
+        }
+      ],
+      "input_tokens": null,
+      "output_tokens": null,
+      "thinking_tokens": null,
+      "total_tokens": null,
+      "error_code": 503,
+      "error_type": "ServerError",
+      "quality_scores": null
+    },
+    {
+      "model": "gemma-4-31b-it",
+      "question_id": "DEV-01",
+      "question": "Is registration in the summer semester mandatory?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "No. Registration in the summer semester is optional.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "prompt_characters": 1978,
+      "prompt_sha256": "b9621e67f3f11ad18bf820b0a4dcdbf9e0d4dcdb658a431f19b5d26104b5d909",
+      "timestamp": "2026-11-25T08:41:28.152721+00:00",
+      "status": "success",
+      "answer": "No, registration in the Summer semester is optional [AIU-003-P002-C002].",
+      "latency_seconds": 32.9055,
+      "total_elapsed_seconds": 32.9057,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 32.9055
+        }
+      ],
+      "input_tokens": 445,
+      "output_tokens": 26,
+      "thinking_tokens": 284,
+      "total_tokens": 755,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemma-4-31b-it",
+      "question_id": "DEV-02",
+      "question": "Who must approve and sign a transcript sealed by the Ministry of Higher Education?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "The Provost and the President must approve and sign the transcript.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-008-P003-C001"
+      ],
+      "context_chunk_ids": [
+        "AIU-008-P003-C001"
+      ],
+      "prompt_characters": 2509,
+      "prompt_sha256": "6833b5806d8f110764882ae8ee7ccda682af94a6abb71fd8518f947f9d9d6a16",
+      "timestamp": "2026-11-25T08:43:49.643994+00:00",
+      "status": "error",
+      "answer": null,
+      "latency_seconds": null,
+      "total_elapsed_seconds": 63.4513,
+      "attempt_count": 3,
+      "retry_count": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 1.3366
+        },
+        {
+          "attempt": 2,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 30.8856
+        },
+        {
+          "attempt": 3,
+          "status": "error",
+          "error_code": 503,
+          "error_type": "ServerError",
+          "latency_seconds": 1.2241
+        }
+      ],
+      "input_tokens": null,
+      "output_tokens": null,
+      "thinking_tokens": null,
+      "total_tokens": null,
+      "error_code": 503,
+      "error_type": "ServerError",
+      "quality_scores": null
+    }
+  ]
+}
