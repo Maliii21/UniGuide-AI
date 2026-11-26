@@ -117,7 +117,7 @@ def save_index(index):
         "index_hash": file_hash(INDEX_FILE)
     }
 
-    with open(MANIFEST_FILE, "w", encoding="utf-8") as file:
+    with open(MANIFEST_FILE, "w", encoding="utf-8", newline="\n") as file:
         json.dump(manifest, file, indent=2)
 
     print(f"Index saved to: {INDEX_FILE}")

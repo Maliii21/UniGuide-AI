@@ -1,0 +1,6 @@
+# Keep retrieval artifacts consistent across platforms
+data/embeddings/*.json text eol=lf
+
+# Preserve binary artifacts without conversion
+*.npy binary
+*.faiss binary
