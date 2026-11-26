@@ -1,0 +1,135 @@
+{
+  "experiment_name": "UniGuide-AI LLM Comparison",
+  "evaluation_type": "fixed_context_development",
+  "created_at": "2026-11-24T23:43:50.560725+00:00",
+  "fingerprint": {
+    "questions_hash": "4869af38ab526ade990e1fe122133bc3a6edc716709ea934510a4dc862a96272",
+    "prompt_hash": "7ed5c905754d91b838be05f99d5b8b57ad951a0945c740e44b661f5a0147f876",
+    "chunks_hash": "eeec7a6aa2b333d5ceb5f4284f5f8872deb334e9ed1a26c9c675faae0435b09c",
+    "script_hash": "552b481957ef33bfc2575ce5252751548fde59944c58d31850378ff510c22070"
+  },
+  "models": [
+    "gemini-3.5-flash-lite",
+    "gemini-4-hydrogen",
+    "gemma-4-31b-it"
+  ],
+  "results": [
+    {
+      "model": "gemini-3.5-flash-lite",
+      "question_id": "DEV-01",
+      "question": "Is registration in the summer semester mandatory?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "No. Registration in the summer semester is optional.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "prompt_characters": 3026,
+      "prompt_sha256": "70565a17bd353d60a19fd7cfab8d504326e87cd403b189b9dfea66c63ebcb46e",
+      "timestamp": "2026-11-24T23:43:52.791434+00:00",
+      "status": "success",
+      "answer": "No, registration in the Summer semester is optional [AIU-003-P002-C002].",
+      "latency_seconds": 1.0063,
+      "total_elapsed_seconds": 1.0069,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 1.0063
+        }
+      ],
+      "input_tokens": 664,
+      "output_tokens": 27,
+      "thinking_tokens": null,
+      "total_tokens": 691,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "question_id": "DEV-01",
+      "question": "Is registration in the summer semester mandatory?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "No. Registration in the summer semester is optional.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "prompt_characters": 3026,
+      "prompt_sha256": "70565a17bd353d60a19fd7cfab8d504326e87cd403b189b9dfea66c63ebcb46e",
+      "timestamp": "2026-11-24T23:44:04.507823+00:00",
+      "status": "success",
+      "answer": "No, registration in the summer semester is not mandatory; registration in the summer semester is optional [AIU-003-P002-C002].",
+      "latency_seconds": 6.7132,
+      "total_elapsed_seconds": 6.7134,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 6.7132
+        }
+      ],
+      "input_tokens": 693,
+      "output_tokens": 40,
+      "thinking_tokens": 444,
+      "total_tokens": 1177,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    },
+    {
+      "model": "gemma-4-31b-it",
+      "question_id": "DEV-01",
+      "question": "Is registration in the summer semester mandatory?",
+      "question_type": "direct_factual",
+      "difficulty": "easy",
+      "answerable": true,
+      "expected_answer": "No. Registration in the summer semester is optional.",
+      "expected_language": "en",
+      "relevant_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "context_chunk_ids": [
+        "AIU-003-P002-C002"
+      ],
+      "prompt_characters": 3026,
+      "prompt_sha256": "70565a17bd353d60a19fd7cfab8d504326e87cd403b189b9dfea66c63ebcb46e",
+      "timestamp": "2026-11-24T23:44:55.394440+00:00",
+      "status": "success",
+      "answer": "No, registration in the summer semester is optional [AIU-003-P002-C002].",
+      "latency_seconds": 35.8819,
+      "total_elapsed_seconds": 35.8821,
+      "attempt_count": 1,
+      "retry_count": 0,
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "success",
+          "latency_seconds": 35.8819
+        }
+      ],
+      "input_tokens": 664,
+      "output_tokens": 26,
+      "thinking_tokens": 360,
+      "total_tokens": 1050,
+      "error_code": null,
+      "error_type": null,
+      "quality_scores": null
+    }
+  ]
+}

@@ -178,7 +178,8 @@ def save_embeddings(
     with open(
         output_dir / "metadata.json",
         "w",
-        encoding="utf-8"
+        encoding="utf-8",
+        newline="\n"
     ) as file:
         json.dump(chunks, file, ensure_ascii=False, indent=2)
 
@@ -195,7 +196,8 @@ def save_embeddings(
     with open(
         output_dir / "config.json",
         "w",
-        encoding="utf-8"
+        encoding="utf-8",
+        newline="\n"
     ) as file:
         json.dump(config, file, indent=2)
 

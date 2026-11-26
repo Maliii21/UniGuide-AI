@@ -1,0 +1,25 @@
+model,question_id,correctness,faithfulness,completeness,citation_quality,instruction_following,weighted_score,abstained,material_unsupported_claim,citation_ids_count,valid_citation_ids_count,reviewer_note
+gemini-3.5-flash-lite,DEV-01,2,2,2,2,2,100.0,0,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.5-flash-lite,DEV-02,2,2,2,2,2,100.0,0,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.5-flash-lite,DEV-03,2,2,1,2,1,85.0,0,0,1,1,Correct deadline; omits explicit late-appeal rejection.
+gemini-3.5-flash-lite,DEV-04,2,2,2,2,2,100.0,0,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.5-flash-lite,DEV-05,2,2,2,2,2,100.0,0,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.5-flash-lite,DEV-06,2,2,1,1,1,77.5,0,0,4,4,Correct submission and eligibility; omits registrar verification and faculty scheduling/deadline; grouped IDs.
+gemini-3.5-flash-lite,DEV-07,2,2,1,1,1,77.5,0,0,5,5,Correct submission and decision authority; omits routing and recommendation; grouped IDs.
+gemini-3.5-flash-lite,DEV-08,2,2,1,1,1,77.5,0,0,4,4,Correct I/F and GPA treatment; omits explicit attendance and submission eligibility reasoning; grouped IDs.
+gemini-3.5-flash-lite,DEV-09,0,0,0,0,0,0.0,1,1,1,1,False abstention: cited context explicitly provides conditional final chance; denial of evidence is contradicted by source.
+gemini-3.5-flash-lite,DEV-10,2,2,1,2,1,85.0,1,0,1,1,Correct abstention; omits known requirement to pay corresponding fees.
+gemini-3.5-flash-lite,DEV-11,2,2,2,2,2,100.0,1,0,0,0,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.5-flash-lite,DEV-12,2,2,2,2,2,100.0,0,0,2,2,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.1-flash-lite,DEV-01,2,2,2,2,2,100.0,0,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.1-flash-lite,DEV-02,2,2,2,2,2,100.0,0,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.1-flash-lite,DEV-03,2,2,2,2,2,100.0,0,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.1-flash-lite,DEV-04,2,2,2,2,2,100.0,0,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.1-flash-lite,DEV-05,2,2,2,2,2,100.0,0,0,2,2,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.1-flash-lite,DEV-06,2,2,2,2,2,100.0,0,0,6,6,"All reference procedural steps covered; beyond-control condition not explicit, but question asks submission procedure and reasonable excuse is stated."
+gemini-3.1-flash-lite,DEV-07,2,2,1,1,1,77.5,0,0,7,7,Correct routing and authority; omits faculty alternative and explicit approve/decline distinction; grouped IDs.
+gemini-3.1-flash-lite,DEV-08,2,2,1,2,1,85.0,0,0,4,4,Correct I/F and GPA treatment; states submission and approval but omits attendance eligibility reasoning.
+gemini-3.1-flash-lite,DEV-09,2,2,2,2,2,100.0,0,0,2,2,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.1-flash-lite,DEV-10,2,2,2,2,2,100.0,1,0,1,1,"Correct, supported and sufficiently complete; appropriate citation or abstention."
+gemini-3.1-flash-lite,DEV-11,2,2,2,1,1,87.5,1,0,2,2,Correct abstention; grouped IDs violate single-ID format; both supplied chunks lack requested limit.
+gemini-3.1-flash-lite,DEV-12,2,2,2,2,2,100.0,0,0,2,2,"Correct, supported and sufficiently complete; appropriate citation or abstention."
