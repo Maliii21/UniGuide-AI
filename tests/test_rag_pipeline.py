@@ -408,7 +408,7 @@ class TestAbstention:
             )
         ]
     )
-    
+
     def test_bilingual_abstention(
         self, pipeline, llm,
         question, expected_text

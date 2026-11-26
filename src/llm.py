@@ -268,7 +268,7 @@ class GeminiLLM:
                 )
             )
 
-    
+
     def generate_answer(self, question, context):
         """Generate an answer grounded in retrieved context."""
 
@@ -412,4 +412,3 @@ class GeminiLLM:
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-    

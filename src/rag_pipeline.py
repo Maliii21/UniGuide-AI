@@ -143,7 +143,7 @@ class RAGPipeline:
                 "Question must be a non-empty string."
             )
 
-        
+
         question = question.strip()
 
         total_start = time.perf_counter()
@@ -193,7 +193,7 @@ class RAGPipeline:
         )
 
         # Step 2: Prepare response metadata.
-        
+
         result = RAGResponse(
             question=question,
             status="pending",
