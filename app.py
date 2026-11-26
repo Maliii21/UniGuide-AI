@@ -7,6 +7,7 @@ Alamein International University
 
 import html
 import logging
+import re
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -62,13 +63,40 @@ st.markdown(
     }
 
     .arabic-message {
-        direction: rtl;
-        text-align: right;
-        line-height: 1.9;
-        font-size: 1rem;
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-        unicode-bidi: plaintext;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.8;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: normal;
+    unicode-bidi: isolate;
+    max-width: 100%;
+    padding-inline: 0.25rem;
+    box-sizing: border-box;
+    }
+
+    .arabic-message .citation-id {
+        direction: ltr;
+        unicode-bidi: isolate;
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 0.85em;
+        color: #64748B;
+        max-width: 100%;
+    }
+
+    .arabic-message .arabic-bullet {
+        display: block;
+        position: relative;
+        padding-inline-start: 1rem;
+        margin-block: 0.35rem;
+    }
+
+    .arabic-message .arabic-bullet::before {
+        content: "•";
+        position: absolute;
+        inset-inline-start: 0;
     }
 
     .chat-alert {
@@ -106,17 +134,28 @@ st.markdown(
     }
 
     @media (max-width: 640px) {
-        .welcome-description {
-            font-size: 0.9rem;
-        }
+    .welcome-description {
+        font-size: 0.9rem;
+    }
 
-        .arabic-message {
-            font-size: 0.95rem;
-        }
+    .arabic-message {
+        font-size: 0.95rem;
+        line-height: 1.75;
+        padding-inline: 0.15rem;
+    }
 
-        .app-footer {
-            font-size: 0.75rem;
-        }
+    .arabic-message .citation-id {
+        font-size: 0.78em;
+    }
+
+    .arabic-message .arabic-bullet {
+        padding-inline-start: 0.85rem;
+        margin-block: 0.2rem;
+    }
+
+    .app-footer {
+        font-size: 0.75rem;
+    }
     }
     </style>
     """,
@@ -211,12 +250,57 @@ def render_sources(sources):
 # Bilingual text rendering
 # ==========================================
 
+def format_arabic_content(content: str) -> str:
+    """Safely format Arabic assistant responses."""
+
+    content = content.strip()
+
+    # Reduce excessive blank lines.
+    content = re.sub(r"\n[ \t]*\n+", "\n", content)
+
+    # Escape untrusted HTML before formatting.
+    safe_content = html.escape(content)
+
+    # Keep citation IDs together and left-to-right.
+    safe_content = re.sub(
+        r"(\[AIU-\d{3}-P\d{3}-C\d{3}\])",
+        r'<bdi class="citation-id" dir="ltr">\1</bdi>',
+        safe_content
+    )
+
+    # Support bold Markdown text.
+    safe_content = re.sub(
+        r"\*\*([^\n]+?)\*\*",
+        r"<strong>\1</strong>",
+        safe_content
+    )
+
+    # Format simple bullet points.
+    safe_content = re.sub(
+        r"(?m)^[ \t]*[-*•][ \t]+([^\n]+)",
+        r'<span class="arabic-bullet">\1</span>',
+        safe_content
+    )
+    # Remove redundant line breaks around block-level bullets.
+    safe_content = re.sub(
+        r"</span>[ \t]*\n+(?=<span class=\"arabic-bullet\">)",
+        "</span>",
+        safe_content
+    )
+
+    return safe_content
+
+
 def render_chat_text(content: str, is_user: bool = False):
     """Render Arabic and English chat messages."""
 
     if contains_arabic(content):
 
-        safe_content = html.escape(content)
+        safe_content = (
+            html.escape(content)
+            if is_user
+            else format_arabic_content(content)
+        )
 
         st.markdown(
             f'<div class="arabic-message" '
@@ -401,7 +485,7 @@ with st.sidebar:
     if st.button(
         "+ New chat",
         type="primary",
-        use_container_width=True
+        width="stretch"
     ):
 
         st.session_state.conversation.clear()
@@ -454,7 +538,7 @@ with st.sidebar:
     st.link_button(
         "Visit AIU Website",
         "https://aiu.edu.eg/",
-        use_container_width=True
+        width="stretch"
     )
 
     st.caption(
@@ -485,7 +569,7 @@ if conversation.is_empty:
         with center:
             st.image(
                 str(LOGO_PATH),
-                use_container_width=True
+                width="stretch"
             )
 
     st.markdown(
@@ -546,7 +630,7 @@ if conversation.is_empty:
             if st.button(
                 example,
                 key=f"example_{index}",
-                use_container_width=True
+                width="stretch"
             ):
 
                 selected_question = example
