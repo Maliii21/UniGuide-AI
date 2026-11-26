@@ -1,4 +1,4 @@
-
+--extra-index-url https://download.pytorch.org/whl/cpu
 # UniGuide-AI
 # Python 3.12
 
@@ -13,7 +13,7 @@ tokenizers==0.23.3
 
 # Embeddings and Reranking
 sentence-transformers==6.3.0
-torch==2.15.0
+torch==2.15.0+cpu
 huggingface-hub==2.4.0
 
 # Numerical Computing
@@ -30,3 +30,10 @@ Pillow==10.3.0
 
 # Testing
 pytest==7.4.4
+
+# LLM Integration
+google-genai==3.6.1
+python-dotenv==1.2.4
+
+# Chatbot User Interface
+streamlit==1.67.0
