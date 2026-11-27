@@ -1,0 +1,51 @@
+{
+  "AR-001": {
+    "original_question": "إيه اللي أعمله لو ضاع مني كارنيه الجامعة علشان أطلع بدل فاقد؟",
+    "translated_question": "What should I do if I lost my university ID card in order to obtain a replacement?",
+    "translation_seconds": 1.0382,
+    "model": "gemini-3.1-flash-lite",
+    "total_tokens": 207
+  },
+  "AR-002": {
+    "original_question": "هل ممكن أحول مقرر حضرته بنظام الاستماع إلى مقرر معتمد بعد كده؟",
+    "translated_question": "Is it possible to convert a course I attended as an auditor into a credited course later?",
+    "translation_seconds": 0.9495,
+    "model": "gemini-3.1-flash-lite",
+    "total_tokens": 205
+  },
+  "AR-003": {
+    "original_question": "هل الطالب اللي خلص دراسته يقدر ينضم لرابطة خريجي الجامعة؟",
+    "translated_question": "Can a student who has completed their studies join the university alumni association?",
+    "translation_seconds": 0.7176,
+    "model": "gemini-3.1-flash-lite",
+    "total_tokens": 201
+  },
+  "AR-004": {
+    "original_question": "إيه الخطوات المطلوبة علشان موظف في الجامعة يحضر مقرر بنظام الاستماع؟",
+    "translated_question": "What are the required steps for a university employee to audit a course?",
+    "translation_seconds": 0.6535,
+    "model": "gemini-3.1-flash-lite",
+    "total_tokens": 202
+  },
+  "AR-005": {
+    "original_question": "كام مقرر ممكن لطالب التبادل الدراسي يحضره بنظام الاستماع في الترم؟",
+    "translated_question": "How many courses can an exchange student audit per semester?",
+    "translation_seconds": 0.9113,
+    "model": "gemini-3.1-flash-lite",
+    "total_tokens": 198
+  },
+  "AR-006": {
+    "original_question": "هل المحاضرات لازم تبدأ في أول الساعة بالضبط؟",
+    "translated_question": "Do lectures have to start exactly at the beginning of the hour?",
+    "translation_seconds": 0.6739,
+    "model": "gemini-3.1-flash-lite",
+    "total_tokens": 193
+  },
+  "AR-007": {
+    "original_question": "إيه الإجراء المطلوب علشان أرجع للدراسة بعد فترة الإيقاف؟",
+    "translated_question": "What is the required procedure to return to studies after a suspension period?",
+    "translation_seconds": 15.9395,
+    "model": "gemini-3.1-flash-lite",
+    "total_tokens": 199
+  }
+}
