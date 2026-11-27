@@ -594,18 +594,6 @@ if conversation.is_empty:
 
     st.divider()
 
-    metric1, metric2, metric3 = st.columns(3)
-
-    with metric1:
-        st.metric("Documents", DOCUMENT_COUNT)
-
-    with metric2:
-        st.metric("Knowledge chunks", CHUNK_COUNT)
-
-    with metric3:
-        st.metric("Languages", 2)
-
-    st.divider()
 
     st.subheader("Explore common questions")
 
