@@ -32,9 +32,13 @@ CHUNK_COUNT = 202
 # Page configuration
 # ==========================================
 
+from PIL import Image
+
+FAVICON_PATH = LOGO_PATH.parent / "favicon.png"
+
 st.set_page_config(
     page_title="UniGuide-AI | AIU",
-    page_icon=str(LOGO_PATH) if LOGO_PATH.is_file() else "🎓",
+    page_icon=Image.open(FAVICON_PATH) if FAVICON_PATH.is_file() else "🎓",
     layout="wide",
     initial_sidebar_state="expanded"
 )

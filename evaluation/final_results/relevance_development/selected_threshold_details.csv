@@ -1,0 +1,29 @@
+question_id,question,language,answerable,max_score,passed,outcome,retained_count
+EN-001,What is the maximum percentage of program credits that can be transferred to AIU?,en,True,3.025460720062256,True,TP,5
+EN-002,Does formative assessment contribute to the final mark?,en,True,2.5357789993286133,True,TP,5
+EN-003,How many digits does an AIU student identification number contain?,en,True,3.1421117782592773,True,TP,5
+EN-004,How recent must the photograph used for a student ID card be?,en,True,2.755209445953369,True,TP,5
+EN-005,Can university classes be scheduled on Fridays?,en,True,4.294883728027344,True,TP,5
+EN-006,Can a student take examinations in an audited course?,en,True,7.476797580718994,True,TP,5
+EN-007,Who is responsible for approving the class schedule?,en,True,2.8083767890930176,True,TP,5
+EN-008,Can I lend my university ID card to another student?,en,True,0.5624195337295532,True,TP,5
+AR-001,إيه اللي أعمله لو ضاع مني كارنيه الجامعة علشان أطلع بدل فاقد؟,ar,True,-0.7998079657554626,True,TP,5
+AR-002,هل ممكن أحول مقرر حضرته بنظام الاستماع إلى مقرر معتمد بعد كده؟,ar,True,5.589089393615723,True,TP,5
+EN-009,When should academic departments submit their teaching plans to the Registrar Office?,en,True,3.7491228580474854,True,TP,5
+EN-010,"As a degree-seeking student, what happens to my audited course on the transcript if I miss four lectures?",en,True,4.73472785949707,True,TP,5
+EN-011,Do graduates lose access to university research resources after graduation?,en,True,-2.5930838584899902,True,TP,5
+EN-012,How can a previously withdrawn student apply to return to AIU?,en,True,4.859553337097168,True,TP,5
+EN-013,How does a degree-seeking student obtain permission to audit a course?,en,True,5.435593128204346,True,TP,5
+EN-014,How does the university prepare and publish the Fall class schedule?,en,True,1.6976369619369507,True,TP,5
+EN-015,Can an employee audit two courses in one semester without paying credit fees?,en,True,7.504547119140625,True,TP,5
+EN-016,What happens if a student misses registration for three consecutive semesters without an approved leave?,en,True,1.7133111953735352,True,TP,5
+EN-017,Can AIU revoke an awarded degree if forgery is discovered in the graduation records?,en,True,5.746993064880371,True,TP,5
+EN-018,Can a student avoid minimum tuition fees when taking a whole semester off?,en,True,6.529317855834961,True,TP,5
+EN-019,How many working days does AIU take to issue a replacement student ID card?,en,False,0.19628897309303284,True,FP,5
+EN-020,Who won the 2018 FIFA World Cup?,en,False,-10.206258773803711,False,TN,0
+AR-003,هل الطالب اللي خلص دراسته يقدر ينضم لرابطة خريجي الجامعة؟,ar,True,-2.6510720252990723,True,TP,5
+AR-004,إيه الخطوات المطلوبة علشان موظف في الجامعة يحضر مقرر بنظام الاستماع؟,ar,True,1.979665756225586,True,TP,5
+AR-005,كام مقرر ممكن لطالب التبادل الدراسي يحضره بنظام الاستماع في الترم؟,ar,True,6.0378217697143555,True,TP,5
+AR-006,هل المحاضرات لازم تبدأ في أول الساعة بالضبط؟,ar,True,-7.803989887237549,True,TP,5
+AR-007,إيه الإجراء المطلوب علشان أرجع للدراسة بعد فترة الإيقاف؟,ar,True,4.714825630187988,True,TP,5
+AR-008,ما هي مواعيد فتح مكتبة الجامعة وإغلاقها يوم السبت؟,ar,False,-6.6701788902282715,True,FP,5

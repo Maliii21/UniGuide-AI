@@ -1,0 +1,3 @@
+mode,questions,generated_answers,correct_abstentions,false_abstentions,technical_errors,semantic_scored,correctness_pct,relevance_pct,strict_accuracy_pct,mean_latency_seconds
+with_rag,42,36,4,1,1,41,89.02439024390245,96.34146341463415,80.95238095238095,6.219911904761905
+without_rag,42,29,4,9,0,42,44.047619047619044,76.19047619047619,26.190476190476193,9.633790476190477

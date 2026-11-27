@@ -1,0 +1,66 @@
+
+{
+  "dataset_name": "UniGuide-AI Evaluation Dataset",
+  "dataset_version": "1.0.0",
+  "freeze_date": "2026-11-27",
+  "status": "frozen",
+  "corpus": {
+    "documents": 26,
+    "pages": 121,
+    "chunks": 202
+  },
+  "dataset": {
+    "total_questions": 70,
+    "unique_fact_groups": 63,
+    "languages": {
+      "en": 50,
+      "ar": 20
+    },
+    "splits": {
+      "development": 28,
+      "test": 42
+    },
+    "answerability": {
+      "answerable": 63,
+      "unanswerable": 7
+    },
+    "question_types": {
+      "direct_factual": 21,
+      "paraphrased": 21,
+      "procedural": 14,
+      "complex_reasoning": 7,
+      "unanswerable": 7
+    }
+  },
+  "review": {
+    "human_reviewed": 56,
+    "ai_reviewed_with_owner_authorization": 14,
+    "pending": 0
+  },
+  "validation": {
+    "structural_validation": "passed",
+    "errors": 0,
+    "warnings": 0
+  },
+  "hash_algorithm": "SHA256",
+  "file_hashes": {
+    "evaluation/test_questions.csv": "489af6af97a3a6a48e7ca0e05cf652ab785f87fb291cae4c43c30d8e6ec7adaf",
+    "evaluation/human_review.csv": "50e6d8eec255ff3b81c0e35eddd9ec9432867583c5c6a2a62fc89d54b695eae5",
+    "evaluation/DATASET_REVIEW_FINAL.md": "0fae66f52933fb0a539360b9092c400d9dce4f545e7c8faedc621263c2f793bf",
+    "data/processed/chunks.json": "eeec7a6aa2b333d5ceb5f4284f5f8872deb334e9ed1a26c9c675faae0435b09c",
+    "data/processed/documents.json": "9c45fb3a53f24f72b1cd6b53816988496d2f1c9c3170ed1d826158050e95c0f7",
+    "data/sources.csv": "ab1a2d3e379561460f768da1356b1308f6a4f6ae79939e0975ba1c7a559a00d1"
+  },
+  "evaluation_rules": {
+    "development_set": "Model selection, parameter tuning and threshold optimization.",
+    "test_set": "Final evaluation after configuration selection.",
+    "allow_test_based_tuning": false,
+    "allow_untracked_dataset_changes": false
+  },
+  "limitations": [
+    "Some source policies require edition confirmation.",
+    "Fourteen revised questions received AI-assisted review rather than independent human verification.",
+    "Complete historical evaluation independence cannot be guaranteed because some preliminary evaluation questions were unavailable.",
+    "Structural validation does not guarantee semantic correctness."
+  ]
+}

@@ -1,6 +1,17 @@
+
 # Keep retrieval artifacts consistent across platforms
 data/embeddings/*.json text eol=lf
 
 # Preserve binary artifacts without conversion
 *.npy binary
 *.faiss binary
+
+# Preserve exact bytes of frozen corpus files
+data/processed/chunks.json -text
+data/processed/documents.json -text
+data/sources.csv -text
+
+# Preserve exact bytes of frozen evaluation files
+evaluation/test_questions.csv -text
+evaluation/human_review.csv -text
+evaluation/DATASET_REVIEW_FINAL.md -text
