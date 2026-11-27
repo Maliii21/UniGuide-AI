@@ -191,7 +191,32 @@ def search(index, query_embedding, metadata, top_k=5):
 
     top_k = min(top_k, index.ntotal)
 
-    scores, indices = index.search(query, top_k)
+    # Retrieve stored document embeddings
+    document_embeddings = index.reconstruct_n(
+        0, index.ntotal
+    )
+
+    # Calculate cosine similarity using NumPy
+    dot_products = document_embeddings @ query[0]
+
+    document_norms = np.linalg.norm(
+        document_embeddings, axis=1
+    )
+
+    query_norm = np.linalg.norm(query[0])
+
+    similarities = dot_products / (
+        document_norms * query_norm
+    )
+
+    # Retrieve the Top-K most similar chunks
+    top_indices = np.argsort(
+        -similarities, kind="stable"
+    )[:top_k]
+
+    # Preserve the existing output structure
+    indices = top_indices.reshape(1, -1)
+    scores = similarities[top_indices].reshape(1, -1)
 
     results = []
 
