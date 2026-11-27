@@ -25,6 +25,14 @@ The system combines document processing, multilingual embeddings, semantic and k
 
 **Project Status:** Core implementation, cloud deployment, comparative evaluation, and automated regression testing completed.
 
+## Application Demo
+
+Watch UniGuide-AI in action, showcasing bilingual question
+answering, source-grounded responses, and an interactive
+university assistant interface.
+
+https://github.com/user-attachments/assets/9d3819a4-414b-4d7d-a3be-5e1c51cc9f65
+
 ## 1. Problem Statement
 
 University students often struggle to locate accurate information across multiple policy documents, academic regulations, and administrative procedures.
