@@ -175,9 +175,11 @@ The system implements four retrieval modes:
 | Hybrid | Semantic and keyword retrieval combined using RRF |
 | Reranked | Hybrid retrieval followed by cross-encoder reranking |
 
-The application uses FAISS IndexFlatIP for exact similarity search. Because the vectors are L2-normalized, inner-product similarity is equivalent to cosine similarity.
+Semantic retrieval uses multilingual E5 embeddings and NumPy-based cosine similarity with Top-K ranking. FAISS is retained for efficient vector storage and reconstruction.
 
-The comparative embedding evaluation also implements exact cosine similarity using NumPy.
+The NumPy implementation was verified against FAISS across 544 retrieval comparisons, achieving 100% chunk selection equivalence and 96.14% exact ranking equivalence.
+
+See [NumPy Verification](evaluation/NUMPY_VERIFICATION.md) for detailed results and limitations.
 
 ### Retrieval Configuration
 
@@ -257,6 +259,14 @@ The application uses shared retrieval resources through Streamlit caching to red
 Conversation history is displayed but is not automatically included in subsequent retrieval and generation requests.
 
 ## 8. Evaluation and Performance Analysis
+
+> **Evaluation Note:** The original RAG evaluation was conducted
+> using FAISS-based similarity search. The subsequent NumPy
+> implementation was validated through semantic retrieval
+> equivalence checks and full regression testing.
+> The original evaluation results remain unchanged.
+> See [NumPy Verification](evaluation/NUMPY_VERIFICATION.md)
+> for detailed results and limitations.
 
 ### 8.1 Evaluation Dataset
 
@@ -348,6 +358,7 @@ The threshold of -8.0 was selected for the final evaluation using a recall-first
 This selection increases the risk of retaining irrelevant evidence. The LLM must therefore assess context sufficiency before answering.
 
 The deployed application retains its original default threshold of -5.0. Final evaluation results correspond to the explicitly evaluated configuration of -8.0.
+
 
 ### 8.6 LLM Model Selection
 
