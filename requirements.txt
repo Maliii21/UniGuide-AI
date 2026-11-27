@@ -37,3 +37,4 @@ python-dotenv==1.2.4
 
 # Chatbot User Interface
 streamlit==1.67.0
+matplotlib

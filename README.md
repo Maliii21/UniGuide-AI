@@ -2,11 +2,9 @@
 
 **A Bilingual Retrieval-Augmented Generation (RAG) University Assistant**
 
-UniGuide-AI is an AI-powered university assistant designed to help Alamein International University (AIU) students access information from official university policy documents through natural-language questions in Arabic and English.
+UniGuide-AI is an AI-powered chatbot designed to help Alamein International University (AIU) students access official university policies and academic regulations through natural-language questions in Arabic and English.
 
-The system integrates document processing, multilingual embeddings, FAISS vector search, BM25 keyword retrieval, hybrid ranking, cross-encoder reranking, automatic query translation, and Google Gemini to generate source-grounded answers with validated citations.
-
-The application provides an interactive Streamlit chatbot accessible from desktop and mobile devices.
+The system combines document processing, multilingual embeddings, semantic and keyword retrieval, cross-encoder reranking, automatic query translation, and Google Gemini to generate source-grounded answers with validated citations.
 
 ## Live Demo
 
@@ -19,97 +17,96 @@ The application provides an interactive Streamlit chatbot accessible from deskto
 | Indexed knowledge chunks | 202 |
 | Embedding dimensions | 768 |
 | Supported languages | Arabic and English |
-| Automated tests passed | 555/555 |
+| Evaluation questions | 70 |
+| Held-out test questions | 42 |
+| Automated tests passed | 573/573 |
 | Online functional acceptance checks | 10/10 |
 | Deployment platform | Streamlit Community Cloud |
 
-**Project Status:** Core implementation and cloud deployment completed. Independent comprehensive evaluation is pending.
+**Project Status:** Core implementation, cloud deployment, comparative evaluation, and automated regression testing completed.
 
-> UniGuide-AI is an academic project and is not an official university service. Important academic decisions should always be verified against official university documents.
+## 1. Problem Statement
 
-## Project Objectives
+University students often struggle to locate accurate information across multiple policy documents, academic regulations, and administrative procedures.
 
-- Provide efficient access to official university policies and academic regulations.
-- Support natural-language questions in Arabic and English.
-- Retrieve relevant evidence using semantic search, keyword retrieval, and hybrid ranking.
-- Improve retrieval relevance through cross-encoder reranking.
-- Generate source-grounded answers using a pretrained large language model.
-- Reduce unsupported responses through relevance filtering, evidence-aware generation, and citation validation.
-- Preserve document metadata and provide access to original university sources.
-- Provide an accessible, responsive web-based chatbot.
-- Support reproducible experiments and systematic performance evaluation.
+Traditional document searching is time-consuming, while standalone large language models may generate inaccurate or unsupported university-specific information.
 
-## System Architecture
+UniGuide-AI addresses this problem by retrieving relevant evidence from official university documents before generating answers.
 
-The system is organized into four main components:
+## 2. Project Objectives
 
-1. Data Collection and Processing.
-2. Embeddings and Retrieval.
-3. LLM Integration and User Interface.
-4. Evaluation and Performance Analysis.
+- Provide efficient access to university policies and academic regulations.
+- Support Arabic and English natural-language questions.
+- Retrieve relevant evidence using semantic and keyword search.
+- Improve retrieval quality through hybrid ranking and cross-encoder reranking.
+- Generate accurate, relevant, and source-grounded answers.
+- Reduce unsupported responses through relevance filtering and citation validation.
+- Provide an accessible web-based chatbot.
+- Evaluate the effectiveness of RAG compared with standalone LLM generation.
 
-The data processing, embeddings, retrieval, LLM integration, and Streamlit user interface components have been implemented and tested.
-
-The system supports English and Arabic questions, automatic query translation, relevance-aware retrieval, source-grounded answer generation, citation validation, and session-based conversation management.
-
-Independent final evaluation and comparative performance analysis remain the next development stage.
-
-### End-to-End RAG Architecture
+## 3. System Architecture
 
 ```mermaid
 flowchart TD
     A[User Question] --> B[Language Detection]
-    B --> C{Contains Arabic?}
-
+    B --> C{Arabic or Mixed Language?}
     C -->|Yes| D[Gemini Query Translation]
     C -->|No| E[Original English Query]
-
-    D --> V{Valid Translation?}
-    V -->|No| ERR[Error Response]
-    V -->|Yes| F[English Retrieval Query]
+    D --> F[Retrieval Query]
     E --> F
-
-    F --> G[FAISS Semantic Search]
-    F --> H[BM25 Keyword Search]
-
+    F --> G[Semantic Search - FAISS]
+    F --> H[Keyword Search - BM25]
     G --> I[Reciprocal Rank Fusion]
     H --> I
-
     I --> J[Cross-Encoder Reranking]
     J --> K[Relevance Filtering]
-    K --> L{Relevant Context?}
-
-    L -->|No| M[Insufficient Context Response]
-    L -->|Yes| CTX[Retrieved Context and Original Question]
-
-    CTX --> N[Gemini Answer Generation]
-    N --> API{Generation Successful?}
-
-    API -->|No| ERR
-    API -->|Yes| O{LLM Abstains?}
-
-    O -->|Yes| M
-    O -->|No| P[Citation Validation]
-
-    P --> Q{Valid Citations?}
-    Q -->|Yes| R[Answer and Validated Sources]
-    Q -->|No| S[Citation Verification Error]
-
-    M --> T[Streamlit Chat Interface]
-    R --> T
-    S --> T
-    ERR --> T
+    K --> L{Relevant Evidence?}
+    L -->|No| M[Insufficient Context]
+    L -->|Yes| N[Retrieved Context and Original Question]
+    N --> O[Gemini Answer Generation]
+    O --> P{Sufficient Evidence?}
+    P -->|No| M
+    P -->|Yes| Q[Citation Validation]
+    Q --> R{Valid Citations?}
+    R -->|Yes| S[Grounded Answer and Sources]
+    R -->|No| T[Citation Error]
+    M --> U[Streamlit Interface]
+    S --> U
+    T --> U
 ```
 
-## Data Collection and Processing
+Translation failures and API errors are handled separately by the RAG pipeline.
 
-The UniGuide-AI data processing pipeline prepares official Alamein International University (AIU) policy documents for a Retrieval-Augmented Generation (RAG) system supporting Arabic and English queries.
+## 4. Technology Stack
 
-### Dataset Overview
+| Component | Technology |
+|---|---|
+| Programming language | Python 3.12 |
+| PDF processing | PyMuPDF |
+| OCR experiments | Tesseract OCR |
+| Embedding framework | Sentence Transformers |
+| Embedding model | intfloat/multilingual-e5-base |
+| Numerical computation | NumPy |
+| Vector search | FAISS |
+| Keyword retrieval | BM25 |
+| Rank fusion | Reciprocal Rank Fusion |
+| Reranking | Cross-Encoder |
+| Large language model | Google Gemini 3.1 Flash-Lite |
+| User interface | Streamlit |
+| Testing | Pytest |
+| Visualization | Matplotlib |
+| Version control | Git and GitHub |
+| Deployment | Streamlit Community Cloud |
+
+## 5. Data Collection and Preprocessing
+
+The knowledge base consists of 26 official AIU policy documents covering academic regulations, registration, attendance, examinations, tuition fees, withdrawal, student services, and other university-related topics.
+
+### Dataset Statistics
 
 | Metric | Value |
-|---|---|
-| Official PDF documents | 26 |
+|---|---:|
+| PDF documents | 26 |
 | Extracted pages | 121 |
 | Extracted words | 33,599 |
 | Pages enhanced with visual summaries | 9 |
@@ -118,386 +115,92 @@ The UniGuide-AI data processing pipeline prepares official Alamein International
 | Minimum chunk size | 34 tokens |
 | Average chunk size | 264.77 tokens |
 | Target chunk overlap | 60 tokens |
-| Passed tests | 27/27 |
 
-### Data Processing Pipeline
+### Processing Pipeline
 
-1. Data Collection: Collect official university policy documents from the AIU website.
-2. Data Validation: Check PDF readability, duplicate files, and text availability.
-3. Source Inventory: Record document metadata, source URLs, page counts, verification statuses, and review notes.
-4. Text Extraction: Extract page-level text using PyMuPDF.
-5. Text Cleaning: Normalize whitespace while preserving the original content and paragraph structure.
-6. Image Content Processing: Supplement native text extraction with reviewed visual summaries where necessary.
-7. Document Chunking: Split extracted text into overlapping, token-based chunks.
-8. Metadata Preservation: Retain document identifiers, page numbers, source URLs, and review information.
-9. Quality Assurance: Validate the processing pipeline through automated tests.
+1. Collect official university policy documents.
+2. Validate PDF readability and document metadata.
+3. Extract page-level text using PyMuPDF.
+4. Clean and normalize extracted content.
+5. Investigate OCR for scanned forms and image-based content.
+6. Supplement native extraction with reviewed visual summaries where necessary.
+7. Generate overlapping, page-aware token chunks.
+8. Preserve source URLs, document identifiers, page numbers, and review metadata.
+9. Validate the generated data through automated tests.
 
-### OCR Experiments
-
-Basic and enhanced OCR approaches were investigated using PyMuPDF and Tesseract OCR.
-
-The experiments included:
-
-- Arabic and English text recognition.
-- High-resolution image rendering.
-- Grayscale conversion.
-- Contrast enhancement and sharpening.
-- OCR configuration adjustments.
-
-Recognition errors were observed in complex forms, tables, and Arabic image-based content. Therefore, raw OCR output was not approved for ingestion.
-
-A hybrid approach was adopted, combining native PDF text extraction with visual form summaries marked as verified in the correction inventory.
-
-Nine pages across five documents were enhanced using this approach.
-
-### Chunking Strategy
-
-The system implements page-aware, boundary-aware token chunking with overlapping content.
-
-| Parameter | Configuration |
-|---|---|
-| Tokenizer | intfloat/multilingual-e5-base |
-| Model maximum sequence length | 512 tokens |
-| Maximum chunk size | 400 tokens |
-| Target overlap | 60 tokens |
-| Overlap percentage | 15% |
-| Page boundary preservation | Enabled |
-| Metadata preservation | Enabled |
-
-The tokenizer is used to calculate token lengths accurately for both Arabic and English content. Natural sentence boundaries are preferred where possible, while character offsets preserve the original extracted text.
-
-The selected chunk size leaves sufficient space for the embedding model's input prefix and special tokens.
+Raw OCR output was not approved for ingestion because of recognition errors in complex forms, tables, and Arabic image-based content.
 
 ### Generated Data Files
 
 | File | Description |
 |---|---|
-| data/sources.csv | Source inventory and document metadata |
-| data/ocr_corrections.json | Page-level visual summaries and review statuses |
-| data/processed/documents.json | Extracted page-level text and metadata |
-| data/processed/chunks.json | Processed chunks ready for embedding |
+| `data/sources.csv` | Source inventory and metadata |
+| `data/ocr_corrections.json` | Reviewed visual summaries |
+| `data/processed/documents.json` | Extracted document text |
+| `data/processed/chunks.json` | Processed knowledge chunks |
 
-### Reproducing the Data Processing Pipeline
+## 6. Embeddings and Retrieval
 
-Run the following commands from the project root:
+### Embedding Configuration
 
-```bash
-python Validate_data.py
-python src/document_loader.py
-python src/chunking.py
-python src/update_source_inventory.py
-```
-
-### Data Processing Testing and Validation
-
-Run the data processing tests using:
-
-```bash
-python -m pytest tests/test_document_loader.py tests/test_chunking.py -v
-```
-
-Test results:
-
-| Test Suite | Passed |
-|---|---|
-| Document Loader | 11/11 |
-| Chunking | 16/16 |
-| Total | 27/27 |
-
-The tests cover text cleaning, metadata preservation, unique identifiers, page boundaries, overlapping content, Arabic text preservation, text coverage, JSON serialization, and embedding input length.
-
-### Data Processing Limitations
-
-- OCR accuracy is affected by complex layouts, tables, and scanned Arabic forms.
-- Some university policies contain outdated editions or conflicting information requiring institutional confirmation.
-- Page-aware chunking may produce shorter chunks for pages with limited content.
-- Retrieval effectiveness must be evaluated after embedding and indexing.
-- Public accessibility of source documents does not automatically establish redistribution permission.
-
-## Embeddings and Retrieval
-
-The retrieval component transforms processed university documents into searchable vector representations and retrieves relevant evidence for the RAG system.
-
-It combines dense semantic retrieval, sparse keyword retrieval, reciprocal rank fusion, cross-encoder reranking, and query-level relevance filtering.
-
-### Retrieval Architecture
-
-```mermaid
-flowchart TD
-    A[Processed Document Chunks] --> B[Embedding Model]
-    B --> C[FAISS Vector Index]
-    A --> D[BM25 Keyword Index]
-    Q[User Question] --> E[Query Embedding]
-    E --> F[Semantic Search]
-    C --> F
-    Q --> G[Keyword Search]
-    D --> G
-    F --> H[Reciprocal Rank Fusion]
-    G --> H
-    H --> I[Cross-Encoder Reranking]
-    I --> J[Relevance Filtering]
-    J --> K{Relevant Evidence?}
-    K -->|Yes| L[Context and Source Metadata]
-    K -->|No| M[Insufficient Evidence]
-    L --> N[LLM Integration]
-```
-Retrieval Configuration
+The system uses Multilingual E5 Base to generate normalized, 768-dimensional vector representations.
 
 | Parameter | Configuration |
 |---|---|
 | Embedding model | intfloat/multilingual-e5-base |
-| Embedding dimension | 768 |
-| Number of indexed chunks | 202 |
-| Embedding data type | Float32 |
-| Embedding normalization | L2 normalization |
-| Maximum embedding input length | 512 tokens |
+| Embedding matrix | 202 × 768 |
+| Data type | Float32 |
+| Normalization | L2 |
+| Maximum input length | 512 tokens |
+| Document prefix | `passage:` |
+| Query prefix | `query:` |
 | Embedding batch size | 16 |
-| Document prefix | passage: |
-| Query prefix | query: |
-| Vector search library | FAISS |
-| Index type | IndexFlatIP |
-| Similarity metric | Cosine similarity through normalized inner product |
-| Keyword retrieval | BM25 |
-| BM25 k1 | 1.5 |
-| BM25 b | 0.75 |
-| Fusion method | Reciprocal Rank Fusion |
-| RRF constant | 60 |
-| Reranking model | cross-encoder/ms-marco-MiniLM-L6-v2 |
-| Reranking batch size | 8 |
-| Reranking maximum input length | 512 tokens |
-| Reranking window overlap | 64 tokens |
-| Default candidate count | 20 |
-| Default final result count | 5 |
-| Preliminary relevance threshold | -5.0 |
-| Default execution device | CPU |
 
-### Embedding Generation
+### Retrieval Strategies
 
-The system generates dense vector representations for the 202 processed document chunks using the Multilingual E5 Base model.
-
-The embedding generation pipeline includes:
-
-- Dataset validation.
-- Unique chunk identifier validation.
-- Model-specific document and query prefixes.
-- Token-length validation before encoding.
-- Batch-based embedding generation.
-- L2 normalization.
-- Embedding dimension and numerical validity checks.
-- Metadata preservation.
-- Local embedding storage.
-
-The resulting embedding matrix has a shape of (202, 768).
-
-### Vector Storage and Semantic Search
-
-FAISS is used to implement exact similarity search over normalized document embeddings.
-
-The IndexFlatIP index performs inner-product search, which is equivalent to cosine similarity when both document and query vectors are L2-normalized.
-
-The vector storage component validates embedding dimensions, vector counts, metadata alignment, numerical values, and normalization.
-
-An index manifest containing file hashes is maintained to detect changes to stored embeddings, metadata, configuration, and index files.
-
-### BM25 Keyword Retrieval
-
-BM25 complements semantic retrieval by identifying documents containing relevant query terms.
-
-The implementation includes:
-
-- Case normalization.
-- Punctuation handling.
-- English stop-word removal.
-- Domain-specific term normalization.
-- Term-frequency and inverse-document-frequency scoring.
-- Document-length normalization.
-- Positive-score filtering.
-
-Important academic terms such as GPA and CGPA are preserved as distinct terms.
-
-### Hybrid Retrieval
-
-Semantic and keyword retrieval results are combined using Reciprocal Rank Fusion (RRF).
-
-RRF combines rankings rather than directly combining incompatible cosine similarity and BM25 scores.
-
-The fusion component removes duplicate chunk identifiers while preserving original retrieval scores, ranks, and source metadata.
-
-### Cross-Encoder Reranking
-
-The system uses cross-encoder/ms-marco-MiniLM-L6-v2 to rerank candidates obtained through hybrid retrieval.
-
-The default configuration retrieves 20 hybrid candidates and returns the five highest-ranked results.
-
-Query-passage pairs are evaluated jointly to improve relevance ranking.
-
-For passages exceeding the model's available token budget, overlapping token windows are generated. Each window is scored independently, and the maximum window score is used as the passage score.
-
-This approach avoids deliberate truncation of oversized passages while preserving the original document text.
-
-### Relevance Filtering
-
-A preliminary query-level relevance threshold of -5.0 is applied to the maximum cross-encoder score.
-
-If the maximum score meets or exceeds the threshold, the retrieved results are retained for context construction. Otherwise, the system returns an insufficient-relevance decision with an empty context.
-
-The threshold is provisional and requires independent evaluation.
-
-Passing the relevance threshold does not guarantee that the retrieved evidence fully answers the question. The LLM component must also assess evidence sufficiency before generating an answer.
-
-### Retrieval Modes
+The system implements four retrieval modes:
 
 | Mode | Description |
 |---|---|
-| semantic | Dense vector similarity search |
-| keyword | BM25 keyword retrieval |
-| hybrid | Semantic and keyword retrieval combined through RRF |
-| reranked | Hybrid retrieval followed by cross-encoder reranking |
+| Semantic | Dense vector similarity search |
+| Keyword | BM25 keyword retrieval |
+| Hybrid | Semantic and keyword retrieval combined using RRF |
+| Reranked | Hybrid retrieval followed by cross-encoder reranking |
 
-The default mode of the general retrieval interface is hybrid.
+The application uses FAISS IndexFlatIP for exact similarity search. Because the vectors are L2-normalized, inner-product similarity is equivalent to cosine similarity.
 
-For LLM integration, the relevance-aware retrieval interface is recommended.
+The comparative embedding evaluation also implements exact cosine similarity using NumPy.
 
-### Retrieval API
+### Retrieval Configuration
 
-Basic retrieval:
-
-```python
-from src.retrieval import RetrievalEngine
-engine = RetrievalEngine()
-results = engine.retrieve(
-    query="How can I register for courses?",
-    top_k=5,
-    mode="reranked"
-)
-for result in results:
-    print(result["document_title"])
-    print(result["chunk_id"])
-    print(result["text"])
-```
-
-Relevance-aware retrieval:
-
-```python
-from src.retrieval import RetrievalEngine
-engine = RetrievalEngine()
-response = engine.retrieve_with_relevance(
-    query="How can I withdraw from a course?",
-    top_k=5,
-    candidate_k=20,
-    threshold=-5.0
-)
-if response["relevance_passed"]:
-    context = response["context"]
-    sources = response["results"]
-else:
-    print("Insufficient relevant information.")
-```
-
-The relevance-aware interface returns the following fields:
-
-| Field | Description |
+| Parameter | Value |
 |---|---|
-| query | Normalized user question |
-| retrieval_mode | Retrieval strategy used |
-| relevance_passed | Query-level relevance decision |
-| max_score | Maximum cross-encoder score |
-| threshold | Applied relevance threshold |
-| reason | Explanation of the relevance decision |
-| retrieved_count | Number of initially retrieved results |
-| retained_count | Number of results retained after filtering |
-| results | Retrieved chunks and source metadata |
-| context | Formatted evidence for LLM integration |
+| Vector index | FAISS IndexFlatIP |
+| BM25 k1 | 1.5 |
+| BM25 b | 0.75 |
+| RRF constant | 60 |
+| Reranking model | cross-encoder/ms-marco-MiniLM-L6-v2 |
+| Candidate count | 20 |
+| Final retrieved chunks | 5 |
+| Application default relevance threshold | -5.0 |
+| Final evaluation relevance threshold | -8.0 |
+| Execution device | CPU |
 
-The retrieval engine should be initialized once and reused across multiple queries where possible.
+The relevance filter evaluates the maximum cross-encoder score at the query level. Passing the threshold does not guarantee that the retrieved evidence is sufficient to answer the question.
 
-### Comparative Embedding Experiments
+### Precomputed Retrieval Artifacts
 
-Three embedding models were investigated using the same dataset of 202 document chunks.
+The repository includes:
 
-| Model | Dimension | Hit@1 | Hit@5 | MRR@10 |
-|---|---|---|---|---|
-| Multilingual E5 Base | 768 | 25.0% | 87.5% | 0.4792 |
-| English E5 Base v2 | 768 | 50.0% | 87.5% | 0.6292 |
-| BGE Base English v1.5 | 768 | 50.0% | 87.5% | 0.5875 |
+- `data/embeddings/embeddings.npy`
+- `data/embeddings/metadata.json`
+- `data/embeddings/config.json`
+- `data/embeddings/index.faiss`
+- `data/embeddings/index_manifest.json`
 
-The preliminary comparison used eight development questions with one tracked target chunk per question.
+These artifacts allow the application to run without regenerating document embeddings.
 
-English E5 Base v2 achieved the highest preliminary MRR@10. However, Multilingual E5 Base was retained provisionally because of its multilingual capabilities, tokenizer coverage, and existing integration with the production retrieval pipeline.
-
-The tokenizer audit identified no oversized embedding inputs or unknown tokens for Multilingual E5 on the current dataset. The English E5 and BGE models required window-based encoding for two oversized chunks.
-
-The comparative retrieval evaluation was reproduced using the saved embeddings, with all 24 tracked target rankings matching the original experiment.
-
-Final model selection is subject to independent evaluation.
-
-### Preliminary Retrieval Performance
-
-Four retrieval modes were compared using three answerable development questions with tracked target chunks.
-
-| Retrieval mode | MRR@5 |
-|---|---|
-| Semantic | 0.3611 |
-| BM25 | 0.5000 |
-| Hybrid | 0.4833 |
-| Hybrid with reranking | 0.8333 |
-
-Cross-encoder reranking achieved a relative MRR@5 improvement of approximately 72.4% over hybrid retrieval on this small development sample.
-
-These results are preliminary and should not be interpreted as final system-wide retrieval accuracy.
-
-### Preliminary Relevance Evaluation
-
-The relevance threshold was investigated using 20 development questions, including ten answerable and ten out-of-scope questions.
-
-| Metric | Result |
-|---|---|
-| True positives | 10 |
-| True negatives | 8 |
-| False positives | 2 |
-| False negatives | 0 |
-| Accuracy | 90.00% |
-| Precision | 83.33% |
-| Recall | 100.00% |
-| F1-score | 90.91% |
-
-These metrics describe preliminary query-level relevance classification, not final answer correctness or document-level retrieval performance.
-
-### Retrieval Component Files
-
-| File | Responsibility |
-|---|---|
-| src/embeddings.py | Document and query embedding generation |
-| src/vector_store.py | FAISS indexing, validation, and similarity search |
-| src/keyword_search.py | BM25 keyword retrieval |
-| src/rank_fusion.py | Reciprocal Rank Fusion |
-| src/reranker.py | Cross-encoder reranking and token-window handling |
-| src/relevance_filter.py | Query-level relevance filtering |
-| src/retrieval.py | Integrated retrieval engine and context construction |
-| evaluation/semantic_search_demo.py | Semantic retrieval demonstration |
-| evaluation/generate_comparative_embeddings.py | Comparative embedding generation |
-| evaluation/evaluate_embedding_models.py | Comparative retrieval evaluation |
-| evaluation/experiments/ | Experiment metadata, results, and documentation |
-
-### Precomputed Embeddings and Vector Index
-
-The repository includes precomputed embeddings and a FAISS vector index for the current dataset of 202 chunks, using the intfloat/multilingual-e5-base model with 768-dimensional embeddings.
-
-| File | Description |
-|---|---|
-| data/embeddings/embeddings.npy | Normalized document embedding matrix |
-| data/embeddings/metadata.json | Chunk text and source metadata |
-| data/embeddings/config.json | Embedding configuration |
-| data/embeddings/index.faiss | FAISS vector index |
-| data/embeddings/index_manifest.json | Index integrity metadata |
-
-Team members can use these artifacts directly without regenerating the embeddings. Regeneration is required when the dataset, embedding model, or relevant embedding configuration changes.
-
-Pretrained model weights, cache files, comparative embedding arrays, and sensitive credentials remain excluded from version control.
-
-## LLM Integration and Chatbot Interface
-
-The LLM component transforms retrieved university policy evidence into grounded natural-language answers. It integrates the retrieval engine with Google Gemini and provides a bilingual chatbot interface using Streamlit.
+## 7. LLM Integration and User Interface
 
 ### LLM Configuration
 
@@ -506,565 +209,146 @@ The LLM component transforms retrieved university policy evidence into grounded 
 | Provider | Google Gemini |
 | Default model | gemini-3.1-flash-lite |
 | Alternative evaluated model | gemini-3.5-flash-lite |
-| Request timeout | 120,000 milliseconds |
+| Request timeout | 120,000 ms |
 | Maximum attempts | 3 |
 | Retryable API error | HTTP 503 |
 | Retry delays | 10 and 20 seconds |
-| Default retrieval candidates | 20 |
-| Default final retrieved chunks | 5 |
-| Preliminary relevance threshold | -5.0 |
 
-The model and timeout are configurable through environment settings. API credentials are stored locally and excluded from version control.
-
-### Preliminary LLM Evaluation
-
-Two Gemini models were compared using 12 development questions, including ten answerable and two unanswerable questions, with fixed retrieved contexts.
-
-| Metric | Gemini 3.5 Flash-Lite | Gemini 3.1 Flash-Lite |
-|---|---:|---:|
-| Completed questions | 12/12 | 12/12 |
-| Weighted evaluation score | 83.54% | 95.83% |
-| Mean successful response latency | 3.30 s | 14.17 s |
-| Valid citation identifiers | 22/22 | 30/30 |
-| Correct abstention | 2/2 | 2/2 |
-| False abstention | 1/10 | 0/10 |
-| Total successful-response tokens | 8,760 | 9,098 |
-
-Gemini 3.1 Flash-Lite was provisionally selected because of its higher weighted answer-quality score and stronger performance on the evaluated development questions, despite its higher response latency.
-
-The evaluation used an AI-assisted, non-blind review process and a limited development sample. The results require independent confirmation and should not be interpreted as final system-wide performance.
+The generation prompt instructs the LLM to answer using retrieved evidence, preserve important conditions and exceptions, respond in the original question language, provide supporting citations, and abstain when evidence is insufficient.
 
 ### Automatic Query Translation
 
-The retrieval pipeline includes an automatic query translation component to improve retrieval for Arabic and mixed-language questions.
+Arabic and mixed-language questions are translated into English before retrieval to improve compatibility with the English-oriented BM25 and reranking components.
 
-- English questions bypass translation.
-- Arabic and mixed-language questions are translated into English before retrieval.
-- The original question is preserved for answer generation.
-- Translation failures and invalid outputs stop the pipeline before retrieval.
-- Translation latency and API usage are recorded separately.
-
-This approach addresses the English-oriented BM25 normalization and cross-encoder reranking components while retaining the multilingual embedding model.
-
-### Arabic Retrieval Case Study
-
-The same Arabic question about mandatory summer semester registration was tested before and after automatic query translation.
-
-| Metric | Before translation | After translation |
-|---|---|---|
-| Known supporting chunks retrieved | 0/2 | 2/2 |
-| Tracked supporting-chunk Recall@5 | 0% | 100% |
-| Answer status | Insufficient context | Success |
-| Answer correctness | False abstention | Correct |
-| Valid supporting citations | 0 | 2 |
-
-The real end-to-end test passed all 11 verification checks, with a total pipeline latency of approximately 4.91 seconds, two API attempts, and 2,516 tokens.
-
-These results describe one diagnostic question and do not establish general Arabic retrieval accuracy.
-
-### Grounded Answer Generation
-
-The generation prompt instructs the LLM to:
-
-- Answer using only the retrieved university policy context.
-- Preserve important academic conditions, deadlines, exceptions, and numerical information.
-- Avoid unsupported assumptions.
-- Respond in the language of the original question.
-- Include supporting chunk identifiers.
-- Abstain when the available evidence is insufficient.
-
-The pipeline checks relevance before answer generation and handles insufficient-context responses separately from API and citation errors.
+The original question is preserved for answer generation, allowing the chatbot to respond in the user's language.
 
 ### Citation Validation
 
-Generated citations use the following format:
+Generated answers contain supporting chunk identifiers, such as:
 
 `[AIU-003-P002-C002]`
 
-The citation validator checks whether cited chunk identifiers exist in the retrieved evidence and rejects missing, malformed, or invalid citations.
+The citation validator checks whether identifiers are correctly formatted and belong to the retrieved evidence.
 
-Only validated cited sources are displayed in successful chatbot responses.
+Identifier validation does not guarantee complete semantic support for every generated claim.
 
-Citation identifier validation does not automatically establish that every generated claim is semantically supported by its cited passage.
+### Chatbot Features
 
-### Streamlit Chatbot
-
-The chatbot interface provides:
-
-- English and Arabic question input.
+- Arabic and English question input.
+- Source-grounded answers.
+- Expandable citations and original document links.
 - Suggested university-related questions.
+- Response-time display.
+- Insufficient-context and error handling.
 - Session-based conversation history.
-- Source-grounded answers with citations.
-- Expandable source references.
-- Original document links.
-- Pipeline response-time display.
-- Insufficient-context and error messages.
-- New Chat functionality.
-- Independent conversation histories across browser sessions.
+- Independent browser sessions.
+- Responsive desktop and mobile layouts.
 
-Conversation history is stored in memory for the current session. Previous messages are displayed but are not automatically included in subsequent retrieval or generation requests.
+The application uses shared retrieval resources through Streamlit caching to reduce redundant model loading.
 
-### Shared Retrieval Resources
+Conversation history is displayed but is not automatically included in subsequent retrieval and generation requests.
 
-To reduce redundant model loading across multiple user sessions, the application uses a shared retrieval engine cached through Streamlit's `st.cache_resource`.
+## 8. Evaluation and Performance Analysis
 
-The implementation provides:
+### 8.1 Evaluation Dataset
 
-- Shared embedding model, FAISS index, BM25 index, and cross-encoder reranker.
-- Thread-safe retrieval through a synchronization lock.
-- Independent retrieval results through deep copying.
-- Separate conversation histories for individual browser sessions.
-- Session-specific RAG pipeline instances.
+A bilingual annotated evaluation dataset was prepared and frozen as version 1.0.0.
 
-This design avoids loading a separate retrieval engine for every user session while preserving independent conversation state.
+| Metric | Development Set | Test Set | Total |
+|---|---:|---:|---:|
+| Questions | 28 | 42 | 70 |
+| English | 20 | 30 | 50 |
+| Arabic | 8 | 12 | 20 |
+| Answerable | 25 | 38 | 63 |
+| Unanswerable | 3 | 4 | 7 |
 
-The implementation is provided in `src/shared_retrieval.py` and integrated into `app.py`.
+The dataset includes direct factual, paraphrased, procedural, complex reasoning, and unanswerable questions.
 
-Multi-session functional testing was completed successfully. However, large-scale concurrent-user performance and cloud memory capacity have not been formally benchmarked.
+Each question includes a reference answer, relevant chunk identifiers, source documents, language, category, difficulty, answerability, and review status.
 
-### LLM and Interface Component Files
+The development set was used for configuration selection. The held-out test set was used for final end-to-end evaluation.
 
-| File | Responsibility |
-|---|---|
-| `src/llm.py` | Gemini configuration, prompts, API requests, retries, and response metadata |
-| `src/query_translator.py` | Arabic detection and automatic query translation |
-| `src/citation_validator.py` | Citation extraction and validation |
-| `src/rag_pipeline.py` | End-to-end retrieval and generation orchestration |
-| `src/conversation.py` | Conversation history and source presentation |
-| `src/shared_retrieval.py` | Shared retrieval resources and thread-safe retrieval |
-| `app.py` | Streamlit chatbot interface |
-| `.streamlit/config.toml` | Interface and server configuration |
-| `.env.example` | API configuration template |
-| `evaluation/llm_experiments/` | Preliminary LLM evaluation artifacts |
+### 8.2 Embedding Model Comparison
 
-### Programmatic RAG Interface
+Three embedding models were evaluated using the same knowledge base and development questions.
 
-```python
-from src.rag_pipeline import RAGPipeline
+**Before query translation:**
 
-with RAGPipeline(device="cpu") as pipeline:
-    result = pipeline.ask(
-        "Is summer registration mandatory?"
-    )
+| Model | Hit@5 | Recall@5 | MRR@10 | nDCG@10 |
+|---|---:|---:|---:|---:|
+| Multilingual E5 Base | 72% | 70% | 0.6237 | 0.6683 |
+| English E5 Base v2 | 72% | 70% | 0.5667 | 0.5908 |
+| BGE Base English v1.5 | 64% | 62% | 0.5533 | 0.5837 |
 
-    print(result.status)
-    print(result.answer)
-    print(result.retrieved_chunks)
-    print(result.total_latency_seconds)
-```
+**After translating Arabic queries:**
 
-The response object includes the original question, retrieval query, translation metadata, retrieved evidence, relevance decision, generated answer, citation validation, API response metadata, and pipeline latency.
-
-## Repository Structure
-
-```text
-UniGuide-AI/
-├── .streamlit/
-│   └── config.toml
-├── assets/
-│   └── logo.png
-├── data/
-│   ├── raw/                       # 26 original university PDFs
-│   ├── processed/
-│   │   ├── documents.json
-│   │   └── chunks.json
-│   ├── embeddings/
-│   │   ├── embeddings.npy
-│   │   ├── metadata.json
-│   │   ├── config.json
-│   │   ├── index.faiss
-│   │   └── index_manifest.json
-│   ├── sources.csv
-│   └── ocr_corrections.json
-├── src/
-│   ├── document_loader.py
-│   ├── chunking.py
-│   ├── update_source_inventory.py
-│   ├── embeddings.py
-│   ├── vector_store.py
-│   ├── keyword_search.py
-│   ├── rank_fusion.py
-│   ├── reranker.py
-│   ├── relevance_filter.py
-│   ├── retrieval.py
-│   ├── llm.py
-│   ├── query_translator.py
-│   ├── citation_validator.py
-│   ├── rag_pipeline.py
-│   ├── conversation.py
-│   └── shared_retrieval.py
-├── evaluation/
-│   ├── experiments/               # Embedding and retrieval experiments
-│   ├── llm_experiments/           # LLM experiments and results
-│   ├── generate_comparative_embeddings.py
-│   ├── evaluate_embedding_models.py
-│   ├── prepare_evaluation_contexts.py
-│   ├── evaluate_llm_models.py
-│   ├── evaluate_llm_models_v3.py
-│   ├── semantic_search_demo.py
-│   ├── test_questions.csv
-│   └── results.csv
-├── tests/                         # 18 automated test modules
-├── docs/
-│   └── HANDOVER.md
-├── app.py
-├── Validate_data.py
-├── ocr_experiment.py
-├── requirements.txt
-├── .env.example
-├── .gitattributes
-├── .gitignore
-└── README.md
-```
-
-The repository separates data preparation, retrieval, language model integration, evaluation, and user interface components to support maintainability, reproducibility, and collaborative development.
-
-Precomputed retrieval artifacts are included to allow the chatbot to run without regenerating document embeddings.
-
-## Installation and Reproduction
-
-### Prerequisites
-
-- Python 3.12
-- Git
-- Google Gemini API key
-- Internet connection for initial pretrained model downloads and Gemini API requests
-- Sufficient memory to load the embedding and reranking models
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/Maliii21/UniGuide-AI.git
-cd UniGuide-AI
-```
-
-During development, the chatbot implementation is available on the `feature/chatbot-ui` branch.
-
-```bash
-git checkout feature/chatbot-ui
-```
-
-### 2. Install Dependencies
-
-```bash
-python -m pip install -r requirements.txt
-python -m pip check
-```
-
-The project uses CPU-compatible PyTorch and does not require a dedicated GPU.
-
-### 3. Configure the Gemini API
-
-Create a `.env` file in the project root using `.env.example` as a template.
-
-For Windows PowerShell:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-For Linux or macOS:
-
-```bash
-cp .env.example .env
-```
-
-Configure the following variables:
-
-```dotenv
-GEMINI_API_KEY=YOUR_API_KEY
-GEMINI_MODEL=gemini-3.1-flash-lite
-GEMINI_TIMEOUT_MS=120000
-```
-
-Replace `YOUR_API_KEY` with a valid Gemini API key.
-
-Never commit API credentials or local environment files to version control.
-
-### 4. Verify the Retrieval Pipeline
-
-```bash
-python -m src.retrieval
-```
-
-The repository includes precomputed embeddings and a FAISS vector index. Initial embedding regeneration is not required.
-
-The first execution may download the pretrained embedding model and cross-encoder reranker.
-
-### 5. Run the Chatbot Locally
-
-```bash
-python -m streamlit run app.py
-```
-
-Open the application at:
-
-http://localhost:8501
-
-The chatbot supports Arabic and English questions, validated citation identifiers, source references, and session-based conversation history.
-
-### 6. Run Automated Tests
-
-```bash
-python -m pytest tests/ -q
-```
-
-### 7. Regenerate Retrieval Artifacts (When Needed)
-
-Regeneration is required when the dataset, embedding model, or relevant embedding configuration changes.
-
-Ensure that `data/processed/chunks.json` exists, then run:
-
-```bash
-python -m src.embeddings
-python -m src.vector_store
-python -m src.retrieval
-```
-
-The embedding metadata, configuration, and index manifest use consistent LF line endings to preserve SHA-256 integrity across Windows and Linux environments.
-
-## Cloud Deployment
-
-UniGuide-AI is deployed on Streamlit Community Cloud and is accessible through desktop and mobile browsers.
-
-**Live application:** https://uniguide-ai.streamlit.app/
-
-### Deployment Configuration
-
-| Parameter | Configuration |
-|---|---|
-| Hosting platform | Streamlit Community Cloud |
-| Repository | Maliii21/UniGuide-AI |
-| Current deployment branch | feature/chatbot-ui |
-| Application entry point | app.py |
-| Python version | 3.12 |
-| Execution device | CPU |
-| LLM provider | Google Gemini |
-| Default LLM | gemini-3.1-flash-lite |
-| Credential management | Streamlit Secrets |
-
-### Deployment Instructions
-
-1. Connect the GitHub repository to Streamlit Community Cloud.
-2. Select the application branch.
-3. Set `app.py` as the application entry point.
-4. Configure Python 3.12.
-5. Add the required Gemini configuration through Streamlit Secrets.
-6. Deploy the application and monitor the deployment logs.
-7. Verify chatbot functionality using representative Arabic and English questions.
-
-The required Streamlit Secrets configuration is:
-
-```toml
-GEMINI_API_KEY = "YOUR_API_KEY"
-GEMINI_MODEL = "gemini-3.1-flash-lite"
-GEMINI_TIMEOUT_MS = "120000"
-```
-
-### Cross-Platform Artifact Integrity
-
-During cloud deployment, a file-integrity validation error was encountered because Windows and Linux used different line-ending representations for JSON retrieval artifacts.
-
-The issue was resolved by:
-
-- Adding `.gitattributes` to enforce LF line endings for embedding JSON files.
-- Preserving NumPy and FAISS files as binary artifacts.
-- Explicitly writing JSON artifacts using LF line endings.
-- Rebuilding the FAISS index manifest.
-- Verifying SHA-256 hashes and index consistency.
-- Running the complete automated regression test suite.
-
-The existing document embeddings were preserved without requiring embedding regeneration.
-
-### Deployment Optimization
-
-The application uses precomputed retrieval artifacts, CPU-compatible dependencies, and shared retrieval resources to reduce redundant computation and model loading.
-
-### Responsive Bilingual Interface
-
-The chatbot interface supports:
-
-- Desktop and mobile browser layouts.
-- Right-to-left rendering for Arabic content.
-- Left-to-right rendering for English content.
-- Consistent citation identifier direction.
-- Arabic bullet-point and bold-text formatting.
-- Responsive text wrapping and spacing.
-- Expandable source references and original document links.
-
-The deployed application successfully completed functional acceptance testing on desktop and mobile devices.
-
-## Reproducing Comparative Experiments
-
-Generate comparative embeddings:
-
-```bash
-python -m evaluation.generate_comparative_embeddings
-```
-
-Evaluate the generated embeddings:
-
-```bash
-python -m evaluation.evaluate_embedding_models
-```
-
-Additional command-line options are available through:
-
-```bash
-python -m evaluation.generate_comparative_embeddings --help
-python -m evaluation.evaluate_embedding_models --help
-```
-
-See [Comparative Experiment Documentation](evaluation/experiments/README.md) for experimental configurations, saved results, reproduction details, and limitations.
-
-The comparative generation script has passed syntax and command-line validation. Full regeneration using the saved script has not yet been independently verified.
-
-## Testing and Validation
-
-The project includes automated tests covering document processing, retrieval, LLM integration, citation validation, conversation management, query translation, cloud configuration, and shared retrieval resources.
-
-Run the complete test suite:
-
-```bash
-python -m pytest tests/ -q
-```
-
-### Automated Test Results
-
-| Test Suite | Passed |
+| Model | Overall Recall@5 |
 |---|---:|
-| Document Loader | 11/11 |
-| Chunking | 16/16 |
-| Embeddings | 20/20 |
-| Vector Store | 23/23 |
-| Keyword Search | 38/38 |
-| Rank Fusion | 24/24 |
-| Reranker | 35/35 |
-| Relevance Filter | 35/35 |
-| Retrieval | 52/52 |
-| LLM Evaluation | 50/50 |
-| LLM Integration | 66/66 |
-| Citation Validation | 26/26 |
-| RAG Pipeline | 61/61 |
-| Conversation Management | 32/32 |
-| Query Translation | 41/41 |
-| Cloud Configuration | 16/16 |
-| Shared Retrieval | 9/9 |
-| **Total** | **555/555** |
+| Multilingual E5 Base | 93% |
+| English E5 Base v2 | 97% |
+| BGE Base English v1.5 | 89% |
 
-The complete automated test suite passed with zero failures and five SWIG-related deprecation warnings.
+Multilingual E5 Base was retained as an engineering trade-off because of its multilingual capabilities, ranking performance, tokenizer compatibility, and existing system integration.
 
-### Online Functional Acceptance Testing
+English E5 achieved higher overall Recall@5 after translation, so the selected model should not be interpreted as universally superior.
 
-The deployed application was tested using representative university-related and out-of-scope questions.
+### 8.3 Arabic Query Translation Evaluation
 
-| Test Case | Result |
-|---|---|
-| English factual question | Passed |
-| Arabic university policy question | Passed |
-| Academic procedural question | Passed |
-| Insufficient-information handling | Passed |
-| Out-of-scope question handling | Passed |
-| Citation and source presentation | Passed |
-| Original document links | Passed |
-| New Chat functionality | Passed |
-| Independent browser sessions | Passed |
-| Desktop and mobile responsiveness | Passed |
+The translation experiment evaluated seven answerable Arabic development questions.
 
-Representative questions included:
+| Model | Before Translation Recall@5 | After Translation Recall@5 |
+|---|---:|---:|
+| Multilingual E5 Base | 14.29% | 96.43% |
+| English E5 Base v2 | 0.00% | 96.43% |
+| BGE Base English v1.5 | 0.00% | 96.43% |
 
-- Is summer registration mandatory?
-- How can I appeal my final grade?
-- ما هي سياسة الحضور والغياب؟
-- How much does an official transcript cost?
-- What is the weather today in Alexandria?
+For Multilingual E5 Base, translation improved Arabic Recall@5 by 82.14 percentage points on the evaluated sample.
 
-The chatbot returned answers with citations for supported questions and abstained when sufficient evidence was unavailable.
+### 8.4 Retrieval Strategy Comparison
 
-### Evaluation Scope
+Four retrieval strategies were evaluated using the development set. Ranking metrics were calculated over the 25 answerable questions.
 
-Automated tests and functional acceptance checks validate the behavior of the implemented components under the tested conditions.
+| Strategy | Hit@5 | Recall@5 | MRR@5 | nDCG@5 | Mean Latency |
+|---|---:|---:|---:|---:|---:|
+| Semantic | 96% | 93% | 0.8333 | 0.8394 | 69.06 ms |
+| Keyword | 96% | 95% | 0.8467 | 0.8626 | 0.88 ms |
+| Hybrid | 100% | 99% | 0.9133 | 0.9177 | 68.28 ms |
+| Reranked | 100% | 99% | 0.9267 | 0.9325 | 1545.31 ms |
 
-These results do not establish general answer accuracy, complete citation faithfulness, large-scale concurrency performance, or final retrieval effectiveness.
+Hybrid retrieval improved evidence recall compared with individual retrieval methods.
 
-Independent evaluation using a larger annotated question set remains a separate project stage.
+Cross-encoder reranking achieved the highest overall MRR@5 and nDCG@5, although it introduced additional computational latency.
 
-## Known Limitations
+Hybrid retrieval remains a viable alternative when response speed is prioritized.
 
-### Dataset Limitations
+### 8.5 Relevance Threshold Selection
 
-- The knowledge base is limited to the 26 collected university policy documents.
-- Some documents may contain outdated regulations, conflicting information, or incomplete policy details.
-- Complex scanned forms and Arabic image-based content remain challenging for automated OCR.
-- Page-aware chunking may separate related information across different pages.
-- Public accessibility of university documents does not automatically establish redistribution permission.
+A threshold sweep was conducted using the 28 development questions.
 
-### Retrieval Limitations
+| Metric | Threshold -5.0 | Threshold -8.0 |
+|---|---:|---:|
+| Accuracy | 92.86% | 92.86% |
+| Precision | 96.00% | 92.59% |
+| Recall | 96.00% | 100.00% |
+| F1-score | 96.00% | 96.15% |
+| Specificity | 66.67% | 33.33% |
+| False negatives | 1 | 0 |
+| False positives | 1 | 2 |
 
-- Embedding model selection and retrieval configuration are based on preliminary development experiments.
-- The relevance threshold of -5.0 requires further independent validation.
-- Query-level relevance filtering does not guarantee that retrieved passages contain sufficient evidence to answer every question.
-- The keyword retrieval and reranking components are primarily English-oriented.
+The threshold of -8.0 was selected for the final evaluation using a recall-first strategy to reduce premature rejection of answerable questions.
 
-### LLM and Answer Quality Limitations
+This selection increases the risk of retaining irrelevant evidence. The LLM must therefore assess context sufficiency before answering.
 
-- Generated answers may still contain inaccuracies or unsupported interpretations.
-- Citation validation verifies identifier correctness and membership in retrieved evidence, rather than complete semantic faithfulness.
-- Automatic query translation may introduce semantic differences in Arabic or mixed-language questions.
-- The system depends on an external Gemini API and may be affected by service availability, rate limits, and response latency.
+The deployed application retains its original default threshold of -5.0. Final evaluation results correspond to the explicitly evaluated configuration of -8.0.
 
-### Application and Deployment Limitations
+### 8.6 LLM Model Selection
 
-- Conversation history is session-based and is not permanently stored.
-- Previous messages are not automatically incorporated into subsequent retrieval or generation requests.
-- Shared retrieval resources reduce redundant model loading, but large-scale concurrent-user performance has not been benchmarked.
-- Cloud resource limitations and cold starts may affect application responsiveness.
+Two Gemini models were compared using 12 development questions with fixed retrieved contexts.
 
-### Evaluation Limitations
-
-- Preliminary experiments use relatively small development datasets.
-- The LLM comparison uses an AI-assisted, non-blind evaluation process.
-- Automated test results and functional acceptance checks do not establish overall answer accuracy.
-- Independent comprehensive retrieval and answer-quality evaluation remains pending.
-
-## Future Work
-
-### Comprehensive Evaluation
-
-- Construct and validate a larger annotated question dataset.
-- Evaluate retrieval using Precision@K, Recall@K, Hit@K, and Mean Reciprocal Rank (MRR).
-- Compare semantic, keyword, hybrid, and reranked retrieval approaches.
-- Independently validate embedding model selection and relevance threshold configuration.
-- Compare LLM responses with and without retrieval augmentation.
-- Evaluate answer correctness, completeness, citation faithfulness, abstention behavior, latency, and token consumption.
-- Conduct independent human evaluation of Arabic and English responses.
-
-### Potential System Improvements
-
-- Expand the knowledge base with additional verified university documents.
-- Introduce periodic document updates and version tracking.
-- Improve OCR and structured information extraction from scanned forms and tables.
-- Investigate multilingual reranking models and Arabic-specific retrieval strategies.
-- Introduce semantic citation verification.
-- Support context-aware follow-up questions.
-- Conduct cloud resource monitoring and concurrent-user load testing.
-- Improve deployment scalability and operational reliability.
-
-## Team Contributions
-
-The project follows a modular collaborative development approach, with responsibilities divided into four main areas.
-
-| Team Role | Responsibilities | Status |
-|---|---|---|
-| Student 1 — Data Collection and Preprocessing | Document collection, source validation, text extraction, OCR experiments, cleaning, chunking, and preprocessing tests | Completed |
-| Student 2 — Embeddings and Retrieval | Embedding experiments, FAISS indexing, BM25 retrieval, rank fusion, cross-encoder reranking, relevance filtering, and retrieval tests | Completed |
-| Student 3 — LLM Integration and User Interface | LLM comparison, Gemini integration, RAG orchestration, citation validation, query translation, conversation management, Streamlit interface, cloud deployment, and functional testing | Completed |
-| Student 4 — Evaluation and Performance Analysis | Annotated evaluation dataset, independent retrieval evaluation, answer-quality assessment, RAG versus non-RAG comparison, and final performance analysis | Pending final verification |
-
-Each component is developed and tested independently before integration into the complete RAG application.
-
-## Disclaimer
-
-UniGuide-AI is an academic project developed for educational and research purposes. It is not an official Alamein International University service.
-
-Students should verify important academic information, deadlines, fees, and regulations using official university documents and authorized university departments.
+| Metric | Gemini 3.5 Flash-Lite | Gemini 3.1 Flash-Lite |
+|---|---:|---:|
+| Weighted evaluation score | 83.54% | 95.83% |
+| Mean successful response latency | 3.30 s | 14.17 s |
+| Valid citation identifiers | 22/22 | 30/30 |
+| Correct abstentions | 2/2 | 2/2 |
+| False abstentions |

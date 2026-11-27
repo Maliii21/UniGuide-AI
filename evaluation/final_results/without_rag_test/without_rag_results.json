@@ -1,0 +1,1782 @@
+{
+  "evaluation_type": "without_rag",
+  "configuration": {
+    "dataset_version": "1.0.0",
+    "questions_sha256": "489af6af97a3a6a48e7ca0e05cf652ab785f87fb291cae4c43c30d8e6ec7adaf",
+    "model": "gemini-3.1-flash-lite",
+    "question_count": 42,
+    "retrieval_enabled": false,
+    "translation_enabled": false,
+    "context_enabled": false,
+    "system_instruction": "\nYou are UniGuide-AI, a university assistant for\nAlamein International University (AIU).\n\nAnswer the student's question using your existing knowledge only.\n\nNo university documents or retrieved context are provided.\n\nRules:\n- Answer in the same language as the question.\n- Be accurate, clear, concise, and relevant.\n- Do not invent university-specific policies or procedures.\n- Preserve important conditions, deadlines, and exceptions.\n- Do not fabricate citations or references.\n- If you cannot reliably answer, return exactly:\n  INSUFFICIENT_CONTEXT\n"
+  },
+  "results": {
+    "EN-021": {
+      "ground_truth": {
+        "question_id": "EN-021",
+        "question": "How long must AIU retain student education records?",
+        "language": "en",
+        "expected_answer": "Education records must be retained permanently.",
+        "relevant_chunk_ids": [
+          "AIU-007-P002-C002"
+        ],
+        "source_document_ids": [
+          "AIU-007"
+        ],
+        "category": "Student Records",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "PRIVACY-001",
+        "annotation_notes": "Permanent retention requirement.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 1.7735,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 1.7724,
+        "total_elapsed_seconds": 1.7735,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 135,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 141,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-022": {
+      "ground_truth": {
+        "question_id": "EN-022",
+        "question": "Which office is the main custodian of enrolled students files?",
+        "language": "en",
+        "expected_answer": "The Registrar Office.",
+        "relevant_chunk_ids": [
+          "AIU-007-P002-C002"
+        ],
+        "source_document_ids": [
+          "AIU-007"
+        ],
+        "category": "Student Records",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "PRIVACY-002",
+        "annotation_notes": "Enrolled student records.",
+        "review_status": "verified"
+      },
+      "answer": "The main custodian of enrolled students' files at Alamein International University (AIU) is the **Office of the Registrar** (or Student Affairs/Admission and Registration). This department is responsible for maintaining the official academic records and personal documentation for all enrolled students.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.1403,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "The main custodian of enrolled students' files at Alamein International University (AIU) is the **Office of the Registrar** (or Student Affairs/Admission and Registration). This department is responsible for maintaining the official academic records and personal documentation for all enrolled students.",
+        "latency_seconds": 1.1402,
+        "total_elapsed_seconds": 1.1403,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 136,
+        "output_tokens": 53,
+        "thinking_tokens": null,
+        "total_tokens": 189,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-023": {
+      "ground_truth": {
+        "question_id": "EN-023",
+        "question": "Do I need to book an appointment before visiting the university clinic?",
+        "language": "en",
+        "expected_answer": "No. Clinic services are available on a walk-in basis.",
+        "relevant_chunk_ids": [
+          "AIU-022-P001-C001",
+          "AIU-022-P001-C002"
+        ],
+        "source_document_ids": [
+          "AIU-022"
+        ],
+        "category": "Medical Services",
+        "question_type": "paraphrased",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "MEDICAL-001",
+        "annotation_notes": "Clinic access policy.",
+        "review_status": "verified"
+      },
+      "answer": "At Alamein International University (AIU), it is highly recommended to contact the university clinic or the student affairs department to check their current policy regarding appointments. While some clinics handle walk-ins for urgent matters, scheduling an appointment is generally preferred to ensure you are seen promptly and to avoid long wait times.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 0.9518,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "At Alamein International University (AIU), it is highly recommended to contact the university clinic or the student affairs department to check their current policy regarding appointments. While some clinics handle walk-ins for urgent matters, scheduling an appointment is generally preferred to ensure you are seen promptly and to avoid long wait times.",
+        "latency_seconds": 0.9517,
+        "total_elapsed_seconds": 0.9517,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 138,
+        "output_tokens": 62,
+        "thinking_tokens": null,
+        "total_tokens": 200,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-024": {
+      "ground_truth": {
+        "question_id": "EN-024",
+        "question": "How frequently must prescriptions for monthly medications be updated?",
+        "language": "en",
+        "expected_answer": "Every three months.",
+        "relevant_chunk_ids": [
+          "AIU-022-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-022"
+        ],
+        "category": "Medical Services",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "MEDICAL-002",
+        "annotation_notes": "Prescription renewal interval.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 1.3802,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 1.3802,
+        "total_elapsed_seconds": 1.3802,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 135,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 141,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-025": {
+      "ground_truth": {
+        "question_id": "EN-025",
+        "question": "Is an automatic away message without an alternative staff contact sufficient during an extended absence?",
+        "language": "en",
+        "expected_answer": "No. The Out of Office message should include contact information for another staff member who can respond during the absence.",
+        "relevant_chunk_ids": [
+          "AIU-015-P003-C002"
+        ],
+        "source_document_ids": [
+          "AIU-015"
+        ],
+        "category": "Email Communication",
+        "question_type": "paraphrased",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "EMAIL-001",
+        "annotation_notes": "Extended staff absence procedure.",
+        "review_status": "verified"
+      },
+      "answer": "An automatic away message without an alternative contact is generally **not considered sufficient** for professional communication during an extended absence.\n\nBest practices for university-related correspondence include:\n\n1.  **Providing an Alternative Point of Contact:** You should include the name and email address of a colleague or department contact who can assist students or staff with urgent matters in your absence.\n2.  **Stating the Return Date:** Clearly mention the date you expect to return to your duties.\n3.  **Managing Expectations:** If you will not be checking your email periodically, explicitly state that emails will not be monitored.\n\nLeaving students or colleagues without a clear path for assistance can lead to unnecessary delays and frustration. It is recommended that you coordinate with your department to ensure proper coverage before your absence begins.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.3938,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "An automatic away message without an alternative contact is generally **not considered sufficient** for professional communication during an extended absence.\n\nBest practices for university-related correspondence include:\n\n1.  **Providing an Alternative Point of Contact:** You should include the name and email address of a colleague or department contact who can assist students or staff with urgent matters in your absence.\n2.  **Stating the Return Date:** Clearly mention the date you expect to return to your duties.\n3.  **Managing Expectations:** If you will not be checking your email periodically, explicitly state that emails will not be monitored.\n\nLeaving students or colleagues without a clear path for assistance can lead to unnecessary delays and frustration. It is recommended that you coordinate with your department to ensure proper coverage before your absence begins.",
+        "latency_seconds": 1.3938,
+        "total_elapsed_seconds": 1.3938,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 141,
+        "output_tokens": 159,
+        "thinking_tokens": null,
+        "total_tokens": 300,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-026": {
+      "ground_truth": {
+        "question_id": "EN-026",
+        "question": "What happens if the same email account is compromised three times within twelve months?",
+        "language": "en",
+        "expected_answer": "The account is immediately suspended and can only be re-enabled after notification of the security director and confirmation of remediation and remedial training.",
+        "relevant_chunk_ids": [
+          "AIU-015-P004-C001"
+        ],
+        "source_document_ids": [
+          "AIU-015"
+        ],
+        "category": "Email Communication",
+        "question_type": "complex_reasoning",
+        "difficulty": "hard",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "EMAIL-002",
+        "annotation_notes": "Suspension and reinstatement conditions.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 0.6696,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 0.6696,
+        "total_elapsed_seconds": 0.6696,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 140,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 146,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-009": {
+      "ground_truth": {
+        "question_id": "AR-009",
+        "question": "هل الطالب اللي عمره أقل من 18 سنة يقدر يطلع على سجله الدراسي بنفسه؟",
+        "language": "ar",
+        "expected_answer": "نعم يحق للطالب المقيد الاطلاع على سجله الدراسي دون إذن ولي الأمر حتى لو كان عمره أقل من 18 سنة.",
+        "relevant_chunk_ids": [
+          "AIU-007-P001-C001",
+          "AIU-007-P001-C002"
+        ],
+        "source_document_ids": [
+          "AIU-007"
+        ],
+        "category": "Student Records",
+        "question_type": "paraphrased",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "PRIVACY-003",
+        "annotation_notes": "Access rights of enrolled minors.",
+        "review_status": "verified"
+      },
+      "answer": "بناءً على السياسات المعتادة في الجامعات، يُعتبر الطالب بمجرد قبوله في الجامعة مسؤولاً عن حسابه الأكاديمي وسجله الدراسي، بغض النظر عن عمره، طالما أنه تم قبوله رسمياً كطالب جامعي.\n\nبما أنك طالب في جامعة العلمين الدولية (AIU)، يمكنك الوصول إلى سجلك الدراسي عبر البوابة الإلكترونية المخصصة للطلاب باستخدام بيانات الدخول الخاصة بك.\n\nإذا واجهت أي قيود تقنية أو إدارية تتعلق بالعمر، يُنصح بالتواصل مع **شؤون الطلاب (Student Affairs)** في الجامعة، حيث أنهم الجهة المسؤولة عن توضيح الإجراءات المتبعة في هذه الحالة بالتحديد.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.6595,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "بناءً على السياسات المعتادة في الجامعات، يُعتبر الطالب بمجرد قبوله في الجامعة مسؤولاً عن حسابه الأكاديمي وسجله الدراسي، بغض النظر عن عمره، طالما أنه تم قبوله رسمياً كطالب جامعي.\n\nبما أنك طالب في جامعة العلمين الدولية (AIU)، يمكنك الوصول إلى سجلك الدراسي عبر البوابة الإلكترونية المخصصة للطلاب باستخدام بيانات الدخول الخاصة بك.\n\nإذا واجهت أي قيود تقنية أو إدارية تتعلق بالعمر، يُنصح بالتواصل مع **شؤون الطلاب (Student Affairs)** في الجامعة، حيث أنهم الجهة المسؤولة عن توضيح الإجراءات المتبعة في هذه الحالة بالتحديد.",
+        "latency_seconds": 1.6595,
+        "total_elapsed_seconds": 1.6595,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 146,
+        "output_tokens": 160,
+        "thinking_tokens": null,
+        "total_tokens": 306,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-010": {
+      "ground_truth": {
+        "question_id": "AR-010",
+        "question": "في الظروف العادية، إيه الخطوات المطلوبة علشان أجدد وأستلم دواء وصفه طبيب عيادة الجامعة؟",
+        "language": "ar",
+        "expected_answer": "احصل على موافقة طبيب العيادة لتجديد الدواء، واحضر بنفسك لاستلامه.",
+        "relevant_chunk_ids": [
+          "AIU-022-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-022"
+        ],
+        "category": "Medical Services",
+        "question_type": "procedural",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "MEDICAL-REFILL-001",
+        "annotation_notes": "Personal medication collection requirement.",
+        "review_status": "verified"
+      },
+      "answer": "في جامعة العلمين الدولية (AIU)، للحصول على الأدوية الموصوفة من طبيب عيادة الجامعة في الظروف العادية، يرجى اتباع الخطوات التالية:\n\n1. **الكشف الطبي:** يجب التوجه إلى عيادة الجامعة للكشف لدى الطبيب المختص والحصول على \"روشتة\" (وصفة طبية) رسمية مختومة من العيادة.\n2. **صرف الدواء:** يتم التوجه بالروشتة إلى صيدلية الجامعة (إذا كانت متوفرة داخل الحرم الجامعي) لصرف الدواء.\n3. **تجديد الدواء:** في حال كان العلاج يحتاج إلى تكرار، يجب مراجعة الطبيب في العيادة مرة أخرى لتقييم الحالة وتجديد الوصفة الطبية، حيث لا يتم صرف أدوية مزمنة أو مكررة دون مراجعة طبية دورية لضمان سلامة الطالب.\n\n**ملاحظات هامة:**\n* تأكد دائماً من حمل **كارنيه الجامعة** الخاص بك، حيث قد يُطلب منك لإثبات هويتك والحصول على الخدمات الطبية.\n* الخدمات الطبية بالجامعة مخصصة لمنتسبيها، والالتزام بتعليمات الطبيب هو الأساس في صرف أي دواء.\n\nللحصول على تفاصيل دقيقة حول ساعات عمل العيادة أو أي إجراءات إدارية إضافية، يُفضل دائماً مراجعة مكتب شؤون الطلاب أو إدارة الخدمات الطبية في الحرم الجامعي.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 12.7976,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "في جامعة العلمين الدولية (AIU)، للحصول على الأدوية الموصوفة من طبيب عيادة الجامعة في الظروف العادية، يرجى اتباع الخطوات التالية:\n\n1. **الكشف الطبي:** يجب التوجه إلى عيادة الجامعة للكشف لدى الطبيب المختص والحصول على \"روشتة\" (وصفة طبية) رسمية مختومة من العيادة.\n2. **صرف الدواء:** يتم التوجه بالروشتة إلى صيدلية الجامعة (إذا كانت متوفرة داخل الحرم الجامعي) لصرف الدواء.\n3. **تجديد الدواء:** في حال كان العلاج يحتاج إلى تكرار، يجب مراجعة الطبيب في العيادة مرة أخرى لتقييم الحالة وتجديد الوصفة الطبية، حيث لا يتم صرف أدوية مزمنة أو مكررة دون مراجعة طبية دورية لضمان سلامة الطالب.\n\n**ملاحظات هامة:**\n* تأكد دائماً من حمل **كارنيه الجامعة** الخاص بك، حيث قد يُطلب منك لإثبات هويتك والحصول على الخدمات الطبية.\n* الخدمات الطبية بالجامعة مخصصة لمنتسبيها، والالتزام بتعليمات الطبيب هو الأساس في صرف أي دواء.\n\nللحصول على تفاصيل دقيقة حول ساعات عمل العيادة أو أي إجراءات إدارية إضافية، يُفضل دائماً مراجعة مكتب شؤون الطلاب أو إدارة الخدمات الطبية في الحرم الجامعي.",
+        "latency_seconds": 12.7975,
+        "total_elapsed_seconds": 12.7976,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 155,
+        "output_tokens": 326,
+        "thinking_tokens": null,
+        "total_tokens": 481,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-027": {
+      "ground_truth": {
+        "question_id": "EN-027",
+        "question": "What grade does a continuing student receive for registered courses when withdrawing from AIU?",
+        "language": "en",
+        "expected_answer": "A W grade.",
+        "relevant_chunk_ids": [
+          "AIU-010-P001-C002",
+          "AIU-003-P003-C002"
+        ],
+        "source_document_ids": [
+          "AIU-010",
+          "AIU-003"
+        ],
+        "category": "University Withdrawal",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WITHDRAW-001",
+        "annotation_notes": "University withdrawal rather than individual course withdrawal.",
+        "review_status": "verified"
+      },
+      "answer": "When a continuing student withdraws from Alamein International University (AIU) during the semester, the grade assigned to their registered courses is typically recorded as a **\"W\" (Withdrawn)**. \n\nThis grade does not affect the student's Cumulative Grade Point Average (CGPA), but the course will count as an attempt, and the student will generally remain responsible for the associated tuition fees for that semester according to the university's withdrawal policy and deadlines. \n\nFor the most accurate information regarding your specific situation and the academic calendar deadlines for receiving a \"W,\" please consult the AIU Student Handbook or contact the Office of the Registrar.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 18.6753,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "When a continuing student withdraws from Alamein International University (AIU) during the semester, the grade assigned to their registered courses is typically recorded as a **\"W\" (Withdrawn)**. \n\nThis grade does not affect the student's Cumulative Grade Point Average (CGPA), but the course will count as an attempt, and the student will generally remain responsible for the associated tuition fees for that semester according to the university's withdrawal policy and deadlines. \n\nFor the most accurate information regarding your specific situation and the academic calendar deadlines for receiving a \"W,\" please consult the AIU Student Handbook or contact the Office of the Registrar.",
+        "latency_seconds": 18.6753,
+        "total_elapsed_seconds": 18.6753,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 141,
+        "output_tokens": 132,
+        "thinking_tokens": null,
+        "total_tokens": 273,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-028": {
+      "ground_truth": {
+        "question_id": "EN-028",
+        "question": "Which documents are required to withdraw from AIU?",
+        "language": "en",
+        "expected_answer": "The withdrawal form and clearance form and reimbursement form.",
+        "relevant_chunk_ids": [
+          "AIU-010-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-010"
+        ],
+        "category": "University Withdrawal",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WITHDRAW-002",
+        "annotation_notes": "Three required documents.",
+        "review_status": "verified"
+      },
+      "answer": "To initiate the official withdrawal process at Alamein International University (AIU), you are generally required to complete the following steps and provide the necessary documentation:\n\n1.  **Withdrawal Request Form:** You must submit an official withdrawal request form, which can typically be obtained from the Office of the Registrar or through the university’s student portal.\n2.  **Student ID Card:** You will be required to return your university-issued student identification card.\n3.  **Clearance Form:** You must obtain a formal clearance from various university departments, including:\n    *   **Library:** To ensure all borrowed books or materials have been returned.\n    *   **Finance/Accounting Department:** To settle any outstanding tuition fees or financial obligations.\n    *   **IT Department:** To return any university-owned equipment or software access.\n    *   **Housing/Dormitories (if applicable):** To confirm the clearance of your living space.\n\n**Important Considerations:**\n*   **Approval:** Your withdrawal must be approved by the relevant academic dean or department head.\n*   **Deadlines:** Be mindful of the academic calendar; withdrawing after specific deadlines may affect your academic transcript and tuition refund eligibility.\n*   **Official Records:** Once the process is finalized, you may request an official transcript or statement of attendance, which will reflect your academic status.\n\nI recommend that you visit the **Office of the Registrar** or contact the **Student Affairs Department** at AIU immediately to obtain the most current withdrawal forms and to receive personalized guidance based on your specific enrollment status.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 5.5539,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "To initiate the official withdrawal process at Alamein International University (AIU), you are generally required to complete the following steps and provide the necessary documentation:\n\n1.  **Withdrawal Request Form:** You must submit an official withdrawal request form, which can typically be obtained from the Office of the Registrar or through the university’s student portal.\n2.  **Student ID Card:** You will be required to return your university-issued student identification card.\n3.  **Clearance Form:** You must obtain a formal clearance from various university departments, including:\n    *   **Library:** To ensure all borrowed books or materials have been returned.\n    *   **Finance/Accounting Department:** To settle any outstanding tuition fees or financial obligations.\n    *   **IT Department:** To return any university-owned equipment or software access.\n    *   **Housing/Dormitories (if applicable):** To confirm the clearance of your living space.\n\n**Important Considerations:**\n*   **Approval:** Your withdrawal must be approved by the relevant academic dean or department head.\n*   **Deadlines:** Be mindful of the academic calendar; withdrawing after specific deadlines may affect your academic transcript and tuition refund eligibility.\n*   **Official Records:** Once the process is finalized, you may request an official transcript or statement of attendance, which will reflect your academic status.\n\nI recommend that you visit the **Office of the Registrar** or contact the **Student Affairs Department** at AIU immediately to obtain the most current withdrawal forms and to receive personalized guidance based on your specific enrollment status.",
+        "latency_seconds": 5.5538,
+        "total_elapsed_seconds": 5.5539,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 135,
+        "output_tokens": 324,
+        "thinking_tokens": null,
+        "total_tokens": 459,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-029": {
+      "ground_truth": {
+        "question_id": "EN-029",
+        "question": "What administrative steps does the Registrar take after a student withdraws from AIU?",
+        "language": "en",
+        "expected_answer": "The Registrar reviews clearance status and delivers the student file, prepares a memo for any tuition or fee refund, informs the Ministry of Higher Education to remove the student from the enrolled list, and informs IT to deactivate the student Microsoft account.",
+        "relevant_chunk_ids": [
+          "AIU-010-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-010"
+        ],
+        "category": "University Withdrawal",
+        "question_type": "procedural",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WITHDRAW-003",
+        "annotation_notes": "Post-withdrawal administrative notifications; distinct from student clearance.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 0.7903,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 0.7902,
+        "total_elapsed_seconds": 0.7903,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 141,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 147,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-030": {
+      "ground_truth": {
+        "question_id": "EN-030",
+        "question": "How can a student formally withdraw from AIU and collect their original documents?",
+        "language": "en",
+        "expected_answer": "Submit a withdrawal request and clearance form to the Registrar Office, meet the academic advisor before approval, complete clearance with the listed departments, and collect the student file from the Registrar Office after clearance.",
+        "relevant_chunk_ids": [
+          "AIU-010-P002-C001",
+          "AIU-003-P003-C002"
+        ],
+        "source_document_ids": [
+          "AIU-010",
+          "AIU-003"
+        ],
+        "category": "University Withdrawal",
+        "question_type": "procedural",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WITHDRAW-002",
+        "annotation_notes": "Preserve clearance requirement.",
+        "review_status": "verified"
+      },
+      "answer": "To formally withdraw from Alamein International University (AIU) and retrieve your original documents, you must follow the official university procedures coordinated through the **Office of the Registrar** and the **Student Affairs Department**.\n\nGeneral steps typically include:\n\n1.  **Submit a Formal Request:** You must submit a written withdrawal request to the Registrar’s Office or via the university’s official student portal. This serves as the official notice to terminate your enrollment.\n2.  **Clearance Procedure:** Before you can collect your documents, you must complete a formal clearance process. This ensures that:\n    *   All library books and university property have been returned.\n    *   All financial obligations (tuition, fees, etc.) are settled with the Finance Department.\n    *   No outstanding issues exist with relevant academic departments or laboratories.\n3.  **Document Retrieval:** Once the clearance process is finalized and approved, you may request the release of your original high school certificates and any other personal documents you submitted during the admission process. These are typically collected in person from the Registrar’s Office, though you may need to present valid identification.\n\n**Important Considerations:**\n*   **Deadlines:** Ensure you initiate the withdrawal process as early as possible. Withdrawing after the add/drop period or during an active semester may have implications for your academic record (e.g., receiving \"W\" grades) and your eligibility for potential tuition refunds.\n*   **Official Correspondence:** Always keep copies of your withdrawal application and any clearance receipts for your records.\n\nSince specific forms and administrative protocols can change, it is highly recommended that you **visit the Registrar’s Office or the Student Affairs office on campus** as soon as possible to receive the specific clearance form and a current checklist of requirements tailored to your student status.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 2.9572,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "To formally withdraw from Alamein International University (AIU) and retrieve your original documents, you must follow the official university procedures coordinated through the **Office of the Registrar** and the **Student Affairs Department**.\n\nGeneral steps typically include:\n\n1.  **Submit a Formal Request:** You must submit a written withdrawal request to the Registrar’s Office or via the university’s official student portal. This serves as the official notice to terminate your enrollment.\n2.  **Clearance Procedure:** Before you can collect your documents, you must complete a formal clearance process. This ensures that:\n    *   All library books and university property have been returned.\n    *   All financial obligations (tuition, fees, etc.) are settled with the Finance Department.\n    *   No outstanding issues exist with relevant academic departments or laboratories.\n3.  **Document Retrieval:** Once the clearance process is finalized and approved, you may request the release of your original high school certificates and any other personal documents you submitted during the admission process. These are typically collected in person from the Registrar’s Office, though you may need to present valid identification.\n\n**Important Considerations:**\n*   **Deadlines:** Ensure you initiate the withdrawal process as early as possible. Withdrawing after the add/drop period or during an active semester may have implications for your academic record (e.g., receiving \"W\" grades) and your eligibility for potential tuition refunds.\n*   **Official Correspondence:** Always keep copies of your withdrawal application and any clearance receipts for your records.\n\nSince specific forms and administrative protocols can change, it is highly recommended that you **visit the Registrar’s Office or the Student Affairs office on campus** as soon as possible to receive the specific clearance form and a current checklist of requirements tailored to your student status.",
+        "latency_seconds": 2.9572,
+        "total_elapsed_seconds": 2.9572,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 140,
+        "output_tokens": 370,
+        "thinking_tokens": null,
+        "total_tokens": 510,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-031": {
+      "ground_truth": {
+        "question_id": "EN-031",
+        "question": "Are students permitted to wear ripped jeans on campus?",
+        "language": "en",
+        "expected_answer": "No. Pants with holes or rips or tears are prohibited.",
+        "relevant_chunk_ids": [
+          "AIU-012-P001-C001"
+        ],
+        "source_document_ids": [
+          "AIU-012"
+        ],
+        "category": "Dress Code",
+        "question_type": "paraphrased",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "DRESS-001",
+        "annotation_notes": "Clothing restrictions.",
+        "review_status": "verified"
+      },
+      "answer": "Alamein International University (AIU) maintains a campus dress code that reflects a professional academic environment. While specific policies may be outlined in the student handbook provided during orientation, students are generally expected to dress in a manner that is appropriate for a university setting.\n\nIt is recommended to consult your specific faculty's guidelines or the Student Affairs office to confirm if ripped jeans are considered acceptable within your particular department's standards.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 0.8318,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "Alamein International University (AIU) maintains a campus dress code that reflects a professional academic environment. While specific policies may be outlined in the student handbook provided during orientation, students are generally expected to dress in a manner that is appropriate for a university setting.\n\nIt is recommended to consult your specific faculty's guidelines or the Student Affairs office to confirm if ripped jeans are considered acceptable within your particular department's standards.",
+        "latency_seconds": 0.8318,
+        "total_elapsed_seconds": 0.8318,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 135,
+        "output_tokens": 85,
+        "thinking_tokens": null,
+        "total_tokens": 220,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-032": {
+      "ground_truth": {
+        "question_id": "EN-032",
+        "question": "How does AIU handle a reported dress code violation?",
+        "language": "en",
+        "expected_answer": "Security personnel report the violation to the Legal Department for investigation. The Legal Department may issue warnings or suspension.",
+        "relevant_chunk_ids": [
+          "AIU-012-P002-C002"
+        ],
+        "source_document_ids": [
+          "AIU-012"
+        ],
+        "category": "Dress Code",
+        "question_type": "procedural",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "DRESS-002",
+        "annotation_notes": "Reporting and disciplinary responsibilities.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 1.3702,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 1.3701,
+        "total_elapsed_seconds": 1.3702,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 136,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 142,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-033": {
+      "ground_truth": {
+        "question_id": "EN-033",
+        "question": "Does changing to another program within the same faculty require submitting the request to the Ministry of Higher Education?",
+        "language": "en",
+        "expected_answer": "No. An internal program change within the same faculty does not require submitting the request to the Ministry.",
+        "relevant_chunk_ids": [
+          "AIU-023-P001-C001"
+        ],
+        "source_document_ids": [
+          "AIU-023"
+        ],
+        "category": "Change Program",
+        "question_type": "paraphrased",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CHANGE-001",
+        "annotation_notes": "Policy edition requires confirmation.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 4.0166,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 4.0166,
+        "total_elapsed_seconds": 4.0166,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 145,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 151,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-034": {
+      "ground_truth": {
+        "question_id": "EN-034",
+        "question": "How does the admission process work for a change-major transfer applicant?",
+        "language": "en",
+        "expected_answer": "Apply at the AIU Admission Office. Obtain Academic and University Council approval. Accepted applicants receive an acceptance email and submit original official documents and attend orientation. The Supreme Council of Universities enrolls accepted students in Ministry records.",
+        "relevant_chunk_ids": [
+          "AIU-023-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-023"
+        ],
+        "category": "Change Program",
+        "question_type": "procedural",
+        "difficulty": "hard",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CHANGE-002",
+        "annotation_notes": "Policy edition requires confirmation.",
+        "review_status": "verified"
+      },
+      "answer": "To provide you with the most accurate information regarding the admission process for a change-major transfer applicant at Alamein International University (AIU), please note the following general steps:\n\n1.  **Application Submission:** You must submit an application through the official AIU admission portal, indicating your intent to transfer and specifying the new major you wish to pursue.\n2.  **Academic Evaluation:** The academic committee will review your previous university transcripts to assess your cumulative GPA and course equivalence. You must meet the specific minimum admission requirements (such as high school subject prerequisites and GPA) for the new program you are applying to.\n3.  **Credit Transfer:** An academic advisor or the relevant faculty committee will evaluate the courses you have already completed at your previous institution to determine which credits can be transferred toward your new degree plan at AIU.\n4.  **Language and Entrance Requirements:** You may need to meet specific language proficiency requirements or pass department-specific interviews or placement tests, depending on the requirements of the new major.\n\n**Important Note:** Admission to a new major is subject to seat availability and the approval of the faculty council for that specific program.\n\nFor the most up-to-date deadlines and specific documentation requirements (such as course descriptions or official transcripts), please contact the **AIU Admission Office** directly or visit the official university website.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.6049,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "To provide you with the most accurate information regarding the admission process for a change-major transfer applicant at Alamein International University (AIU), please note the following general steps:\n\n1.  **Application Submission:** You must submit an application through the official AIU admission portal, indicating your intent to transfer and specifying the new major you wish to pursue.\n2.  **Academic Evaluation:** The academic committee will review your previous university transcripts to assess your cumulative GPA and course equivalence. You must meet the specific minimum admission requirements (such as high school subject prerequisites and GPA) for the new program you are applying to.\n3.  **Credit Transfer:** An academic advisor or the relevant faculty committee will evaluate the courses you have already completed at your previous institution to determine which credits can be transferred toward your new degree plan at AIU.\n4.  **Language and Entrance Requirements:** You may need to meet specific language proficiency requirements or pass department-specific interviews or placement tests, depending on the requirements of the new major.\n\n**Important Note:** Admission to a new major is subject to seat availability and the approval of the faculty council for that specific program.\n\nFor the most up-to-date deadlines and specific documentation requirements (such as course descriptions or official transcripts), please contact the **AIU Admission Office** directly or visit the official university website.",
+        "latency_seconds": 1.6048,
+        "total_elapsed_seconds": 1.6049,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 139,
+        "output_tokens": 274,
+        "thinking_tokens": null,
+        "total_tokens": 413,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-011": {
+      "ground_truth": {
+        "question_id": "AR-011",
+        "question": "كام نسبة استرداد المصروفات الدراسية للطالب المستمر لو انسحب خلال أول أسبوعين من الدراسة؟",
+        "language": "ar",
+        "expected_answer": "يمكنه طلب استرداد 50% من الرسوم الدراسية للفصل الدراسي.",
+        "relevant_chunk_ids": [
+          "AIU-010-P001-C002"
+        ],
+        "source_document_ids": [
+          "AIU-010"
+        ],
+        "category": "University Withdrawal",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WITHDRAW-005",
+        "annotation_notes": "Continuing students only.",
+        "review_status": "verified"
+      },
+      "answer": "وفقاً للوائح المعمول بها في جامعة العلمين الدولية (AIU) بخصوص استرداد المصروفات الدراسية للطلاب المستمرين:\n\nيتم استرداد **80%** من قيمة المصروفات الدراسية في حال الانسحاب خلال الأسبوع الأول من الدراسة، و**60%** في حال الانسحاب خلال الأسبوع الثاني.\n\nيُنصح دائماً بالتواصل المباشر مع إدارة شؤون الطلاب بالجامعة أو القسم المالي للتأكد من الإجراءات المتبعة وتوقيت تقديم طلب الانسحاب لضمان تطبيق النسبة الصحيحة.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 34.0412,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "وفقاً للوائح المعمول بها في جامعة العلمين الدولية (AIU) بخصوص استرداد المصروفات الدراسية للطلاب المستمرين:\n\nيتم استرداد **80%** من قيمة المصروفات الدراسية في حال الانسحاب خلال الأسبوع الأول من الدراسة، و**60%** في حال الانسحاب خلال الأسبوع الثاني.\n\nيُنصح دائماً بالتواصل المباشر مع إدارة شؤون الطلاب بالجامعة أو القسم المالي للتأكد من الإجراءات المتبعة وتوقيت تقديم طلب الانسحاب لضمان تطبيق النسبة الصحيحة.",
+        "latency_seconds": 34.0411,
+        "total_elapsed_seconds": 34.0411,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 151,
+        "output_tokens": 129,
+        "thinking_tokens": null,
+        "total_tokens": 280,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-012": {
+      "ground_truth": {
+        "question_id": "AR-012",
+        "question": "هل مسموح للطلاب يلبسوا كاب داخل مباني الجامعة؟",
+        "language": "ar",
+        "expected_answer": "لا يسمح بارتداء القبعات أو الكابات أو أغطية الرأس من نوع الهود داخل المرافق المغلقة وفقا لسياسة الملابس.",
+        "relevant_chunk_ids": [
+          "AIU-012-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-012"
+        ],
+        "category": "Dress Code",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "DRESS-003",
+        "annotation_notes": "Indoor facilities restriction.",
+        "review_status": "verified"
+      },
+      "answer": "تتبع جامعة العلمين الدولية (AIU) سياسة المظهر العام التي تتسم بالاحترام والاحترافية، وعادةً ما يُتوقع من الطلاب الالتزام بزي يليق بالحرم الجامعي.\n\nبشكل عام، لا توجد لائحة تمنع ارتداء \"الكاب\" في الساحات الخارجية للجامعة، ولكن قد تختلف القواعد داخل القاعات الدراسية أو المعامل بناءً على توجيهات أعضاء هيئة التدريس أو طبيعة المكان، حيث يُفضل في كثير من الأحيان خلعه داخل الفصول.\n\nيُنصح دائمًا بالالتزام بالذوق العام والتقيد بأي تعليمات خاصة قد تصدر من إدارة كليتك أو أساتذتك في هذا الشأن.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.6948,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "تتبع جامعة العلمين الدولية (AIU) سياسة المظهر العام التي تتسم بالاحترام والاحترافية، وعادةً ما يُتوقع من الطلاب الالتزام بزي يليق بالحرم الجامعي.\n\nبشكل عام، لا توجد لائحة تمنع ارتداء \"الكاب\" في الساحات الخارجية للجامعة، ولكن قد تختلف القواعد داخل القاعات الدراسية أو المعامل بناءً على توجيهات أعضاء هيئة التدريس أو طبيعة المكان، حيث يُفضل في كثير من الأحيان خلعه داخل الفصول.\n\nيُنصح دائمًا بالالتزام بالذوق العام والتقيد بأي تعليمات خاصة قد تصدر من إدارة كليتك أو أساتذتك في هذا الشأن.",
+        "latency_seconds": 1.6948,
+        "total_elapsed_seconds": 1.6948,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 142,
+        "output_tokens": 163,
+        "thinking_tokens": null,
+        "total_tokens": 305,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-013": {
+      "ground_truth": {
+        "question_id": "AR-013",
+        "question": "لو عايز أحول لبرنامج في كلية مختلفة هل الإجراءات زي التحويل داخل نفس الكلية؟",
+        "language": "ar",
+        "expected_answer": "لا. التحويل داخل نفس الكلية لا يتطلب تقديم الطلب للوزارة بينما التحويل لكلية أخرى يتطلب إبلاغ الوزارة والرجوع إلى شروط القبول.",
+        "relevant_chunk_ids": [
+          "AIU-023-P001-C001",
+          "AIU-023-P001-C002"
+        ],
+        "source_document_ids": [
+          "AIU-023"
+        ],
+        "category": "Change Program",
+        "question_type": "complex_reasoning",
+        "difficulty": "hard",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CHANGE-001",
+        "annotation_notes": "Compare internal and cross-faculty transfer.",
+        "review_status": "verified"
+      },
+      "answer": "بشكل عام في جامعة العلمين الدولية (AIU)، تختلف إجراءات التحويل بين البرامج داخل نفس الكلية عن التحويل بين كليات مختلفة، وذلك لاختلاف المتطلبات الأكاديمية والمواد الدراسية.\n\nإليك النقاط الأساسية التي يجب مراعاتها:\n\n1. **توافر المقاعد:** التحويل بين الكليات يخضع دائماً لتوافر أماكن شاغرة في البرنامج الذي ترغب في الانتقال إليه.\n2. **المتطلبات الأكاديمية (الحد الأدنى للقبول):** يجب أن يكون مجموعك في الثانوية العامة (أو الشهادة المعادلة) متوافقاً مع الحد الأدنى للقبول في الكلية التي ترغب في التحويل إليها في سنة التحاقك.\n3. **المقاصة الأكاديمية:** عند التحويل بين كليات مختلفة، تتم عملية \"مقاصة\" للمواد التي درستها؛ حيث يتم تحديد المواد التي يمكن معادلتها في برنامجك الجديد والمواد التي يجب عليك دراستها من البداية.\n4. **موافقة المجالس:** التحويل بين الكليات يتطلب موافقة مجلس الكلية (المنقول منها والمنقول إليها) وعادةً ما يتطلب موافقة إدارة الجامعة، بينما التحويل داخل الكلية قد يكون إجراءً إدارياً أكثر بساطة.\n\n**نصيحة:** للبدء في الإجراءات بشكل صحيح، يرجى التوجه إلى **إدارة شئون الطلاب** في الجامعة أو التواصل مع **مكتب القبول والتسجيل**، حيث سيقومون بتزويدك بنموذج التحويل الداخلي وتوضيح مدى مطابقة حالتك الأكاديمية لمتطلبات الكلية الجديدة.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 2.0681,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "بشكل عام في جامعة العلمين الدولية (AIU)، تختلف إجراءات التحويل بين البرامج داخل نفس الكلية عن التحويل بين كليات مختلفة، وذلك لاختلاف المتطلبات الأكاديمية والمواد الدراسية.\n\nإليك النقاط الأساسية التي يجب مراعاتها:\n\n1. **توافر المقاعد:** التحويل بين الكليات يخضع دائماً لتوافر أماكن شاغرة في البرنامج الذي ترغب في الانتقال إليه.\n2. **المتطلبات الأكاديمية (الحد الأدنى للقبول):** يجب أن يكون مجموعك في الثانوية العامة (أو الشهادة المعادلة) متوافقاً مع الحد الأدنى للقبول في الكلية التي ترغب في التحويل إليها في سنة التحاقك.\n3. **المقاصة الأكاديمية:** عند التحويل بين كليات مختلفة، تتم عملية \"مقاصة\" للمواد التي درستها؛ حيث يتم تحديد المواد التي يمكن معادلتها في برنامجك الجديد والمواد التي يجب عليك دراستها من البداية.\n4. **موافقة المجالس:** التحويل بين الكليات يتطلب موافقة مجلس الكلية (المنقول منها والمنقول إليها) وعادةً ما يتطلب موافقة إدارة الجامعة، بينما التحويل داخل الكلية قد يكون إجراءً إدارياً أكثر بساطة.\n\n**نصيحة:** للبدء في الإجراءات بشكل صحيح، يرجى التوجه إلى **إدارة شئون الطلاب** في الجامعة أو التواصل مع **مكتب القبول والتسجيل**، حيث سيقومون بتزويدك بنموذج التحويل الداخلي وتوضيح مدى مطابقة حالتك الأكاديمية لمتطلبات الكلية الجديدة.",
+        "latency_seconds": 2.0681,
+        "total_elapsed_seconds": 2.0681,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 148,
+        "output_tokens": 368,
+        "thinking_tokens": null,
+        "total_tokens": 516,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-014": {
+      "ground_truth": {
+        "question_id": "AR-014",
+        "question": "إيه المستندات المطلوبة للتقديم على تغيير التخصص حسب سياسة الجامعة؟",
+        "language": "ar",
+        "expected_answer": "مستندات القبول المطلوبة وفقا لسياسة الأهلية الأكاديمية وإفادة القيد من المؤسسة الأكاديمية السابقة.",
+        "relevant_chunk_ids": [
+          "AIU-023-P001-C002"
+        ],
+        "source_document_ids": [
+          "AIU-023"
+        ],
+        "category": "Change Program",
+        "question_type": "direct_factual",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CHANGE-003",
+        "annotation_notes": "Policy edition requires confirmation.",
+        "review_status": "verified"
+      },
+      "answer": "لتقديم طلب تغيير التخصص في جامعة العلمين الدولية (AIU)، يرجى العلم أن الإجراءات تخضع للوائح الأكاديمية بالجامعة، وعادة ما تتطلب المستندات والإجراءات التالية:\n\n1. **نموذج طلب تغيير التخصص:** يتم الحصول عليه من إدارة شؤون الطلاب أو عبر النظام الإلكتروني للجامعة.\n2. **سجل دراسي (Transcript):** بيان بجميع المواد التي درسها الطالب وتقديراته الحالية لتقييم مدى ملاءمة التحويل.\n3. **موافقة القسمين:** موافقة القسم المحول منه والقسم المحول إليه (في بعض الحالات).\n4. **استيفاء شروط القبول:** يجب التأكد من أن الطالب يستوفي الحد الأدنى من مجموع الثانوية العامة أو ما يعادلها الخاص بالتخصص الجديد، وأن تكون هناك مقاعد شاغرة في البرنامج المراد الانتقال إليه.\n\n**ملاحظات هامة:**\n* **الموعد:** عادة ما يتم تقديم طلبات التحويل خلال فترة محددة قبل بداية الفصل الدراسي الجديد.\n* **المقاصة الأكاديمية:** سيقوم القسم المختص بإجراء \"مقاصة\" للمواد التي درسها الطالب لتحديد ما يمكن معادلتها في التخصص الجديد.\n\n**نصيحة:** لضمان دقة المعلومات المتعلقة بحالتك الأكاديمية والجدول الزمني للتقديم، يرجى التوجه مباشرة إلى **مكتب شؤون الطلاب (Student Affairs)** بمقر الجامعة أو التواصل مع **المرشد الأكاديمي (Academic Advisor)** الخاص بك، حيث أن سياسات التحويل قد تختلف بناءً على عدد الساعات المكتسبة والكلية المقصودة.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 2.1922,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "لتقديم طلب تغيير التخصص في جامعة العلمين الدولية (AIU)، يرجى العلم أن الإجراءات تخضع للوائح الأكاديمية بالجامعة، وعادة ما تتطلب المستندات والإجراءات التالية:\n\n1. **نموذج طلب تغيير التخصص:** يتم الحصول عليه من إدارة شؤون الطلاب أو عبر النظام الإلكتروني للجامعة.\n2. **سجل دراسي (Transcript):** بيان بجميع المواد التي درسها الطالب وتقديراته الحالية لتقييم مدى ملاءمة التحويل.\n3. **موافقة القسمين:** موافقة القسم المحول منه والقسم المحول إليه (في بعض الحالات).\n4. **استيفاء شروط القبول:** يجب التأكد من أن الطالب يستوفي الحد الأدنى من مجموع الثانوية العامة أو ما يعادلها الخاص بالتخصص الجديد، وأن تكون هناك مقاعد شاغرة في البرنامج المراد الانتقال إليه.\n\n**ملاحظات هامة:**\n* **الموعد:** عادة ما يتم تقديم طلبات التحويل خلال فترة محددة قبل بداية الفصل الدراسي الجديد.\n* **المقاصة الأكاديمية:** سيقوم القسم المختص بإجراء \"مقاصة\" للمواد التي درسها الطالب لتحديد ما يمكن معادلتها في التخصص الجديد.\n\n**نصيحة:** لضمان دقة المعلومات المتعلقة بحالتك الأكاديمية والجدول الزمني للتقديم، يرجى التوجه مباشرة إلى **مكتب شؤون الطلاب (Student Affairs)** بمقر الجامعة أو التواصل مع **المرشد الأكاديمي (Academic Advisor)** الخاص بك، حيث أن سياسات التحويل قد تختلف بناءً على عدد الساعات المكتسبة والكلية المقصودة.",
+        "latency_seconds": 2.1921,
+        "total_elapsed_seconds": 2.1922,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 143,
+        "output_tokens": 368,
+        "thinking_tokens": null,
+        "total_tokens": 511,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-035": {
+      "ground_truth": {
+        "question_id": "EN-035",
+        "question": "Can a graduate receive a diploma in both Arabic and English?",
+        "language": "en",
+        "expected_answer": "Yes. Each graduate receives two diplomas in English and Arabic.",
+        "relevant_chunk_ids": [
+          "AIU-008-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-008"
+        ],
+        "category": "Transcript",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "TRANSCRIPT-001",
+        "annotation_notes": "Bilingual diplomas.",
+        "review_status": "verified"
+      },
+      "answer": "Yes, graduates of Alamein International University (AIU) are typically issued their academic diplomas in both Arabic and English to ensure they are prepared for both local and international professional or academic requirements.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 0.9224,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "Yes, graduates of Alamein International University (AIU) are typically issued their academic diplomas in both Arabic and English to ensure they are prepared for both local and international professional or academic requirements.",
+        "latency_seconds": 0.9223,
+        "total_elapsed_seconds": 0.9224,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 137,
+        "output_tokens": 39,
+        "thinking_tokens": null,
+        "total_tokens": 176,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-036": {
+      "ground_truth": {
+        "question_id": "EN-036",
+        "question": "Can I change the name on my academic transcript after graduation?",
+        "language": "en",
+        "expected_answer": "Only if a court-ordered name change is submitted.",
+        "relevant_chunk_ids": [
+          "AIU-008-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-008"
+        ],
+        "category": "Transcript",
+        "question_type": "paraphrased",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "TRANSCRIPT-002",
+        "annotation_notes": "Court order requirement.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 4.8494,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 4.8493,
+        "total_elapsed_seconds": 4.8493,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 137,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 143,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-037": {
+      "ground_truth": {
+        "question_id": "EN-037",
+        "question": "Will a replacement diploma show a new graduation date?",
+        "language": "en",
+        "expected_answer": "No. It retains the original degree award date and states that the diploma has been reissued.",
+        "relevant_chunk_ids": [
+          "AIU-008-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-008"
+        ],
+        "category": "Transcript",
+        "question_type": "paraphrased",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "TRANSCRIPT-003",
+        "annotation_notes": "Original award date and reissue wording.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 1.2306,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 1.2306,
+        "total_elapsed_seconds": 1.2306,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 135,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 141,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-038": {
+      "ground_truth": {
+        "question_id": "EN-038",
+        "question": "How can students arrange an appointment with the university counseling service?",
+        "language": "en",
+        "expected_answer": "Complete the online one-to-one counseling form or visit the center to learn how to book. Faculty members may also refer students.",
+        "relevant_chunk_ids": [
+          "AIU-005-P004-C001",
+          "AIU-005-P005-C001",
+          "AIU-005-P005-C002"
+        ],
+        "source_document_ids": [
+          "AIU-005"
+        ],
+        "category": "Student Wellbeing",
+        "question_type": "procedural",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WELLBEING-001",
+        "annotation_notes": "Self-referral and faculty referral.",
+        "review_status": "verified"
+      },
+      "answer": "Students at Alamein International University (AIU) can arrange an appointment with the university counseling service by visiting the Student Affairs office or the dedicated counseling unit on campus to request a session. Alternatively, students can inquire through the university’s official student portal or by contacting the student support services email address provided in the university’s student handbook to schedule an appointment.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 0.96,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "Students at Alamein International University (AIU) can arrange an appointment with the university counseling service by visiting the Student Affairs office or the dedicated counseling unit on campus to request a session. Alternatively, students can inquire through the university’s official student portal or by contacting the student support services email address provided in the university’s student handbook to schedule an appointment.",
+        "latency_seconds": 0.9599,
+        "total_elapsed_seconds": 0.96,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 137,
+        "output_tokens": 73,
+        "thinking_tokens": null,
+        "total_tokens": 210,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-039": {
+      "ground_truth": {
+        "question_id": "EN-039",
+        "question": "Is a faculty member expected to handle a student panic attack alone?",
+        "language": "en",
+        "expected_answer": "No. In exceptional circumstances such as a panic attack, faculty should call the AIU Clinic doctor or CSW Well-being Unit staff.",
+        "relevant_chunk_ids": [
+          "AIU-005-P005-C001"
+        ],
+        "source_document_ids": [
+          "AIU-005"
+        ],
+        "category": "Student Wellbeing",
+        "question_type": "paraphrased",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WELLBEING-002",
+        "annotation_notes": "Emergency response procedure; not routine appointment scheduling.",
+        "review_status": "verified"
+      },
+      "answer": "No, a faculty member is not expected to handle a student's panic attack alone. In such situations, the faculty member should prioritize the student's safety and seek immediate professional support.\n\nTypically, the recommended steps include:\n\n1.  **Seek Assistance:** Contact the university’s campus security, student services, or the designated medical/counseling office immediately.\n2.  **Maintain Safety:** Ensure the student is in a safe location and, if possible, have someone stay with them until professional help arrives.\n3.  **Follow Protocol:** Adhere to Alamein International University’s (AIU) established emergency response protocols for medical or psychological crises.\n\nFaculty members are encouraged to familiarize themselves with the university's specific emergency contact numbers and the procedure for referring students to the appropriate student support or mental health services.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 73.0237,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "No, a faculty member is not expected to handle a student's panic attack alone. In such situations, the faculty member should prioritize the student's safety and seek immediate professional support.\n\nTypically, the recommended steps include:\n\n1.  **Seek Assistance:** Contact the university’s campus security, student services, or the designated medical/counseling office immediately.\n2.  **Maintain Safety:** Ensure the student is in a safe location and, if possible, have someone stay with them until professional help arrives.\n3.  **Follow Protocol:** Adhere to Alamein International University’s (AIU) established emergency response protocols for medical or psychological crises.\n\nFaculty members are encouraged to familiarize themselves with the university's specific emergency contact numbers and the procedure for referring students to the appropriate student support or mental health services.",
+        "latency_seconds": 73.0236,
+        "total_elapsed_seconds": 73.0237,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 138,
+        "output_tokens": 172,
+        "thinking_tokens": null,
+        "total_tokens": 310,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-040": {
+      "ground_truth": {
+        "question_id": "EN-040",
+        "question": "How should faculty members respond when they are concerned about a students mental wellbeing?",
+        "language": "en",
+        "expected_answer": "Refer the student to available support resources and encourage early help-seeking. Faculty may direct the student to the CSW Student Counseling Service.",
+        "relevant_chunk_ids": [
+          "AIU-005-P003-C001",
+          "AIU-005-P005-C001"
+        ],
+        "source_document_ids": [
+          "AIU-005"
+        ],
+        "category": "Student Wellbeing",
+        "question_type": "procedural",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WELLBEING-003",
+        "annotation_notes": "Faculty referral responsibilities.",
+        "review_status": "verified"
+      },
+      "answer": "Faculty members at Alamein International University (AIU) should prioritize student safety and well-being by following these general professional guidelines:\n\n1.  **Immediate Risk:** If there is an immediate threat to the student’s life or the safety of others, contact campus security or local emergency services immediately.\n2.  **Private Conversation:** Approach the student privately to express your observations with care and empathy. Use \"I\" statements (e.g., \"I have noticed you have been absent recently and I am concerned about how you are doing\") rather than making diagnostic assumptions.\n3.  **Active Listening:** Allow the student to speak without interruption. You are not expected to act as a counselor; your role is to provide a supportive ear and facilitate professional help.\n4.  **Referral:** Direct the student to the appropriate university support services. Familiarize yourself with the Student Affairs department or the designated counseling/wellness office at AIU. Provide them with the contact information for these offices.\n5.  **Documentation:** Keep a factual, private record of your observations and the steps you have taken. \n6.  **Maintain Boundaries:** While being supportive, maintain professional boundaries. Do not attempt to provide therapy or medical advice. \n7.  **Consultation:** If you are unsure how to handle a situation, consult with your department head or the university’s student support services team for guidance on how to proceed while protecting the student's privacy.\n8.  **Privacy:** Maintain the student’s confidentiality and only share information with relevant university authorities on a \"need-to-know\" basis, in accordance with AIU’s data protection and privacy policies.\n\nIf you are a faculty member, please refer to the official AIU Staff Handbook or contact the Student Affairs office for the specific protocols and reporting channels mandated by the university.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 53.0166,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "Faculty members at Alamein International University (AIU) should prioritize student safety and well-being by following these general professional guidelines:\n\n1.  **Immediate Risk:** If there is an immediate threat to the student’s life or the safety of others, contact campus security or local emergency services immediately.\n2.  **Private Conversation:** Approach the student privately to express your observations with care and empathy. Use \"I\" statements (e.g., \"I have noticed you have been absent recently and I am concerned about how you are doing\") rather than making diagnostic assumptions.\n3.  **Active Listening:** Allow the student to speak without interruption. You are not expected to act as a counselor; your role is to provide a supportive ear and facilitate professional help.\n4.  **Referral:** Direct the student to the appropriate university support services. Familiarize yourself with the Student Affairs department or the designated counseling/wellness office at AIU. Provide them with the contact information for these offices.\n5.  **Documentation:** Keep a factual, private record of your observations and the steps you have taken. \n6.  **Maintain Boundaries:** While being supportive, maintain professional boundaries. Do not attempt to provide therapy or medical advice. \n7.  **Consultation:** If you are unsure how to handle a situation, consult with your department head or the university’s student support services team for guidance on how to proceed while protecting the student's privacy.\n8.  **Privacy:** Maintain the student’s confidentiality and only share information with relevant university authorities on a \"need-to-know\" basis, in accordance with AIU’s data protection and privacy policies.\n\nIf you are a faculty member, please refer to the official AIU Staff Handbook or contact the Student Affairs office for the specific protocols and reporting channels mandated by the university.",
+        "latency_seconds": 53.0164,
+        "total_elapsed_seconds": 53.0165,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 140,
+        "output_tokens": 381,
+        "thinking_tokens": null,
+        "total_tokens": 521,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-041": {
+      "ground_truth": {
+        "question_id": "EN-041",
+        "question": "Can a student publish another students private academic information on social media?",
+        "language": "en",
+        "expected_answer": "No. Posting another individuals protected academic information is prohibited.",
+        "relevant_chunk_ids": [
+          "AIU-026-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-026"
+        ],
+        "category": "Social Media",
+        "question_type": "paraphrased",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "SOCIAL-001",
+        "annotation_notes": "Protected academic information.",
+        "review_status": "verified"
+      },
+      "answer": "No. Sharing another student's private academic information on social media without their explicit consent is a violation of student codes of conduct and privacy policies. \n\nAt Alamein International University (AIU), as in most academic institutions, students are expected to uphold the principles of academic integrity, ethical behavior, and respect for the privacy of others. Unauthorized disclosure of private information can lead to disciplinary action.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.336,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "No. Sharing another student's private academic information on social media without their explicit consent is a violation of student codes of conduct and privacy policies. \n\nAt Alamein International University (AIU), as in most academic institutions, students are expected to uphold the principles of academic integrity, ethical behavior, and respect for the privacy of others. Unauthorized disclosure of private information can lead to disciplinary action.",
+        "latency_seconds": 1.3358,
+        "total_elapsed_seconds": 1.3359,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 138,
+        "output_tokens": 80,
+        "thinking_tokens": null,
+        "total_tokens": 218,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-042": {
+      "ground_truth": {
+        "question_id": "EN-042",
+        "question": "Does AIU encourage people who witness improper social media behavior to report it?",
+        "language": "en",
+        "expected_answer": "Yes. They are encouraged to report it to the university ethics officer as soon as possible.",
+        "relevant_chunk_ids": [
+          "AIU-026-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-026"
+        ],
+        "category": "Social Media",
+        "question_type": "paraphrased",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "SOCIAL-002",
+        "annotation_notes": "Reporting inappropriate conduct.",
+        "review_status": "verified"
+      },
+      "answer": "Yes, Alamein International University (AIU) encourages its community members to report any improper social media behavior that violates the university's code of conduct, policies, or professional standards. \n\nMaintaining a respectful, inclusive, and professional online environment is a core expectation for all students and staff. If you witness behavior that is harassing, defamatory, or otherwise harmful to the university community, you should report it to the appropriate university authorities, such as the Student Affairs department or the relevant academic administration, so that it can be reviewed in accordance with AIU’s disciplinary policies.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.392,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "Yes, Alamein International University (AIU) encourages its community members to report any improper social media behavior that violates the university's code of conduct, policies, or professional standards. \n\nMaintaining a respectful, inclusive, and professional online environment is a core expectation for all students and staff. If you witness behavior that is harassing, defamatory, or otherwise harmful to the university community, you should report it to the appropriate university authorities, such as the Student Affairs department or the relevant academic administration, so that it can be reviewed in accordance with AIU’s disciplinary policies.",
+        "latency_seconds": 1.3919,
+        "total_elapsed_seconds": 1.392,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 140,
+        "output_tokens": 116,
+        "thinking_tokens": null,
+        "total_tokens": 256,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-043": {
+      "ground_truth": {
+        "question_id": "EN-043",
+        "question": "Is removing a patients name sufficient to make their medical information anonymous before posting it online?",
+        "language": "en",
+        "expected_answer": "No. Other details such as age or diagnosis or treatment information or distinctive photographs may still identify the person.",
+        "relevant_chunk_ids": [
+          "AIU-026-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-026"
+        ],
+        "category": "Social Media",
+        "question_type": "complex_reasoning",
+        "difficulty": "hard",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "SOCIAL-003",
+        "annotation_notes": "Indirect identification risk.",
+        "review_status": "verified"
+      },
+      "answer": "No, removing a patient’s name is **not sufficient** to ensure medical information is anonymous.\n\nUnder data privacy standards (such as HIPAA in the U.S. or GDPR in Europe), de-identification requires the removal of all 18 identifiers that could potentially link the information back to an individual. Simply removing a name leaves behind \"indirect identifiers\" that can be used to re-identify a patient. These include:\n\n*   **Geographic data:** Precise locations, including specific towns, street addresses, or ZIP codes.\n*   **Dates:** All elements of dates (except year) directly related to an individual, such as birth date, admission date, discharge date, or date of death.\n*   **Unique identifiers:** Social security numbers, medical record numbers, health plan beneficiary numbers, account numbers, certificate/license numbers.\n*   **Contact information:** Telephone numbers, fax numbers, email addresses.\n*   **Biometric identifiers:** Fingerprints, voiceprints, or full-face photographic images.\n*   **Device identifiers:** Serial numbers of medical devices.\n*   **Unique characteristics:** Any other unique identifying number, characteristic, or code (e.g., rare conditions that might be linked to a specific person in a small community).\n\n**Important Note for Students:** Posting patient information online—even if you believe it is anonymized—often violates university ethical policies, clinical rotation agreements, and patient confidentiality laws. You should never post patient data, photographs, or specific case details on public platforms or social media without explicit, formal institutional authorization and written patient consent.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 2.1061,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "No, removing a patient’s name is **not sufficient** to ensure medical information is anonymous.\n\nUnder data privacy standards (such as HIPAA in the U.S. or GDPR in Europe), de-identification requires the removal of all 18 identifiers that could potentially link the information back to an individual. Simply removing a name leaves behind \"indirect identifiers\" that can be used to re-identify a patient. These include:\n\n*   **Geographic data:** Precise locations, including specific towns, street addresses, or ZIP codes.\n*   **Dates:** All elements of dates (except year) directly related to an individual, such as birth date, admission date, discharge date, or date of death.\n*   **Unique identifiers:** Social security numbers, medical record numbers, health plan beneficiary numbers, account numbers, certificate/license numbers.\n*   **Contact information:** Telephone numbers, fax numbers, email addresses.\n*   **Biometric identifiers:** Fingerprints, voiceprints, or full-face photographic images.\n*   **Device identifiers:** Serial numbers of medical devices.\n*   **Unique characteristics:** Any other unique identifying number, characteristic, or code (e.g., rare conditions that might be linked to a specific person in a small community).\n\n**Important Note for Students:** Posting patient information online—even if you believe it is anonymized—often violates university ethical policies, clinical rotation agreements, and patient confidentiality laws. You should never post patient data, photographs, or specific case details on public platforms or social media without explicit, formal institutional authorization and written patient consent.",
+        "latency_seconds": 2.106,
+        "total_elapsed_seconds": 2.106,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 142,
+        "output_tokens": 326,
+        "thinking_tokens": null,
+        "total_tokens": 468,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-044": {
+      "ground_truth": {
+        "question_id": "EN-044",
+        "question": "By which week of the Spring semester must the annual academic calendar be available?",
+        "language": "en",
+        "expected_answer": "Before the tenth week of the Spring semester.",
+        "relevant_chunk_ids": [
+          "AIU-011-P001-C001"
+        ],
+        "source_document_ids": [
+          "AIU-011"
+        ],
+        "category": "Academic Calendar",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CALENDAR-001",
+        "annotation_notes": "Annual publication deadline.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "false_abstention",
+      "latency_seconds": 1.6396,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 1.6395,
+        "total_elapsed_seconds": 1.6396,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 140,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 146,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-045": {
+      "ground_truth": {
+        "question_id": "EN-045",
+        "question": "How does the university develop and approve its academic calendar?",
+        "language": "en",
+        "expected_answer": "The Registrar develops, compiles, releases and publishes the calendar and presents it to the Academic Council. The policy also assigns approval and website publication to the Academic Council.",
+        "relevant_chunk_ids": [
+          "AIU-011-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-011"
+        ],
+        "category": "Academic Calendar",
+        "question_type": "procedural",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CALENDAR-002",
+        "annotation_notes": "Development and approval responsibilities.",
+        "review_status": "verified"
+      },
+      "answer": "At Alamein International University (AIU), the development and approval of the academic calendar follow a formal institutional process to ensure alignment with national regulations and academic requirements:\n\n1.  **Drafting:** The calendar is initially proposed by the university administration in coordination with the relevant academic departments. It is structured to comply with the credit-hour system requirements and the guidelines set by the Ministry of Higher Education and Scientific Research in Egypt.\n2.  **Internal Review:** The draft is reviewed by the university's academic councils to ensure that the number of teaching weeks, examination periods, and holidays meet the necessary accreditation and instructional standards.\n3.  **Final Approval:** The proposed academic calendar is submitted to the University Council for formal approval. Once approved, the calendar is finalized and published to ensure students and faculty are aware of key dates, including the start and end of semesters, registration periods, and breaks.\n\nFor the most specific dates regarding your current academic year, please check the official AIU website or your student portal.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.7315,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "At Alamein International University (AIU), the development and approval of the academic calendar follow a formal institutional process to ensure alignment with national regulations and academic requirements:\n\n1.  **Drafting:** The calendar is initially proposed by the university administration in coordination with the relevant academic departments. It is structured to comply with the credit-hour system requirements and the guidelines set by the Ministry of Higher Education and Scientific Research in Egypt.\n2.  **Internal Review:** The draft is reviewed by the university's academic councils to ensure that the number of teaching weeks, examination periods, and holidays meet the necessary accreditation and instructional standards.\n3.  **Final Approval:** The proposed academic calendar is submitted to the University Council for formal approval. Once approved, the calendar is finalized and published to ensure students and faculty are aware of key dates, including the start and end of semesters, registration periods, and breaks.\n\nFor the most specific dates regarding your current academic year, please check the official AIU website or your student portal.",
+        "latency_seconds": 1.7313,
+        "total_elapsed_seconds": 1.7314,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 136,
+        "output_tokens": 207,
+        "thinking_tokens": null,
+        "total_tokens": 343,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-046": {
+      "ground_truth": {
+        "question_id": "EN-046",
+        "question": "How do the teaching and examination periods differ between the Fall and Summer semesters?",
+        "language": "en",
+        "expected_answer": "Fall has 15 teaching weeks and 3 examination weeks. Summer has 7 teaching weeks and 1 examination week.",
+        "relevant_chunk_ids": [
+          "AIU-011-P001-C001",
+          "AIU-003-P002-C002",
+          "AIU-011-P001-C002"
+        ],
+        "source_document_ids": [
+          "AIU-011",
+          "AIU-003"
+        ],
+        "category": "Academic Calendar",
+        "question_type": "complex_reasoning",
+        "difficulty": "hard",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CALENDAR-003",
+        "annotation_notes": "Compare both teaching and examination periods.",
+        "review_status": "verified"
+      },
+      "answer": "At Alamein International University (AIU), the primary differences between the Fall and Summer semesters relate to duration and academic intensity:\n\n*   **Fall Semester:** This is a full-length, standard academic semester (typically 15–16 weeks). It follows a traditional pace with comprehensive coverage of the course curriculum, standard assignment schedules, and a formal final examination period scheduled at the conclusion of the semester.\n*   **Summer Semester:** This is an intensive, condensed term (typically 6–8 weeks). Because the duration is significantly shorter, the teaching pace is accelerated to cover the required course material. Consequently, the examination period is also condensed, and midterms or final assessments often occur more rapidly following the instruction phase compared to the Fall semester.\n\nWhile the academic standards remain the same, the Summer semester is designed primarily for students aiming to accelerate their progress or retake courses, requiring a much higher frequency of lectures and a faster turnaround for assessments.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 84.2806,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "At Alamein International University (AIU), the primary differences between the Fall and Summer semesters relate to duration and academic intensity:\n\n*   **Fall Semester:** This is a full-length, standard academic semester (typically 15–16 weeks). It follows a traditional pace with comprehensive coverage of the course curriculum, standard assignment schedules, and a formal final examination period scheduled at the conclusion of the semester.\n*   **Summer Semester:** This is an intensive, condensed term (typically 6–8 weeks). Because the duration is significantly shorter, the teaching pace is accelerated to cover the required course material. Consequently, the examination period is also condensed, and midterms or final assessments often occur more rapidly following the instruction phase compared to the Fall semester.\n\nWhile the academic standards remain the same, the Summer semester is designed primarily for students aiming to accelerate their progress or retake courses, requiring a much higher frequency of lectures and a faster turnaround for assessments.",
+        "latency_seconds": 3.118,
+        "total_elapsed_seconds": 84.2805,
+        "attempt_count": 2,
+        "retry_count": 1,
+        "input_tokens": 140,
+        "output_tokens": 195,
+        "thinking_tokens": null,
+        "total_tokens": 335,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-047": {
+      "ground_truth": {
+        "question_id": "EN-047",
+        "question": "Are holidays always observed on their exact calendar dates?",
+        "language": "en",
+        "expected_answer": "No. Holidays may be observed on different dates.",
+        "relevant_chunk_ids": [
+          "AIU-011-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-011"
+        ],
+        "category": "Academic Calendar",
+        "question_type": "paraphrased",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CALENDAR-004",
+        "annotation_notes": "Holiday date flexibility.",
+        "review_status": "verified"
+      },
+      "answer": "At Alamein International University (AIU), as with most universities in Egypt, the observance of holidays typically follows the official decrees issued by the Egyptian government.\n\nWhile many fixed-date holidays (such as National Day or certain secular holidays) are observed on their exact calendar dates, many religious and national holidays may be shifted to a Thursday or the following Sunday if they fall in the middle of the week, in accordance with official ministerial decisions intended to provide long weekends. \n\nPlease monitor the official AIU academic calendar and announcements from the university administration for specific adjustments to class schedules or operational closures related to upcoming holidays.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 11.3161,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "At Alamein International University (AIU), as with most universities in Egypt, the observance of holidays typically follows the official decrees issued by the Egyptian government.\n\nWhile many fixed-date holidays (such as National Day or certain secular holidays) are observed on their exact calendar dates, many religious and national holidays may be shifted to a Thursday or the following Sunday if they fall in the middle of the week, in accordance with official ministerial decisions intended to provide long weekends. \n\nPlease monitor the official AIU academic calendar and announcements from the university administration for specific adjustments to class schedules or operational closures related to upcoming holidays.",
+        "latency_seconds": 11.316,
+        "total_elapsed_seconds": 11.316,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 135,
+        "output_tokens": 124,
+        "thinking_tokens": null,
+        "total_tokens": 259,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-048": {
+      "ground_truth": {
+        "question_id": "EN-048",
+        "question": "What is the exact price of a meal at the AIU cafeteria today?",
+        "language": "en",
+        "expected_answer": "Insufficient information in the university policy corpus.",
+        "relevant_chunk_ids": [],
+        "source_document_ids": [],
+        "category": "Campus Services",
+        "question_type": "unanswerable",
+        "difficulty": "medium",
+        "answerable": false,
+        "split": "test",
+        "fact_group_id": "UNKNOWN-004",
+        "annotation_notes": "Requires current cafeteria pricing not established by the policy corpus.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "correct_abstention",
+      "latency_seconds": 21.5063,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 21.5062,
+        "total_elapsed_seconds": 21.5062,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 140,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 146,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-049": {
+      "ground_truth": {
+        "question_id": "EN-049",
+        "question": "How many students booked appointments with the university counseling service yesterday?",
+        "language": "en",
+        "expected_answer": "Insufficient information in the university policy corpus.",
+        "relevant_chunk_ids": [],
+        "source_document_ids": [],
+        "category": "Student Wellbeing",
+        "question_type": "unanswerable",
+        "difficulty": "medium",
+        "answerable": false,
+        "split": "test",
+        "fact_group_id": "UNKNOWN-005",
+        "annotation_notes": "Requires recent counseling appointment statistics not established by the policy corpus.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "correct_abstention",
+      "latency_seconds": 1.6974,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 1.6973,
+        "total_elapsed_seconds": 1.6974,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 137,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 143,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "EN-050": {
+      "ground_truth": {
+        "question_id": "EN-050",
+        "question": "What is the current temperature on the surface of Venus?",
+        "language": "en",
+        "expected_answer": "The university policy corpus does not provide this information.",
+        "relevant_chunk_ids": [],
+        "source_document_ids": [],
+        "category": "Out of Scope",
+        "question_type": "unanswerable",
+        "difficulty": "easy",
+        "answerable": false,
+        "split": "test",
+        "fact_group_id": "UNKNOWN-006",
+        "annotation_notes": "Unrelated to university policies.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "correct_abstention",
+      "latency_seconds": 21.24,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 21.2399,
+        "total_elapsed_seconds": 21.2399,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 136,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 142,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-015": {
+      "ground_truth": {
+        "question_id": "AR-015",
+        "question": "هل الأنشطة الطلابية والمسابقات ممكن تظهر في سجل منفصل عن السجل الأكاديمي؟",
+        "language": "ar",
+        "expected_answer": "نعم تصدر الجامعة سجلا منفصلا للأنشطة غير الأكاديمية مثل المشاركة في الأندية والمسابقات والجوائز والمشروعات.",
+        "relevant_chunk_ids": [
+          "AIU-008-P001-C002",
+          "AIU-008-P001-C001"
+        ],
+        "source_document_ids": [
+          "AIU-008"
+        ],
+        "category": "Transcript",
+        "question_type": "paraphrased",
+        "difficulty": "medium",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "TRANSCRIPT-004",
+        "annotation_notes": "Separate extracurricular transcript.",
+        "review_status": "verified"
+      },
+      "answer": "في جامعة العلمين الدولية (AIU)، يتم توثيق الأنشطة الطلابية والمسابقات عادةً في **\"السجل الموازي\" (Co-Curricular Record)** أو ما يُعرف بسجل الأنشطة الطلابية، وهو سجل منفصل عن السجل الأكاديمي (Transcript) الذي يحتوي فقط على المقررات الدراسية والدرجات العلمية.\n\nيُعد هذا السجل وثيقة رسمية معتمدة من الجامعة توثق المهارات والأنشطة التي شارك فيها الطالب، ويهدف إلى إبراز الجوانب الشخصية والمهارية بجانب التفوق الأكاديمي.\n\nللحصول على نسخة من هذا السجل أو لمعرفة الإجراءات المحددة لإصداره، يُنصح بالتواصل مع **إدارة رعاية الشباب** في الجامعة، حيث إنها الجهة المسؤولة عن توثيق هذه الأنشطة.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.7539,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "في جامعة العلمين الدولية (AIU)، يتم توثيق الأنشطة الطلابية والمسابقات عادةً في **\"السجل الموازي\" (Co-Curricular Record)** أو ما يُعرف بسجل الأنشطة الطلابية، وهو سجل منفصل عن السجل الأكاديمي (Transcript) الذي يحتوي فقط على المقررات الدراسية والدرجات العلمية.\n\nيُعد هذا السجل وثيقة رسمية معتمدة من الجامعة توثق المهارات والأنشطة التي شارك فيها الطالب، ويهدف إلى إبراز الجوانب الشخصية والمهارية بجانب التفوق الأكاديمي.\n\nللحصول على نسخة من هذا السجل أو لمعرفة الإجراءات المحددة لإصداره، يُنصح بالتواصل مع **إدارة رعاية الشباب** في الجامعة، حيث إنها الجهة المسؤولة عن توثيق هذه الأنشطة.",
+        "latency_seconds": 1.7538,
+        "total_elapsed_seconds": 1.7539,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 149,
+        "output_tokens": 192,
+        "thinking_tokens": null,
+        "total_tokens": 341,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-016": {
+      "ground_truth": {
+        "question_id": "AR-016",
+        "question": "هل السجل الأكاديمي بيحتوي على فترات الانقطاع عن الدراسة؟",
+        "language": "ar",
+        "expected_answer": "نعم يتضمن السجل الأكاديمي فترات عدم القيد والانقطاع عن الدراسة مثل الإجازات والانسحاب.",
+        "relevant_chunk_ids": [
+          "AIU-008-P001-C001"
+        ],
+        "source_document_ids": [
+          "AIU-008"
+        ],
+        "category": "Transcript",
+        "question_type": "paraphrased",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "TRANSCRIPT-005",
+        "annotation_notes": "Enrollment interruptions.",
+        "review_status": "verified"
+      },
+      "answer": "نعم، عادةً ما يظهر السجل الأكاديمي (Transcript) الحالة الأكاديمية للطالب خلال كل فصل دراسي، بما في ذلك فترات الانقطاع عن الدراسة أو \"إيقاف القيد\" (Academic Suspension/Leave of Absence)، حيث يتم توضيح حالة الطالب في تلك الفصول لضمان دقة وتاريخ السجل الأكاديمي.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 1.9886,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "نعم، عادةً ما يظهر السجل الأكاديمي (Transcript) الحالة الأكاديمية للطالب خلال كل فصل دراسي، بما في ذلك فترات الانقطاع عن الدراسة أو \"إيقاف القيد\" (Academic Suspension/Leave of Absence)، حيث يتم توضيح حالة الطالب في تلك الفصول لضمان دقة وتاريخ السجل الأكاديمي.",
+        "latency_seconds": 1.9885,
+        "total_elapsed_seconds": 1.9886,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 145,
+        "output_tokens": 82,
+        "thinking_tokens": null,
+        "total_tokens": 227,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-017": {
+      "ground_truth": {
+        "question_id": "AR-017",
+        "question": "كام أسبوع دراسة وامتحانات في الفصل الدراسي الربيعي؟",
+        "language": "ar",
+        "expected_answer": "خمسة عشر أسبوعا للدراسة وثلاثة أسابيع للامتحانات.",
+        "relevant_chunk_ids": [
+          "AIU-011-P001-C001",
+          "AIU-003-P002-C002",
+          "AIU-011-P001-C002"
+        ],
+        "source_document_ids": [
+          "AIU-003",
+          "AIU-011"
+        ],
+        "category": "Academic Calendar",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CALENDAR-005",
+        "annotation_notes": "Spring semester duration.",
+        "review_status": "verified"
+      },
+      "answer": "يتكون الفصل الدراسي في جامعة العلمين الدولية (AIU) عادةً من **16 أسبوعاً**، تشمل فترة الدراسة والامتحانات النهائية.\n\nيرجى ملاحظة أن التقويم الأكاديمي قد يختلف قليلاً من عام لآخر، لذا يُنصح دائماً بمراجعة التقويم الأكاديمي الرسمي المعتمد على موقع الجامعة أو التواصل مع وحدة شؤون الطلاب للحصول على المواعيد الدقيقة للفصل الدراسي الحالي.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 3.3083,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "يتكون الفصل الدراسي في جامعة العلمين الدولية (AIU) عادةً من **16 أسبوعاً**، تشمل فترة الدراسة والامتحانات النهائية.\n\nيرجى ملاحظة أن التقويم الأكاديمي قد يختلف قليلاً من عام لآخر، لذا يُنصح دائماً بمراجعة التقويم الأكاديمي الرسمي المعتمد على موقع الجامعة أو التواصل مع وحدة شؤون الطلاب للحصول على المواعيد الدقيقة للفصل الدراسي الحالي.",
+        "latency_seconds": 3.3083,
+        "total_elapsed_seconds": 3.3083,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 139,
+        "output_tokens": 99,
+        "thinking_tokens": null,
+        "total_tokens": 238,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-018": {
+      "ground_truth": {
+        "question_id": "AR-018",
+        "question": "إيه الجهة المسؤولة عن تطوير التقويم الأكاديمي للجامعة؟",
+        "language": "ar",
+        "expected_answer": "مكتب المسجل هو المسؤول عن تطوير التقويم الأكاديمي.",
+        "relevant_chunk_ids": [
+          "AIU-011-P002-C001"
+        ],
+        "source_document_ids": [
+          "AIU-011"
+        ],
+        "category": "Academic Calendar",
+        "question_type": "direct_factual",
+        "difficulty": "easy",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "CALENDAR-002",
+        "annotation_notes": "Shared fact with English calendar procedure question.",
+        "review_status": "verified"
+      },
+      "answer": "الجهة المسؤولة عن إعداد وتطوير التقويم الأكاديمي في جامعة العلمين الدولية (AIU) هي **إدارة الجامعة** بالتنسيق مع **مجلس الجامعة** و**قطاع الشؤون الأكاديمية**، وذلك بما يتوافق مع القواعد واللوائح التي يحددها المجلس الأعلى للجامعات الأهلية والخاصة في مصر.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 10.2176,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "الجهة المسؤولة عن إعداد وتطوير التقويم الأكاديمي في جامعة العلمين الدولية (AIU) هي **إدارة الجامعة** بالتنسيق مع **مجلس الجامعة** و**قطاع الشؤون الأكاديمية**، وذلك بما يتوافق مع القواعد واللوائح التي يحددها المجلس الأعلى للجامعات الأهلية والخاصة في مصر.",
+        "latency_seconds": 10.2175,
+        "total_elapsed_seconds": 10.2176,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 144,
+        "output_tokens": 83,
+        "thinking_tokens": null,
+        "total_tokens": 227,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-019": {
+      "ground_truth": {
+        "question_id": "AR-019",
+        "question": "هل معلومات الصحة النفسية للطالب سرية حتى لو كان فيه خطر عليه أو على الآخرين؟",
+        "language": "ar",
+        "expected_answer": "الأصل هو سرية المعلومات ومشاركتها بموافقة الطالب مع توضيح الجهة والسبب. توجد استثناءات محدودة مثل الخطر على الطالب أو الآخرين أو التحقيق في جريمة أو الإفصاح المطلوب قانونا. وفي حالات الإفصاح الاستثنائي المذكورة في الإجراءات تكون المعلومات محدودة ومتناسبة مع الموقف بعد موافقة نائب رئيس الجامعة للشؤون الأكاديمية.",
+        "relevant_chunk_ids": [
+          "AIU-005-P002-C002",
+          "AIU-005-P003-C001",
+          "AIU-005-P005-C001"
+        ],
+        "source_document_ids": [
+          "AIU-005"
+        ],
+        "category": "Student Wellbeing",
+        "question_type": "complex_reasoning",
+        "difficulty": "hard",
+        "answerable": true,
+        "split": "test",
+        "fact_group_id": "WELLBEING-004",
+        "annotation_notes": "Confidentiality and exceptions.",
+        "review_status": "verified"
+      },
+      "answer": "في العادة، تُعتبر معلومات الصحة النفسية للطلاب سرية ومحمية بموجب أخلاقيات المهنة وسياسات الخصوصية في الجامعات. ومع ذلك، هناك **استثناء قانوني وأخلاقي جوهري** لهذا المبدأ؛ وهو عند وجود **خطر حقيقي ومباشر** على حياة الطالب نفسه (مثل محاولات إيذاء النفس) أو خطر على حياة الآخرين.\n\nفي هذه الحالات الاستثنائية، تلتزم الجامعة أو الأخصائي النفسي بكسر حاجز السرية لاتخاذ الإجراءات الضرورية لضمان السلامة، والتي قد تشمل إبلاغ الجهات المعنية أو أولياء الأمور أو السلطات المختصة، وذلك بهدف حماية الأرواح.\n\nللحصول على توضيح دقيق حول سياسة السرية الخاصة بمركز الإرشاد النفسي أو الوحدة المعنية في **جامعة العلمين الدولية (AIU)**، يُنصح دائماً بمراجعة قسم شؤون الطلاب أو المركز المعني بالصحة النفسية في الجامعة مباشرة، حيث سيتم إطلاعك على حدود السرية والإجراءات المتبعة لديهم بوضوح.",
+      "status": "success",
+      "outcome": "answer_generated",
+      "latency_seconds": 6.5906,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "في العادة، تُعتبر معلومات الصحة النفسية للطلاب سرية ومحمية بموجب أخلاقيات المهنة وسياسات الخصوصية في الجامعات. ومع ذلك، هناك **استثناء قانوني وأخلاقي جوهري** لهذا المبدأ؛ وهو عند وجود **خطر حقيقي ومباشر** على حياة الطالب نفسه (مثل محاولات إيذاء النفس) أو خطر على حياة الآخرين.\n\nفي هذه الحالات الاستثنائية، تلتزم الجامعة أو الأخصائي النفسي بكسر حاجز السرية لاتخاذ الإجراءات الضرورية لضمان السلامة، والتي قد تشمل إبلاغ الجهات المعنية أو أولياء الأمور أو السلطات المختصة، وذلك بهدف حماية الأرواح.\n\nللحصول على توضيح دقيق حول سياسة السرية الخاصة بمركز الإرشاد النفسي أو الوحدة المعنية في **جامعة العلمين الدولية (AIU)**، يُنصح دائماً بمراجعة قسم شؤون الطلاب أو المركز المعني بالصحة النفسية في الجامعة مباشرة، حيث سيتم إطلاعك على حدود السرية والإجراءات المتبعة لديهم بوضوح.",
+        "latency_seconds": 6.5905,
+        "total_elapsed_seconds": 6.5905,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 145,
+        "output_tokens": 250,
+        "thinking_tokens": null,
+        "total_tokens": 395,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "AR-020": {
+      "ground_truth": {
+        "question_id": "AR-020",
+        "question": "كام عدد الأماكن الفاضية في سكن الجامعة النهارده؟",
+        "language": "ar",
+        "expected_answer": "لا تتوفر معلومات عن عدد الأماكن المتاحة حاليا في وثائق الجامعة.",
+        "relevant_chunk_ids": [],
+        "source_document_ids": [],
+        "category": "Accommodation",
+        "question_type": "unanswerable",
+        "difficulty": "medium",
+        "answerable": false,
+        "split": "test",
+        "fact_group_id": "UNKNOWN-007",
+        "annotation_notes": "Requires live accommodation availability.",
+        "review_status": "verified"
+      },
+      "answer": "INSUFFICIENT_CONTEXT",
+      "status": "insufficient_context",
+      "outcome": "correct_abstention",
+      "latency_seconds": 0.9491,
+      "llm_response": {
+        "status": "success",
+        "model": "gemini-3.1-flash-lite",
+        "answer": "INSUFFICIENT_CONTEXT",
+        "latency_seconds": 0.949,
+        "total_elapsed_seconds": 0.9491,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "input_tokens": 139,
+        "output_tokens": 6,
+        "thinking_tokens": null,
+        "total_tokens": 145,
+        "error_code": null,
+        "error_type": null,
+        "error_message": null
+      }
+    }
+  }
+}

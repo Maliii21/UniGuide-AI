@@ -1,0 +1,17 @@
+{
+  "evaluated_questions": 42,
+  "expected_questions": 42,
+  "evaluation_complete": true,
+  "outcomes": {
+    "answer_generated": 36,
+    "false_abstention": 1,
+    "correct_abstention": 4,
+    "technical_error": 1
+  },
+  "mean_latency_seconds": 6.219911904761905,
+  "median_latency_seconds": 3.0181500000000003,
+  "known_api_attempts": 53,
+  "known_total_tokens": 98017,
+  "questions_with_complete_token_metadata": 41,
+  "semantic_answer_review_complete": false
+}
